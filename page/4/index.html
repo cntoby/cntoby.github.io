@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 4 | 老白说</title>
+  <meta name="author" content="老白">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-28T15:41:37.000Z"><a href="/2014/03/28/cocos2d-x-learning-3-(ccscene-and-ccmenu)/">2014-03-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/28/cocos2d-x-learning-3-(ccscene-and-ccmenu)/">Cocos2D-X learning 3 (CCScene and CCMenu)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>废话</h3>
+<p>本来部门计划今天下午全部门去搞团建的，主要活动是开卡丁车、桌游等项目，可惜天不从人愿，早晨有点下雨，好不容易盼到中午晴天，结果Leader又一个通知，说今天事情太多，活动改期到下周了，我勒个去的，废话不多说，进去正题。</p>
+<h3>概述</h3>
+<p>今天练习的内容主要是在Cocos2D开发中，对菜单的运用以及场景切换，中间还涉及到对于CCSprite对象的一些操作和schedule的简单应用。</p>
+<h3>正文</h3>
+<p>首先用<code>create_project.py</code>建立一个基础项目，然后分别建立两个CCLayer的子类。</p>
+<figure class="highlight c++"><figcaption><span>StudyCocos2D.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudyCocos2D</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onStartClick</span><span class="params">(CCObject *obj)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(StudyCocos2D);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__StudyCocos2D__) */</span></span></span><br></pre></td></tr></table></figure>
+<p>这是一个最简单的头文件，相比上一篇只多了一个私有方法<code>void onStartClick(CCObject *obj)</code>，其作用后面再说明。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/28/cocos2d-x-learning-3-(ccscene-and-ccmenu)/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-28T06:00:08.000Z"><a href="/2014/03/28/about-the-seqno-of-packet-in-mysql-network-protocol/">2014-03-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/28/about-the-seqno-of-packet-in-mysql-network-protocol/">关于MySQL网络协议中的数据包序号</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。</p>
+<p>在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。</p>
+<p>前三个字节最大只能表达16M的长度，这是三个字节表达无符号整型的极限，所以，每次客户端可以接受到的最大数据包为16M+4个字节。</p>
+<p>至于第四个字节，这是表达当前包的序数的，一个字节能表达的最大正整数是255。我们知道，在MySQL协议中，发送COM_QUERY命令后，服务器返回的数据格式为，响应头为一个包，然后，每一个字段的描述也会是一个包，字段说明后面会跟一个EOF包表示字段描述结束，之后则跟随的是表中的数据，每一个数据包表达一行数据，一般情况，我们每次从数据库里检索的条数，去掉描述协议的部分，在序数中我们还有不少空间可以用在数据记录上，但是，如果总的包数超过255，那会是怎么的情况哪？</p>
+<p>在我们使用数据库的经验中，我们可以经常有机会看到很多条记录同时显示出来的例子，记录数明明超过了255，可是依然正常显示，这是为什么哪？</p>
+<p>经过对MySQL交互嗅探，我发现在数据包次序达到255后，之后紧随的包的次序就变成了0，在Wireshark的协议分析中会认为这是错乱的协议，我想，这应该是MySQL特意使用的方式。</p>
+<p>前后端的交互中，到发现次序达到255后，对序数加1，由于只使用了一个字节，所以数据溢出变成了0，这样的情况在MySQL协议中被认为是合法的，只要前后端认可这种方式，那这种通讯就不会出错。</p>
+<p>所以我认为，在MySQL通讯中，包序号只是用来确认包的次序没有发生错误的，至于序号是几并不重要，只要认定255号后为0号是合法的，那就可以达到正常交互并保证数据序号不会出错的目的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-27T14:49:58.000Z"><a href="/2014/03/27/cocos2d-x-learning-2/">2014-03-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/27/cocos2d-x-learning-2/">Cocos2D-X learning 2</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>概述</h3>
+<p>今天学习了在Cocos2D-X开发中创建场景，以及在场景中加入图片资源，并通过写一个简单的例子对涉及到的CCLayer和CCSprite进行练习和熟悉。</p>
+<h3>过程</h3>
+<p>首先，场景类需要继承于CCLayer，并且必须实现类函数<code>CCScene *scene()</code>和虚函数<code>bool init()</code>,前者用于建立场景并在场景中加入层以备演示CCSprite，而后者则是用于对本场景进行初始化，代码如下：</p>
+<figure class="highlight c++"><figcaption><span>GameScene.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HelloCocos__GameScene__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HelloCocos__GameScene__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameScene</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameScene);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__HelloCocos__GameScene__) */</span></span></span><br></pre></td></tr></table></figure>
+<p>以上代码， <code>CREATE_FUNC(GameScene)</code>是一个宏，此宏的功能是为GameScene类创建一个<code>GameScene *GameScene::create()</code>类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的<code>init()</code>方法，因此，使用宏对代码进行简化是一个非常好的方法。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/27/cocos2d-x-learning-2/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-26T23:41:48.000Z"><a href="/2014/03/27/cocos2d-x-learning-1/">2014-03-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/27/cocos2d-x-learning-1/">Cocos2D-X learning 1</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近学了一些关于Cocos2D-X的知道，在这里整理一下。</p>
+<p>一直以来我做的都是后端的工作，现在突然有兴趣做一些前端的关于移动程序开发以及游戏开发方面的程序，对很多概念都是非常陌生的，不知道我后端开发方面的经验放在前端有没有一些用处。</p>
+<h3>Cocos2D的简单介绍</h3>
+<p>Cocos2D是一个应用非常广泛的2D游戏开发引擎，可以帮助对页面的元素进行方便的管理以及移动变形等操作，Cocos2D是基于Objective-C语言的，所以在iOS上的开发非常方便，但是跨平台方面就较差了，所以，就有了Cocos2D-X这一个基于C++的复刻版。</p>
+<h3>Cocos2D的一些概念（这里只说我学到的）</h3>
+<ol>
+<li>导演类CCDirector：这个类可以算是管理类，可以通过这个类获取到游戏运行界面的一些元素的属性，比如winSize等，在游戏中可以用来管理场景等。本类的使用方式为单例，通过类方法CCDirector::sharedDirecter获取对象。</li>
+<li>OpenGL类CCEGLView：对于OpenGL我不是很了解，但是我猜是可以提供类似于DirectX之类的功能，应该是管理图像动画等操作的，CCDirector需要绑定一个CCEGLView对象才可以运行，也是以单例的方式使用，通过类方法CCEGLView::sharedOpenGLView获取对象。</li>
+<li>场景类CCScene: 场景类继承于CCNode，在其中可以放置CCLayer类。</li>
+<li>层CCLayer：此类同样继承于CCNode，在其中可以放置CCSprite类，我的理解CCLayer就相当于电影中的幕次吧。在游戏中定义的不同游戏场景都需要继承CCLayer，必须实现的方法有virtual CCScene * scene()/static bool init()/CREATE_FUNC(CustomSceneName)，其中CREATE_FUNC是宏，可以帮助建立create方法。</li>
+<li>精灵类CCSprite：这应该是场景中更小的元素，在游戏中放置的背景、图片等都需要使用CCSprite，与CCScene一样都是继承自CCNode，由此可以判断，CCSprite类也是一个小场景，在其中可以加入其它的子元素，共同完成更复杂的动作。</li>
+</ol>
+<p>目前基本只学到了这些，明天继续。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-28T13:27:57.000Z"><a href="/2014/02/28/encounter-swindlers/">2014-02-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/28/encounter-swindlers/">遭遇骗子</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>骗子出现</h2>
+<p>下午正在看书时，QQ提示有人加好友，由于我的QQ设置了加好友需要回答问题，所以，一般回答问题不是我认识的人，并且引不起我的兴趣的话我是不会加好友的。但是那骗子的QQ资料跟我一个朋友完全一样，而且我跟那朋友也好久没有联系了，虽然他在验证问题里回答的都是“认识的”，但是我还是以为是他本人换QQ了或是启用新号之类的原因，于是没有犹豫就加了好友。</p>
+<h2>为行骗做铺垫</h2>
+<p>由于我一般不会在QQ上主动跟别人说话，所以尽管加了好友但是我并没有跟他说话。</p>
+<p>等到他主动跟我说话时我首先问了一个我比较关心的问题，就是为什么突然又加我好友，其实这个时候我还没开始怀疑，因为我根本不记得那朋友以前用的QQ号，这骗子的回答是不小心把我删了，现在又加回来，我当时虽然觉得回答合理，可还是感觉有点不对劲，事后我反应过来，如果你把一个QQ好友删掉，恐怕你根本就不会记得你删掉好友的QQ号，又怎么可能那么容易加回来哪。</p>
+<p>然后，对方马上让我发视频，说是要看看他那边还能不能显示，于是我发送了视频请求，然后对方视频刚一显示出来一个画面就不动了，然后对方马上跟我说新西兰这边网络太差，视频太卡了，然后就关掉了视频。当时看视频显示的画面确实是我朋友，当时只是觉得这画面好眼熟，其它的也没多想。</p>
+<p>在识穿骗子的真面目后，我去朋友Q空间相册里找到了视频里显示的照片，看到照片后我又想到一个疑点，新西兰在南半球，这个时候应该是夏秋季节，可照片里是穿厚衣服的，这很明显不对头呀。</p>
+<p>骗子之所以来这一手，其目的就是让你认为在电脑那头的就是你朋友，当你认为这是熟人之后自然就便于骗子下手了。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/02/28/encounter-swindlers/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/3/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/5/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Install a git server use gitolite over the ssh | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="闲话
+最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。
+进入正题
+建立服务器的软件我这里选用Gitolite，之所以选用Gitoli">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Install a git server use gitolite over the ssh"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-15T04:06:56.000Z"><a href="/2014/04/15/install-a-git-server-use-gitolite-over-ssh-protocol/">2014-04-15</a></time>
+      
+      
+  
+    <h1 class="title">Install a git server use gitolite over the ssh</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>闲话</h3>
+<p>最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。</p>
+<h3>进入正题</h3>
+<p>建立服务器的软件我这里选用Gitolite，之所以选用Gitolite，一是因为之前曾经使用过Gitolite，再一个是因为Gitolite可配置性更高，而且更为小巧。而且，由于这个服务器只在内部使用，没有必要使用Gitlab这种体积庞大的提供过多的WEB方面功能的程序。</p>
+<p>没有特别声明的都为在服务器上执行</p>
+<ol>
+<li>Git<br>
+使用系统命令安装git客户端，比如<code>yum install git</code>，版本最好不要太低，1.7以上。</li>
+<li>建立Git帐户<br>
+<code>useradd -d /opt/git -m git</code>，用户目录的位置不做要求，但是由于是专用帐号，最好是放在有备份保证的目录，便于管理。</li>
+<li>生成管理公钥 （管理端）<br>
+<code>ssh-keygen -t rsa -C &quot;Git Admin&quot; -f gitadmin</code><br>
+这个步骤需要注意的是生成密钥对最好不要加密码，否则有可能出现奇怪的问题。完成这一步后将gitadmin.pub文件传至git的HOME目录中备用。</li>
+<li>同步Gitolite代码<br>
+<code>git clone https://github.com/sitaramc/gitolite</code>，此命令需要在Git用户的HOME目录中执行。</li>
+<li>安装Gitolite<br>
+在用户目录中执行<code>gitolite/install -ln</code>，参数的意思是在$HOME/bin目录中建立指向源代码目录的文件链接，这样做的好处是可以方便的升级gitolite，另外，install命令另一个参数是-to可以指定命令安装到的目录，默认情况下不需要指定。<br>
+需要注意的是，默认安装的时候需要将$HOME/bin加入$PATH，如果指定安装目标需要将$HOME/to_dir加入$PATH。<br>
+执行完install之后需要执行<code>gitolite setup -pk gitadmin.pub</code>。<br>
+完成后，需要再检查一下~/.ssh目录和其中的authorized_keys文件的权限，需要将权限控制为仅本人可读写。</li>
+<li>同步管理库（管理端）<br>
+由于管理端或客户端与Git服务器之间的通讯是基于ssh的，所以，为了便于使用，需要对与Git服务器的连接进行单独配置，打开<code>~/.ssh/config</code>，在其中加入单独定义管理时所使用的密钥文件。</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">  <span class="built_in"> User </span>git</span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
+<p>经过以上配置即可以执行<code>git clone gitadmin:gitadmin</code>获取管理库，之后所有对服务器的管理只能通过此管理库进行，严禁直接在服务器上对服务器进行修改。</p>
+<ol start="7">
+<li>修改Gitolite配置及用户管理<br>
+详细使用配置及管理方法请参考源代码目录下的<code>README.txt</code></li>
+<li>从Subversion向Git做版本迁移<br>
+两种方法
+<ul>
+<li>
+<p>git svn clone svn://url.to.svn/repos --no-metadata --authors-file=users.txt<br>
+直接从svn版本库中clone数据到本地，其中<br>
+–no-metadata 指定命令不在git版本库中加入svn版本元数据。<br>
+–authors-file 指定与svn用户相对应的git用户。</p>
+</li>
+<li>
+<p>git svn init svn://url.to.svn/repos --no-metadata</p>
+</li>
+<li>
+<p>git svn fetch --authors-file=users.txt<br>
+这两个命令为一组，第一个命令初始化一个基于svn源的git库，此时可以在该库的.git目录下修改branches和tags信息，完成之后使用第二个命令开始同步代码，此时代码将按照配置把不同分支或标签下的代码提交到git库的指定位置。<br>
+如要迁移的Subversion版本库使用遵循惯例的目录设置，则可以在第一种方法和第二种方法的第一条命令中加入-s选项，本选择可以简化同步的操作。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Windows版客户端TortoiseGit下载地址：<a href="http://download.tortoisegit.org/tgit/1.8.8.0/" target="_blank" rel="noopener">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>
+Pro Git: <a href="http://git-scm.com/book/zh/" target="_blank" rel="noopener">http://git-scm.com/book/zh/</a></p>
+<h3>结束语</h3>
+<p>Git的使用入门很容易 ，只需要简单的分支、标签管理和版本提交，基本上就可以满足日常的需求，当然，还有更多的特性需要在使用的过程中逐渐的接触和应用。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Git/">Git</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/git/">git</a>, <a href="/tags/gitolite/">gitolite</a>, <a href="/tags/ssh/">ssh</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 3 | 老白说</title>
+  <meta name="author" content="老白">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-13T14:53:11.000Z"><a href="/2014/08/13/Busy-Times/">2014-08-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/13/Busy-Times/">繁忙时代</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>繁忙时代前言</h2>
+<p>从进入三月份进入新公司，一直到现在，刚看了一下日期，竟然刚好是13号，整整五个月的时间。现在想来，这五个月的时间我自己做起来的项目应该说只有一个半，但是这一个半项目贯穿了公司里多个项目多个部分，毕竟做的是基础开发，这也是必然的吧。</p>
+<p>当然了，之所以说繁忙，主要还是因为除了工作我还做了不少其它的事，总之，这段时间我把时间安排的非常紧凑，尽管很忙，但是这也让我过得很充实，下面尽量简单的记一个流水帐。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/08/13/Busy-Times/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-15T04:06:56.000Z"><a href="/2014/04/15/install-a-git-server-use-gitolite-over-ssh-protocol/">2014-04-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/15/install-a-git-server-use-gitolite-over-ssh-protocol/">Install a git server use gitolite over the ssh</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>闲话</h3>
+<p>最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。</p>
+<h3>进入正题</h3>
+<p>建立服务器的软件我这里选用Gitolite，之所以选用Gitolite，一是因为之前曾经使用过Gitolite，再一个是因为Gitolite可配置性更高，而且更为小巧。而且，由于这个服务器只在内部使用，没有必要使用Gitlab这种体积庞大的提供过多的WEB方面功能的程序。</p>
+<p>没有特别声明的都为在服务器上执行</p>
+<ol>
+<li>Git<br>
+使用系统命令安装git客户端，比如<code>yum install git</code>，版本最好不要太低，1.7以上。</li>
+<li>建立Git帐户<br>
+<code>useradd -d /opt/git -m git</code>，用户目录的位置不做要求，但是由于是专用帐号，最好是放在有备份保证的目录，便于管理。</li>
+<li>生成管理公钥 （管理端）<br>
+<code>ssh-keygen -t rsa -C &quot;Git Admin&quot; -f gitadmin</code><br>
+这个步骤需要注意的是生成密钥对最好不要加密码，否则有可能出现奇怪的问题。完成这一步后将gitadmin.pub文件传至git的HOME目录中备用。</li>
+<li>同步Gitolite代码<br>
+<code>git clone https://github.com/sitaramc/gitolite</code>，此命令需要在Git用户的HOME目录中执行。</li>
+<li>安装Gitolite<br>
+在用户目录中执行<code>gitolite/install -ln</code>，参数的意思是在$HOME/bin目录中建立指向源代码目录的文件链接，这样做的好处是可以方便的升级gitolite，另外，install命令另一个参数是-to可以指定命令安装到的目录，默认情况下不需要指定。<br>
+需要注意的是，默认安装的时候需要将$HOME/bin加入$PATH，如果指定安装目标需要将$HOME/to_dir加入$PATH。<br>
+执行完install之后需要执行<code>gitolite setup -pk gitadmin.pub</code>。<br>
+完成后，需要再检查一下~/.ssh目录和其中的authorized_keys文件的权限，需要将权限控制为仅本人可读写。</li>
+<li>同步管理库（管理端）<br>
+由于管理端或客户端与Git服务器之间的通讯是基于ssh的，所以，为了便于使用，需要对与Git服务器的连接进行单独配置，打开<code>~/.ssh/config</code>，在其中加入单独定义管理时所使用的密钥文件。</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">  <span class="built_in"> User </span>git</span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
+<p>经过以上配置即可以执行<code>git clone gitadmin:gitadmin</code>获取管理库，之后所有对服务器的管理只能通过此管理库进行，严禁直接在服务器上对服务器进行修改。</p>
+<ol start="7">
+<li>修改Gitolite配置及用户管理<br>
+详细使用配置及管理方法请参考源代码目录下的<code>README.txt</code></li>
+<li>从Subversion向Git做版本迁移<br>
+两种方法
+<ul>
+<li>
+<p>git svn clone svn://url.to.svn/repos --no-metadata --authors-file=users.txt<br>
+直接从svn版本库中clone数据到本地，其中<br>
+–no-metadata 指定命令不在git版本库中加入svn版本元数据。<br>
+–authors-file 指定与svn用户相对应的git用户。</p>
+</li>
+<li>
+<p>git svn init svn://url.to.svn/repos --no-metadata</p>
+</li>
+<li>
+<p>git svn fetch --authors-file=users.txt<br>
+这两个命令为一组，第一个命令初始化一个基于svn源的git库，此时可以在该库的.git目录下修改branches和tags信息，完成之后使用第二个命令开始同步代码，此时代码将按照配置把不同分支或标签下的代码提交到git库的指定位置。<br>
+如要迁移的Subversion版本库使用遵循惯例的目录设置，则可以在第一种方法和第二种方法的第一条命令中加入-s选项，本选择可以简化同步的操作。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Windows版客户端TortoiseGit下载地址：<a href="http://download.tortoisegit.org/tgit/1.8.8.0/" target="_blank" rel="noopener">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>
+Pro Git: <a href="http://git-scm.com/book/zh/" target="_blank" rel="noopener">http://git-scm.com/book/zh/</a></p>
+<h3>结束语</h3>
+<p>Git的使用入门很容易 ，只需要简单的分支、标签管理和版本提交，基本上就可以满足日常的需求，当然，还有更多的特性需要在使用的过程中逐渐的接触和应用。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-02T12:10:28.000Z"><a href="/2014/04/02/get-a-texturepacker-free-license/">2014-04-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/02/get-a-texturepacker-free-license/">Get a TexturePacker free license</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>闲话几句</h3>
+<p>昨天跟老婆吵了几句，当时确实是非常气愤，不过现在想想真的很划不来，气大伤身不说，昨天也因为这吵架导致了始终静不下心来学习，所以说，这吵架不仅伤身、伤心情，还浪费了时间。<br>
+其实本来也没有什么大不了的事情，没有必要非得争个是非黑白，如果确实觉得对方做的不合适，完全可以在对方心情恢复正常之后再换个角度讲给她听，这样在达到目的的同时也避免了伤和气。基本上应该有这个原则，在对方情绪激动的时候最好是避免正面的意见冲突，这不光是在两口子之间的相处之道，在和任何人相处时都是适用的。</p>
+<h3>说点正题</h3>
+<p><a href="http://www.codeandweb.com/texturepacker" title="Texture Packer" target="_blank" rel="noopener">Texture Packer</a>是一个非常方便的Sprite Sheet生成工具，我在<a href="/2014/03/31/about-sprite-sheet-and-tools/" title="About Sprite Sheet and Tools">About Sprite Sheet</a>一文中讲到过，那天我在写博文时就发现下面提示还有两天的试用期，于是去到官网上准备，然后就看到下面有个可以申请免费License的链接，看里面的说明，我的博客是符合条件的，于是就试着申请了一下，没想到今天就收到了作者发来的邮件。<br>
+<img src="/images/get-a-texture-packer-free-license/mail1.png" alt="Email"><br>
+同时，下面还附送了一个<a href="http://www.codeandweb.com/physicseditor" title="Physics Editor" target="_blank" rel="noopener">Physics Editor</a>的授权文件，这个软件我也安装上了，看起来也是非常的强大，尽管我还没有试用，不过我想这对我学习游戏开发的过程一定会很有帮助，在此对作者表示剧烈的感谢。</p>
+<h3>结语</h3>
+<p>我想作者愿意为做技术的或跟此相关的人提供免费的授权，一方面是希望能帮助宣传这他的软件以使他能够获得更多的回报，另一方面也是希望他的用户更多，即便是没有得到金钱上的回报，但是由此带来的巨大成就感也是所有软件开发者内心所渴望的。<br>
+就像<a href="http://www.hector2.us" title="TIGER/HECTOR学艺碎碎念" target="_blank" rel="noopener">王爷</a>他老人家现在每天熬夜加班费劲巴力的花大量的时间在搞他的一个EF English辅助APP一样，他也没指望能在这个APP上获得什么经济回报，当然能得到经济回报更好，就算得不到，一旦用户多了，我想他也会忍不住请我动吃大吃一顿来庆祝一番的。【千里传音：我说的对吧，王爷？】。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-31T13:06:17.000Z"><a href="/2014/03/31/about-sprite-sheet-and-tools/">2014-03-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/31/about-sprite-sheet-and-tools/">About Sprite Sheet And Tools</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>闲话</h3>
+<p>感冒好像有些更严重了，头很不舒服。</p>
+<p>下午听王爷说他们发奖金了，虽然不多，但是也是要恭喜一下的，毕竟不管发多少，总比不发强吧，而且现在他的项目进展的也算是顺利。一想到这项目还是会有些郁闷，毕竟是我们哥几个一点点弄出来的，现在却成了别人的孩子，而且还是不太待见的孩子，郁闷。</p>
+<h3>正文</h3>
+<p>今天随便说说<a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)" target="_blank" rel="noopener">Sprite Sheet</a>吧，简单来说，这是一个小图片集合。我印象中，这种技术最早用于WEB开发中，当在网页中使用很多小图片时，在访问时，浏览器需要对每个图片发起请求，而每次请求都只传送了一个很小的图片文件，这无形中就浪费了大量的HTTP请求和网络连接，即使在<a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="noopener">HTTP 1.1</a>的环境中，默认的头Connection保持keep-alive时可以我重用连接，便是多次请求传送的Header也会浪费很多的流量。</p>
+<p>因此，就有聪明人发明了这种方式，把多个小图片合成一个大图片，这样不仅减少了请求数、节约了资源，还使数据传输更加有效率，于是人们亲切的称之为Sprite Sheet。</p>
+<p>而在游戏开发中，合理的使用Sprite Sheet同样有着积极的作用，比如将相关性较高的图片合并到一张大图片中，不仅可以使图片的渲染过程得到优化，同时还能使图片资源更便于管理（这也是我最近也学到的，:)）。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/31/about-sprite-sheet-and-tools/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-29T15:22:08.000Z"><a href="/2014/03/29/cocos2d-x-learning-4/">2014-03-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/29/cocos2d-x-learning-4/">Cocos2D-X learning 4</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>废话</h3>
+<p>今天和王爷一起去传说中的车库咖啡见了一个创业团队，跟他们有了一个小时左右的交流时间，交流的详情就不说了，总之，让我和王爷多了一个很好的话题，在回家的路上，我们就这个话题进行了友好、亲切而又愉快的交流，受益匪浅。<br>
+不过，最糟心的是，跑这一趟我竟然感冒了，主要是天气热，出了很多汗，而在地铁通道里风太大，晾了汗了，纠结死我了，明天还要去见一个离得比较近的创业团队，我在犹豫到底还要不要去。</p>
+<h3>概述</h3>
+<p>今天随便说说在Cocos2D-X开发中，关于对CCSprite方面的优化，总得来说就是尽可能减少渲染次数，这样可以使游戏运行更有效率，能够空出更多的CPU时间做其它的事情，以增加游戏的流畅与体验。</p>
+<h3>正文</h3>
+<p>Cocos2D为图片资源批量加载提供了<code>CCSpriteFrameCache</code>类，此类可以通过使用Sprite Sheet文件来减少图片加载次数，简单来说，就是把多个图片拼成一个大图片，之后通过坐标在大文件上取到相应的图片，这个技术被广泛使用在网页设计及游戏开发中。在这里我使用了一个叫做Zwoptex的软件自动生成大图片及相应的<code>.plist</code>，软件的具体使用方法就不在这里细说了（另外，朋友介绍说Texture Packer是可以更好的做这件事的工具，改天尝试一下）。</p>
+<p>另外，Cocos2D还提供了一个<code>CCSpriteBatchNode</code>类，这个类主要作用是，当相同图片资源被重复使用时，通过这个类可以减少使相同的图片只渲染一次，具体做法看下面的代码。<br>
+PS: 代码基于上一篇BLOG，只对关键部分进行说明。</p>
+<figure class="highlight c++"><figcaption><span>GameSceneDH.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameSceneDH</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene *<span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameSceneDH);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/29/cocos2d-x-learning-4/#more" class="more-link">Read More</a>
+          </div>
+        
+	
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/2/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/page/4/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Cocos2D-X learning 3 (CCScene and CCMenu) | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="废话
+本来部门计划今天下午全部门去搞团建的，主要活动是开卡丁车、桌游等项目，可惜天不从人愿，早晨有点下雨，好不容易盼到中午晴天，结果Leader又一个通知，说今天事情太多，活动改期到下周了，我勒个去的，废话不多说，进去正题。
+概述
+今天练习的内容主要是在Cocos2D开发中，对菜单的运用以及场景切换，中间还涉及到对于CCSprite对象的一些操作和schedule的简单应用。
+正文
+首先用create_project.py建立一个基础项目，然后分别建立两个CCLayer的子类。
+StudyCocos2D.h12345678910111213141516171819202122232425////  StudyCocos2D.h//  StudyCocos2D////  Created by Toby Lee on 14-3-28.////#ifndef __StudyCocos2D__StudyCocos2D__#define __StudyCocos2D__StudyCocos2D__#include &amp;lt;iostream&amp;gt;#include &#34;cocos2d.h&#34;using namespace cocos2d;class StudyCocos2D: public CCLayer &amp;#123;private:    void onStartClick(CCObject *obj);public:    static CCScene * scene();    virtual bool init();    CREATE_FUNC(StudyCocos2D);&amp;#125;;#endif /* defined(__StudyCocos2D__StudyCocos2D__) */
+这是一个最简单的头文件，相比上一篇只多了一个私有方法void onStartClick(CCObject *obj)，其作用后面再说明。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Cocos2D-X learning 3 (CCScene and CCMenu)"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-28T15:41:37.000Z"><a href="/2014/03/28/cocos2d-x-learning-3-(ccscene-and-ccmenu)/">2014-03-28</a></time>
+      
+      
+  
+    <h1 class="title">Cocos2D-X learning 3 (CCScene and CCMenu)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>废话</h3>
+<p>本来部门计划今天下午全部门去搞团建的，主要活动是开卡丁车、桌游等项目，可惜天不从人愿，早晨有点下雨，好不容易盼到中午晴天，结果Leader又一个通知，说今天事情太多，活动改期到下周了，我勒个去的，废话不多说，进去正题。</p>
+<h3>概述</h3>
+<p>今天练习的内容主要是在Cocos2D开发中，对菜单的运用以及场景切换，中间还涉及到对于CCSprite对象的一些操作和schedule的简单应用。</p>
+<h3>正文</h3>
+<p>首先用<code>create_project.py</code>建立一个基础项目，然后分别建立两个CCLayer的子类。</p>
+<figure class="highlight c++"><figcaption><span>StudyCocos2D.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudyCocos2D</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onStartClick</span><span class="params">(CCObject *obj)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(StudyCocos2D);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__StudyCocos2D__) */</span></span></span><br></pre></td></tr></table></figure>
+<p>这是一个最简单的头文件，相比上一篇只多了一个私有方法<code>void onStartClick(CCObject *obj)</code>，其作用后面再说明。</p>
+<a id="more"></a>
+<figure class="highlight c++"><figcaption><span>StudyCocos2D.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.cpp</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"StudyCocos2D.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"RotatingIcon.h"</span></span></span><br><span class="line"></span><br><span class="line">CCScene * StudyCocos2D::scene()</span><br><span class="line">&#123;</span><br><span class="line">    CCScene *scene = CCScene::create();</span><br><span class="line">    CCLayer *layer = StudyCocos2D::create();</span><br><span class="line">    scene-&gt;addChild(layer);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> scene;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> StudyCocos2D::init()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!CCLayer::init()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    CCMenuItemFont *menuItem = CCMenuItemFont::create(<span class="string">"START GAME"</span>, <span class="keyword">this</span>, menu_selector(StudyCocos2D::onStartClick));</span><br><span class="line">    </span><br><span class="line">    CCMenu *menu = CCMenu::create(menuItem, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">this</span>-&gt;addChild(menu);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> StudyCocos2D::onStartClick(cocos2d::CCObject *obj)</span><br><span class="line">&#123;</span><br><span class="line">    CCScene *iconScene = RotatingIcon::scene();</span><br><span class="line">    iconScene-&gt;autorelease();</span><br><span class="line">    CCDirector::sharedDirector()-&gt;replaceScene(iconScene);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码生成场景如下<br>
+<img src="/images/cocos2d-x-learning-3/scene1.png" alt="场景1"></p>
+<p><code>StudyCocos2D::init()</code>方法中完成了建立，菜单项的工作，使用<code>CCMenuItemFont</code>类建立一个基于文字的菜单，在<code>CCMenuItemFont::create(const char *, CCObject, selector)</code>方法中完成了一个文字菜单项的建立，第一个参数是显示在菜单中的文字，第二个参数是作用于哪一个对象，第三个则是指定响应触发动作的方法。<br>
+<code>void StudyCocos2D::onStartClick(CCObject *obj)</code>方法完成了点击菜单后的操作，首先建立从<code>RotatingIcon</code>类中创建一个场景，然后用<code>CCDirector::replaceScene(CCScene *)</code>方法将显示的场景替换成新的场景。<br>
+<code>iconScene-&gt;autorelease()</code>方法的调用，会使本场景不在使用时自动释放。</p>
+<figure class="highlight c++"><figcaption><span>RotatingIcon.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  RotatingIcon.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__RotatingIcon__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__RotatingIcon__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RotatingIcon</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotatingIcon</span><span class="params">(<span class="keyword">float</span> t)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(RotatingIcon);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__RotatingIcon__) */</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>RotatingIcon.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  RotatingIcon.cpp</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"RotatingIcon.h"</span></span></span><br><span class="line"></span><br><span class="line">CCScene * RotatingIcon::scene()</span><br><span class="line">&#123;</span><br><span class="line">    CCScene *scene = CCScene::create();</span><br><span class="line">    CCLayer *layer = RotatingIcon::create();</span><br><span class="line">    scene-&gt;addChild(layer);</span><br><span class="line">    <span class="keyword">return</span> scene;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> RotatingIcon::init()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!CCLayer::init()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    CCSize winSize = CCDirector::sharedDirector()-&gt;getWinSize();</span><br><span class="line">    </span><br><span class="line">    CCSprite *icon = CCSprite::create(<span class="string">"Icon-72.png"</span>);</span><br><span class="line">    icon-&gt;setPosition(ccp(winSize.width/<span class="number">2</span>, winSize.height/<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">this</span>-&gt;addChild(icon);</span><br><span class="line">    </span><br><span class="line">    schedule(schedule_selector(RotatingIcon::rotatingIcon));</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> RotatingIcon::rotatingIcon(<span class="keyword">float</span> t)</span><br><span class="line">&#123;</span><br><span class="line">    CCArray *childNodes = <span class="keyword">this</span>-&gt;getChildren();</span><br><span class="line">    <span class="keyword">if</span> (childNodes-&gt;count() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        CCSprite *icon = (CCSprite *)childNodes-&gt;objectAtIndex(<span class="number">0</span>);</span><br><span class="line">        icon-&gt;setRotation(icon-&gt;getRotation() + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/cocos2d-x-learning-3/scene2.png" alt="场景2"><br>
+这里声明并定义了RotatingIcon类，在此类中需要说明的是，在Cocos2D中，精灵的锚点在该精灵的中心，如一个包含图片的<code>CCSprite</code>对象，在没有明确设置锚点及坐标时，会显示在场景的左下角，且只显示四分之一，因此，对于精灵对象一般都需要明确指定其坐标。<br>
+在以上的代码中，使用<code>CCDirector::getWinSize()</code>得到游戏显示区域的大小，之后就可以在下面的<code>ccp(winSize.width/2, winSize.height/2)</code>中计算出场景的中心，经过此设置后，图片将显示在整个场景的中心，其中<code>ccp(__X__, __Y__)</code>是一个宏，这个宏可以用来产生一个<code>CCPoint</code>对象。<br>
+<code>schedule</code>定义了一个执行计划，在以上代码中的调用方式，可以在程序在每一帧都执行一次指定的方法。<br>
+在<code>void RotatingIcon::rotatingIcon(float t)</code>方法中，程序首先获取当前场景的子元素，此调用将返回一个<code>CCArray</code>对象。在获取到第一个子元素后，直接对该元素的旋转角度进行加1的操作，以实现图标不间断旋转的功能。</p>
+<p>最后，在<code>AppDelegate.cpp</code>文件中，将建立场景的那一行代码修改为<code>CCScene *pScene = StudyCocos2D::scene();</code>。</p>
+<h3>结束</h3>
+<p>今天练习的内容非常简单，就是实现了菜单、场景切换和图标定位及旋转的功能，这些都是基础的概念和元素，需要很好的掌握其用法。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Cocos2D/">Cocos2D</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/game/">game</a>, <a href="/tags/cocos2d-x/">cocos2d-x</a>, <a href="/tags/cocos2d/">cocos2d</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

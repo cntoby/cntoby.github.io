@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在游戏后端开发中我是怎样解决高并发高负载问题的 | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="引子
+大概在两个多月前，我们之前的小公司被现在公司收购，从此，我就开始了水深火热的生活。再也不能享受走路五分钟就可以到公司的待遇了，想吃点早餐还要算着时间，不过好在现在这公司在10点前到公司都可以不算迟到。
+除了生活上的问题，还有就是工作上也遇到了新的挑战。之前，公司在游戏的推广力度上不大，游戏服务也一直运行的非常不错，没出过大问题，更同遇到过负载问题，但是到了这边后就大不一样了。几乎来新公司之后就马上对游戏开始了大力的推广，于是就开始了地狱般的一个月。
+NoSQL
+在游戏开始推广之前我们就已经意识到有可能会出现负载问题，到了新公司第一件事就是把一部分与其它库的关联不是那么密切表迁移到NoSQL数据库中，首批迁移的是建筑数据                                                 ，这是数据量最大记录条数最多的数据，在这里我们使用的是腾讯开放平台提供的CMEM，其实就是Memcached，只不过提供了持久化的能力。
+由于之前没有尝试过使用NOSQL，出于对这种存储数据方式的不信任和不适应，我们决定保存两份数据，一份在CMEM中，同时再保存一份到数据库中，此处使用的数据库也是腾讯提供的CDB(其实就是MySQL)。我的做法是，在保存数据&amp;gt;到memcached中后，马上把该操作生成sql写入队列，然后再由队列处理程序异步的将数据写入到数据库中，这个做法在刚开始压力没那么大的时候效果非常好，从memcached中读取数据要比从数据库读取的速度快不少。
+404 or 500
+随着用户的增加，新的问题开始暴发出来。表现出来的现象是，一到在线高峰，用户就可以访问不到服务器，提示404错误，检查日志，发现出现404错误是由500错误引发的，由于没有配置500错误页面，500错误时找不到500错误页面，于是Nginx返回了404 Not Found。查看500错误，发现是无法连接fastcgi服务，然后就卡在这里了，当时没想起来可以记慢执行日志。
+在腾讯开放后台查看统计数据时无意中发现，在每次出现大量404错误时数据库的连接数都暴高，猜测这可能是由于同时连接到数据库的客户端太多，查遍了所有有关连接数据库的位置，加入延迟连接数据库的代码，只在必要的时候&amp;gt;连接数据库。这种做法虽然稍有改观，但是在在线高峰时还是会出现404错误。
+在纠结于无法解决这个问题时，又检查了GM后台，以及感觉不起眼的队列同步服务，发现队列服务竟然没限制同时连接数，虽然里面加入了限制连接数的代码，但是没启用。果断限制连接数，然后再看，高峰时段平稳度过。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在游戏后端开发中我是怎样解决高并发高负载问题的"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-05-20T11:11:17.000Z"><a href="/2013/05/20/how-do-i-dispose-the-high-load-in-game-server/">2013-05-20</a></time>
+      
+      
+  
+    <h1 class="title">在游戏后端开发中我是怎样解决高并发高负载问题的</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2>引子</h2>
+<p>大概在两个多月前，我们之前的小公司被现在公司收购，从此，我就开始了水深火热的生活。再也不能享受走路五分钟就可以到公司的待遇了，想吃点早餐还要算着时间，不过好在现在这公司在10点前到公司都可以不算迟到。<br>
+除了生活上的问题，还有就是工作上也遇到了新的挑战。之前，公司在游戏的推广力度上不大，游戏服务也一直运行的非常不错，没出过大问题，更同遇到过负载问题，但是到了这边后就大不一样了。几乎来新公司之后就马上对游戏开始了大力的推广，于是就开始了地狱般的一个月。</p>
+<h2>NoSQL</h2>
+<p>在游戏开始推广之前我们就已经意识到有可能会出现负载问题，到了新公司第一件事就是把一部分与其它库的关联不是那么密切表迁移到NoSQL数据库中，首批迁移的是建筑数据                                                 ，这是数据量最大记录条数最多的数据，在这里我们使用的是腾讯开放平台提供的CMEM，其实就是Memcached，只不过提供了持久化的能力。<br>
+由于之前没有尝试过使用NOSQL，出于对这种存储数据方式的不信任和不适应，我们决定保存两份数据，一份在CMEM中，同时再保存一份到数据库中，此处使用的数据库也是腾讯提供的CDB(其实就是MySQL)。我的做法是，在保存数据&gt;到memcached中后，马上把该操作生成sql写入队列，然后再由队列处理程序异步的将数据写入到数据库中，这个做法在刚开始压力没那么大的时候效果非常好，从memcached中读取数据要比从数据库读取的速度快不少。</p>
+<h2>404 or 500</h2>
+<p>随着用户的增加，新的问题开始暴发出来。表现出来的现象是，一到在线高峰，用户就可以访问不到服务器，提示404错误，检查日志，发现出现404错误是由500错误引发的，由于没有配置500错误页面，500错误时找不到500错误页面，于是Nginx返回了404 Not Found。查看500错误，发现是无法连接fastcgi服务，然后就卡在这里了，当时没想起来可以记慢执行日志。<br>
+在腾讯开放后台查看统计数据时无意中发现，在每次出现大量404错误时数据库的连接数都暴高，猜测这可能是由于同时连接到数据库的客户端太多，查遍了所有有关连接数据库的位置，加入延迟连接数据库的代码，只在必要的时候&gt;连接数据库。这种做法虽然稍有改观，但是在在线高峰时还是会出现404错误。<br>
+在纠结于无法解决这个问题时，又检查了GM后台，以及感觉不起眼的队列同步服务，发现队列服务竟然没限制同时连接数，虽然里面加入了限制连接数的代码，但是没启用。果断限制连接数，然后再看，高峰时段平稳度过。</p>
+<a id="more"></a>
+<h2>分库</h2>
+<p>在感觉游戏运行平稳之后，公司尝试给推广了一波，问题再次暴发出来，相同的问题，500造成404错误，数据库连接数再次超过限制，此时能限制的连接已经基本上全部限制了，还有什么办法哪？<br>
+既然单数据库的连接数已经到达极限，而且无法再进行连接方面的优化，那么就分库吧，建筑数据已经迁移到memcached中，而且不再直接从数据库中读取这部分数据，第一步就先把这部分数据分到新库中，由于这部分建筑数据已经&gt;大部分都迁移到了memcached中，此处分库之前只需要把队列处理程序停掉，所有对建筑进行的操作都保存进了队列，此时再把建筑数据迁移到新库，然后修改队列处理程序的目的库的配置，然后把队列程序运行起来，成功分库后，&gt;主库的压力一下减掉接近一半，总算可以暂时松一口气了。</p>
+<h2>索引</h2>
+<p>在系统暂时不出现问题的时候，我总算可以有时间做一下细节优化了，先找到慢查询日志，挨个分析，发现有不少全表扫描，这种情况肯定是不合理的，而且肯定有优化空间。</p>
+<h3>找出所有SQL查询日志</h3>
+<p>这部分包括从慢查询日志中查找和在程序的数据查询模块记录所有发出的SQL，分析这些查询有否使用到索引、索引使用是否合理。</p>
+<h3>确定优化方案</h3>
+<p>对SQL的优化主要在合理使用索引和联合查询，尽量少使用或不使用子查询。先说一点索引优化，1、在一起对时间的处理上，把时间转成int型，索引的条件字段不能使用函数，否则不会使用索引。2、合理使用联合索引，联合索引千万不能滥用，否则不仅会挺慢添加新数据的效率，对检索并没有太多好处。另外要特别注意的是，联合索引的先后顺序很重要，当使用联合索引中的一个字段进行查询时，只有使用联合索引中的第一个索引字段才能利用到索引。</p>
+<h2>再次分库</h2>
+<p>随着在线人数越来越多，服务器压力一再暴涨，由于有了上次的经验，我们再次把修改频繁的资源道具单独使用一个库，同时再把查询压力非常大的交易分成独立的库，此时整个系统的查询是分散到4个库的，刚开始每个数据库的压&gt;力都被控制在30%以下，但是随着时间推移，问题又再一次…</p>
+<h2>清除过期数据</h2>
+<p>此次问题出现在交易库，数据无法修改，印象中似乎是事务无法提交之类的。据TX的DBA说应该是一个事务内的操作太多，但是检查后没发现有太多的情况，但是每次查询扫描的记录过来确实是存在的问题，最终在无法继续优化的前&gt;提下，把过期数据全都清掉了，过期交易数据清掉之后，交易相关的查询再也没出过问题。</p>
+<h2>总结</h2>
+<p>上一次因为负载过大对系统进行优化已经是一个月年的事了，到现在为止没有再出现过负载和并发问题。<br>
+在没有使用更先进的技术介入之前，我解决负载和并发问题的方法应该算是一个简单的思路。<br>
+主要就是适当使用NoSQL、按功能分库、合理使用索引、及时清理过期数据。<br>
+我现在正在考虑是否需要用C写一个专用服务端为游戏提供RESTful数据服务。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/架构/">架构</a>
+  </div>
+
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Start to learn Haskell 03 | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="郁闷
+今天周六，公司附近基本上没有卖早餐的，不过今天看起来似乎比较幸运，竟然神奇的多了一家卖早鸡蛋灌饼的在地铁附近。为了早晨不挨饿就买了一个，但是不知道为什么，在去公司的路上我就一直感觉不太对，也一直在考虑只要再看到有一家卖早点的，我就把这个灌饼给丢掉。但是今天是周六嘛，我没有幸运的看到第二家卖早点的，只好将就一下了。
+事情的发展是这样的，10点半吃完，到11点前就感觉不太对，我以为那是因为我还喝了格瓦斯，11点多出去抽烟，感觉更难受了，然后就去了厕所，先是拉肚子，然后出来又开始吐。中午吃饭时也感觉没有胃口，平时一碗面对我来说还略嫌不够，不过今天吃了连三分之一都不到就吃不下了，吃饭回来又接着吐。在拉肚子的时候任何一个屁都不值得相信，为了安全起见，又进了厕所，果然又是拉肚子，然后下午就由两个同事陪同去了医院急诊，拿了药回到家接着吐，然后睡觉，现在总算是好一些了。
+这期间还有，从下午回来我就发现王爷是在家的，但是一直到我晚上起床都没听到他的动静，就打了电话给他，原来他老人家上吐下泄到今天凌晨4点，我勒个去的。
+哦，还有，中日友好医院急诊内科的那个年轻女大夫很漂亮。
+Haskell变量类型
+基本类型
+在Haskell中一切都是有类型的，如字符Char字符列表[Char]元组(Int, Bool)，数值类型有Int和Integer，其中Int受系统位数影响，比如64位系统，这种类型的范围就是-2-2…63到263-1Integer类型则非常大，可以尝试一下product [1..50]。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Start to learn Haskell 03"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-28T06:13:31.000Z"><a href="/2015/03/28/Start-to-learn-Haskell-03/">2015-03-28</a></time>
+      
+      
+  
+    <h1 class="title">Start to learn Haskell 03</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>郁闷</h1>
+<p>今天周六，公司附近基本上没有卖早餐的，不过今天看起来似乎比较幸运，竟然神奇的多了一家卖早鸡蛋灌饼的在地铁附近。为了早晨不挨饿就买了一个，但是不知道为什么，在去公司的路上我就一直感觉不太对，也一直在考虑只要再看到有一家卖早点的，我就把这个灌饼给丢掉。但是今天是周六嘛，我没有幸运的看到第二家卖早点的，只好将就一下了。<br>
+事情的发展是这样的，10点半吃完，到11点前就感觉不太对，我以为那是因为我还喝了格瓦斯，11点多出去抽烟，感觉更难受了，然后就去了厕所，先是拉肚子，然后出来又开始吐。中午吃饭时也感觉没有胃口，平时一碗面对我来说还略嫌不够，不过今天吃了连三分之一都不到就吃不下了，吃饭回来又接着吐。在拉肚子的时候任何一个屁都不值得相信，为了安全起见，又进了厕所，果然又是拉肚子，然后下午就由两个同事陪同去了医院急诊，拿了药回到家接着吐，然后睡觉，现在总算是好一些了。<br>
+这期间还有，从下午回来我就发现王爷是在家的，但是一直到我晚上起床都没听到他的动静，就打了电话给他，原来他老人家上吐下泄到今天凌晨4点，我勒个去的。<br>
+哦，还有，中日友好医院急诊内科的那个年轻女大夫很漂亮。</p>
+<h1>Haskell变量类型</h1>
+<h2>基本类型</h2>
+<p>在Haskell中一切都是有类型的，如字符<code>Char</code>字符列表<code>[Char]</code>元组<code>(Int, Bool)</code>，数值类型有<code>Int</code>和<code>Integer</code>，其中<code>Int</code>受系统位数影响，比如64位系统，这种类型的范围就是-2-2…<sup>63到2</sup>63-1<code>Integer</code>类型则非常大，可以尝试一下<code>product [1..50]</code>。</p>
+<a id="more"></a>
+<h2>函数类型</h2>
+<p>前面说到，Haskell的函数也是有类型的，在在hci<em>中输入<code>:t getChar</code>，返回是<code>getChar :: IO Char</code>，其含义是</em>getChar*这个函数返回一个<code>Char</code>类型数据（这个地方不太会解释）。<br>
+由于Haskell可以推断类型，很多情况下似乎可以不用特意声明类型，但是为了使程序更易读并易于编译器检查，我们还是应该在定义函数时，在函数前加上函数类型，如下：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">byThree</span> :: <span class="type">Int</span> -&gt; <span class="type">Bool</span></span><br><span class="line"><span class="title">byThree</span> x = <span class="keyword">if</span> x `mod` <span class="number">3</span> == <span class="number">0</span></span><br><span class="line">            <span class="keyword">then</span> <span class="type">True</span></span><br><span class="line">            <span class="keyword">else</span> <span class="type">False</span></span><br></pre></td></tr></table></figure>
+<p>例子中，第一行声明<code>byThree</code>这个函数接受一个<code>Int</code>型参数，返回一个<code>Bool</code>型值。</p>
+<h2>类型变量</h2>
+<p>记得在前两天刚开始学Haskell时，学到一个函数<code>maximum [1,2,3,4,2,5]</code>，这个函数接受一个列表做为参数，返回列表中最大的元素，来看一下这个函数的类型，<code>:t maximum</code>，返回为<code>maximum :: [a] -&gt; a</code>，哦，这是什么意思哪？是说这个函数接受一个<code>a</code>类型列表返回一个<code>a</code>类型数值吗？是的，不过在这里<code>a</code>不特指某一类型，而是可以为<code>Char</code>也可以是<code>Int</code>更可以是别的什么，这是一个变量，在这里就叫<em>类型变量</em>了，而使用<em>类型变量</em>指代参数类型的函数就可以叫做<em>多态函数</em>，这跟C++或Java的泛型有些相似。</p>
+<p>当然，<code>a</code>既然只是一个变量，那我们也可以用其它名字代替，比如<code>b</code>。</p>
+<p>还记得前面学元组时学到的两个函数吧<code>fst</code>和<code>snd</code>，看一下<code>:t fst</code>，返回<code>fst :: (a,b) -&gt; a</code>，其含义就是<code>fst</code>函数接受一个元组为参数，这个元组的第一个元素为<code>a</code>类型，第二个元素为<code>b</code>类型，该函数返回的数据类型与第一个元素相同，因为本函数返回的就是元组的第一个元素。再查看一下<code>:t snd</code>，返回<code>snd :: (a,b) -&gt; b</code>，其含义就显而易见了。</p>
+<h1>结尾</h1>
+<p>今天身体不舒服，就写到这里吧，现在已经11点28了，马上休息，希望明天身体装备能完全恢复，今天就暂停一天的学习，明天可以多学一些进行补偿。<br>
+另外，希望<a href="http://www.hector2.us" target="_blank" rel="noopener">王爷</a>的身体也尽快恢复健康。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/haskell/">haskell</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/functionally/">functionally</a>, <a href="/tags/haskell/">haskell</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

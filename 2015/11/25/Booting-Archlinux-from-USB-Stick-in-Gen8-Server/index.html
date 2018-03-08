@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Booting Archlinux from USB Stick in Gen8 Server | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="冲动的入手Gen8
+看上Gen8已经很久了，一直因为价格问题和纠结于买来后是否有用的问题而迟迟没有下手，这次总算是借着双11的机会，再加上京东白条免息免手续费分期，算了一下，很划算呀，每月还不了多少钱，感觉很合适。因为太过激动，就忘了硬盘的事，于是又弄了两块2T的红盘，因为考虑最终要做Raid10，所以就不准备直接把系统安排在四个主要的硬盘位上，光驱位是个好地方，这也是Gen8的玩家们常用来放第五块硬盘的位置，于是又搞了一块120TG[1]的SSD硬盘，好在这块硬盘并不贵，因为后来启动服务器时，发现启动系统最浪费时间的地方根本就不在硬盘上。
+本来以为硬盘到位后就可以开始玩起哪，谁知道，手上存的几根数据线根本就没办法用，要么不够长，要么接口不对，然后又满网上找合适的线，前两条买回来还不对，靠，那两条线还都写了Gen8专用啥啥的，坑啊，也怪我没认真去看那几根线的接口，只是看到Gen8专用就以为没问题哪。
+在数据线到手后又折腾了一对电力猫，以便为服务器提供稳定的网络，不过话说回来，电力猫确实是好东西，通过电力线路传输网络信号，在现在这个信道几乎全部会被占用的大环境里，能方便的使用有线网络，那绝对是改变生活质量的举措啊。
+后来一想，反正这些东西都备齐了也不差几根好点的网线了，于是又搞了几条超六类网线，不知是心理作用还是实际效果，反正感觉上来说好像确实上网感受好了不少哪。
+折腾Gen8
+因为不想以后再麻烦的拆装硬盘什么的，又买了两个2.5转3.5的硬盘盒，用来安装我之前的两个移动硬盘到服务器，再加上新买的两块红盘，硬盘仓的四个位置全部占满，然后再加上SSD硬盘安装系统，一共五块硬盘都安装在服务器上。
+然后服务器上的两根网线都连到路由器上，一根是iLo另一根就是系统要用的了，到此为止，所有准备工作都准备好了，可以正式开始折腾了，哦对了，我还去HP官网申请了一个iLo专业版的试用证书，要不然是不能使用iLo的Remote Console功能的，因为家里用的是iMac，没有多余的显示器给服务器用，所以，这个Remote Console绝对是好东西，还可以把ISO虚拟成光盘给服务器使用，绝对是利器。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Booting Archlinux from USB Stick in Gen8 Server"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-11-25T03:15:16.000Z"><a href="/2015/11/25/Booting-Archlinux-from-USB-Stick-in-Gen8-Server/">2015-11-25</a></time>
+      
+      
+  
+    <h1 class="title">Booting Archlinux from USB Stick in Gen8 Server</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1>冲动的入手Gen8</h1>
+<p>看上Gen8已经很久了，一直因为价格问题和纠结于买来后是否有用的问题而迟迟没有下手，这次总算是借着双11的机会，再加上京东白条免息免手续费分期，算了一下，很划算呀，每月还不了多少钱，感觉很合适。因为太过激动，就忘了硬盘的事，于是又弄了两块2T的红盘，因为考虑最终要做Raid10，所以就不准备直接把系统安排在四个主要的硬盘位上，光驱位是个好地方，这也是Gen8的玩家们常用来放第五块硬盘的位置，于是又搞了一块120<s>T</s>G<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>的SSD硬盘，好在这块硬盘并不贵，因为后来启动服务器时，发现启动系统最浪费时间的地方根本就不在硬盘上。</p>
+<p>本来以为硬盘到位后就可以开始玩起哪，谁知道，手上存的几根数据线根本就没办法用，要么不够长，要么接口不对，然后又满网上找合适的线，前两条买回来还不对，靠，那两条线还都写了Gen8专用啥啥的，坑啊，也怪我没认真去看那几根线的接口，只是看到Gen8专用就以为没问题哪。</p>
+<p>在数据线到手后又折腾了一对电力猫，以便为服务器提供稳定的网络，不过话说回来，电力猫确实是好东西，通过电力线路传输网络信号，在现在这个信道几乎全部会被占用的大环境里，能方便的使用有线网络，那绝对是改变生活质量的举措啊。</p>
+<p>后来一想，反正这些东西都备齐了也不差几根好点的网线了，于是又搞了几条超六类网线，不知是心理作用还是实际效果，反正感觉上来说好像确实上网感受好了不少哪。</p>
+<h1>折腾Gen8</h1>
+<p>因为不想以后再麻烦的拆装硬盘什么的，又买了两个2.5转3.5的硬盘盒，用来安装我之前的两个移动硬盘到服务器，再加上新买的两块红盘，硬盘仓的四个位置全部占满，然后再加上SSD硬盘安装系统，一共五块硬盘都安装在服务器上。</p>
+<p>然后服务器上的两根网线都连到路由器上，一根是iLo另一根就是系统要用的了，到此为止，所有准备工作都准备好了，可以正式开始折腾了，哦对了，我还去HP官网申请了一个iLo专业版的试用证书，要不然是不能使用iLo的Remote Console功能的，因为家里用的是iMac，没有多余的显示器给服务器用，所以，这个Remote Console绝对是好东西，还可以把ISO虚拟成光盘给服务器使用，绝对是利器。</p>
+<a id="more"></a>
+<p>Arch Linux应该算是我最爱的一个Linux发行版了，最早的时候超爱Gentoo，因为我偏爱可定制度更高的系统，但是随着年龄的增长发现兴趣或是偏好也在改变，当然还是喜欢定制度高的系统，但是却不喜欢太折腾了，所以首先就是放弃了Gentoo而转向Arch Linux，首先，Arch Linux是有着Gentoo的相似的特点的，就是系统本身是最简的，没有多余的东西，所有的东西都需要亲自动手一点点搭建，但是好处是不需要所有的软件都从头编译，而Arch Linux的包管理工具提供的各种软件又都是针对不同平台进行过优化编译的，在性能方向是不会有问题的，还有就是，Arch Linux的启动速度是相当之快的，当然了，这一点在系统用于服务器时并不重要。</p>
+<p>为了方便，直接下载了Arch Linux最新的镜像文件，然后安排在服务器的第五块硬盘上，并且正确的安装了Grub，然后我就天真的以为可以启动系统了，结果，<code>reboot</code>命令执行后就傻逼了，电脑根本找不到启动盘，Google之后才知道，硬盘启动时系统只认第一第二个硬盘位的启动盘和U盘以及TF卡的位置，我第一第二硬盘位还要用来做RAID，肯定不能拿来装系统，只能想办法从U盘或TF卡位启动了，翻箱倒柜半天找出了很久不用的两个U盘，因为U盘只用来做启动盘，正常情况下系统不会使用启动盘，所以，我估摸着这两个U盘应该够我用几年了吧。</p>
+<p>于是重新加载ISO镜像启动进Live系统，格式化U盘，分出<code>/boot</code>区，重新安装<code>grub</code>到U盘，再次<code>reboot</code>。</p>
+<h1>不能从U盘启动</h1>
+<p>意外的事发生了，系统并没有如预料中的那样正常启动起来。事后想来，这个问题其实就是因为粗心造成的，众所周知，系统的启动分区是必须要设置成<code>bootable</code>的，但是因为我在第一次安装系统时启动盘不是Grub，结果后来重新安装启动信息到U盘时就忘了最重要的一步，把分区设置成<code>bootable</code>，而这个小疏忽让我浪费了差不多三天的业余时间去试图寻找问题所在，期间尝试了修改启动盘顺序、重新安装启动信息等方式，但是一直没有奏效，我甚至都差点以为是电脑出了硬盘问题或是U盘本身有问题，然后又想起这个U盘之前装过PE，一直也是正常使用的呀，然后一个念头就出现了，我猜自己犯了愚蠢的错误，于是再一次加载ISO，启动进系统，<code>fdisk /dev/sdf</code>，<code>p</code>，果然，启动分区上并没有<code>A</code>标志，马上加上标志，<code>reboot</code>，这一次系统成功启动。</p>
+<p>先入为主害死人，这也是很多人都会犯的经验主义，当你觉得不会犯某个错误时，那可能就很危险了，那个错误可能会造成严重后果，比如在管理数据时，常常觉得直接执行一个<code>DELETE</code>指令不会出问题，然后后果可能是清空了整个表，这样的错误我也犯过，值得警惕。</p>
+<h1>等待继续折腾</h1>
+<p>系统算是安装完了，不过这个时候游戏才刚刚开始，在我的计划中要完成的事情中，这台服务器要给配置成家里的媒体服务器、文件服务器，这只是初步的计划，下一步，这台服务器将为我提供远程的备份功能，比如在手机上顺手记一些idea，或是记帐，或是文件等等，另外，还要提供远程管理下载任务的功能，这都需要时间去一步步的完成，也许这需要花费整个2016年的业余时间，毕竟还有工作要完成，关于这些设计，有时间的话专门再写一篇儿吧。</p>
+<h1>后记</h1>
+<p>这篇博开题是在11月25号，今天已经是1月11号了，这差不多快两个月过去才又抽出时间来完成它，忙再加上懒，于是事情就无限被拖延了。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="http://tigerwang.us" target="_blank" rel="noopener">王爷</a>火眼金睛 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/server/">server</a>, <a href="/categories/server/archlinux/">archlinux</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/gen8/">gen8</a>, <a href="/tags/boot/">boot</a>, <a href="/tags/linux/">linux</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

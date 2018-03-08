@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Cocos2D-X learning 2 | 老白说</title>
+  <meta name="author" content="老白">
+  
+  <meta name="description" content="概述
+今天学习了在Cocos2D-X开发中创建场景，以及在场景中加入图片资源，并通过写一个简单的例子对涉及到的CCLayer和CCSprite进行练习和熟悉。
+过程
+首先，场景类需要继承于CCLayer，并且必须实现类函数CCScene *scene()和虚函数bool init(),前者用于建立场景并在场景中加入层以备演示CCSprite，而后者则是用于对本场景进行初始化，代码如下：
+GameScene.h12345678910111213141516#ifndef __HelloCocos__GameScene__#define __HelloCocos__GameScene__#include &amp;lt;iostream&amp;gt;#include &#34;cocos2d.h&#34;using namespace cocos2d;class GameScene: public CCLayer &amp;#123;private:public:    virtual bool init();    static CCScene * scene();    CREATE_FUNC(GameScene);&amp;#125;;#endif /* defined(__HelloCocos__GameScene__) */
+以上代码， CREATE_FUNC(GameScene)是一个宏，此宏的功能是为GameScene类创建一个GameScene *GameScene::create()类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的init()方法，因此，使用宏对代码进行简化是一个非常好的方法。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Cocos2D-X learning 2"/>
+  <meta property="og:site_name" content="老白说"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36519147-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">老白说</a></h1>
+  <h2><a href="/">讲述老白身边的故事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-27T14:49:58.000Z"><a href="/2014/03/27/cocos2d-x-learning-2/">2014-03-27</a></time>
+      
+      
+  
+    <h1 class="title">Cocos2D-X learning 2</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>概述</h3>
+<p>今天学习了在Cocos2D-X开发中创建场景，以及在场景中加入图片资源，并通过写一个简单的例子对涉及到的CCLayer和CCSprite进行练习和熟悉。</p>
+<h3>过程</h3>
+<p>首先，场景类需要继承于CCLayer，并且必须实现类函数<code>CCScene *scene()</code>和虚函数<code>bool init()</code>,前者用于建立场景并在场景中加入层以备演示CCSprite，而后者则是用于对本场景进行初始化，代码如下：</p>
+<figure class="highlight c++"><figcaption><span>GameScene.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HelloCocos__GameScene__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HelloCocos__GameScene__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameScene</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameScene);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__HelloCocos__GameScene__) */</span></span></span><br></pre></td></tr></table></figure>
+<p>以上代码， <code>CREATE_FUNC(GameScene)</code>是一个宏，此宏的功能是为GameScene类创建一个<code>GameScene *GameScene::create()</code>类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的<code>init()</code>方法，因此，使用宏对代码进行简化是一个非常好的方法。</p>
+<a id="more"></a>
+<figure class="highlight c++"><figcaption><span>GameScene.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"GameScene.h"</span></span></span><br><span class="line"></span><br><span class="line">CCScene * GameScene::scene()</span><br><span class="line">&#123;</span><br><span class="line">    CCScene *scene = CCScene::create();</span><br><span class="line">    MyScene *layer = MyScene::create();</span><br><span class="line">    scene-&gt;addChild(layer);</span><br><span class="line">    <span class="keyword">return</span> scene;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> GameScene::init()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!CCLayer::init()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    CCSprite *sprite = CCSprite::create(<span class="string">"Icon-72.png"</span>);</span><br><span class="line">    sprite-&gt;setPosition(ccp(<span class="number">300</span>, <span class="number">300</span>));</span><br><span class="line">    <span class="keyword">this</span>-&gt;addChild(sprite);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上这段代码完成了一个基本的CCLayer子函数，并对其进行合适的初始化。其主要工作为，在<code>CCScene *GameScene::scene()</code>方法中始建一个CCScene对象，并将此类的对象加入为子元素。</p>
+<p>同时，在<code>bool GameScene::init()</code>方法中用一个图片文件初始化一个精灵对象，并将其加入层中的(300,300)位置。</p>
+<p>其中，<code>ccp(300, 300)</code>是一个宏调用，这个宏的作用是实例化一个CCPoint对象，CCPoint类指示了屏幕上的一个坐标。</p>
+<p>PS：在Cocos2D中，坐标点(0,0)为左下角，这一点与Web及iOS应用开发都是不同的，Web与iOS坐标(0,0)为显示区域的右上角。</p>
+<figure class="highlight c++"><figcaption><span>AppDelegate.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"AppDelegate.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"GameScene.h"</span></span></span><br><span class="line"></span><br><span class="line">USING_NS_CC;</span><br><span class="line"></span><br><span class="line">AppDelegate::AppDelegate() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AppDelegate::~AppDelegate() </span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> AppDelegate::applicationDidFinishLaunching() &#123;</span><br><span class="line">    <span class="comment">// initialize director</span></span><br><span class="line">    CCDirector* pDirector = CCDirector::sharedDirector();</span><br><span class="line">    CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();</span><br><span class="line"></span><br><span class="line">    pDirector-&gt;setOpenGLView(pEGLView);</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// turn on display FPS</span></span><br><span class="line">    pDirector-&gt;setDisplayStats(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// set FPS. the default value is 1.0/60 if you don't call this</span></span><br><span class="line">    pDirector-&gt;setAnimationInterval(<span class="number">1.0</span> / <span class="number">60</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create a scene. it's an autorelease object</span></span><br><span class="line">    CCScene *pScene = GameScene::scene();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// run</span></span><br><span class="line">    pDirector-&gt;runWithScene(pScene);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This function will be called when the app is inactive. When comes a phone call,it's be invoked too</span></span><br><span class="line"><span class="keyword">void</span> AppDelegate::applicationDidEnterBackground() &#123;</span><br><span class="line">    CCDirector::sharedDirector()-&gt;stopAnimation();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if you use SimpleAudioEngine, it must be pause</span></span><br><span class="line">    <span class="comment">// SimpleAudioEngine::sharedEngine()-&gt;pauseBackgroundMusic();</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// this function will be called when the app is active again</span></span><br><span class="line"><span class="keyword">void</span> AppDelegate::applicationWillEnterForeground() &#123;</span><br><span class="line">    CCDirector::sharedDirector()-&gt;startAnimation();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if you use SimpleAudioEngine, it must resume here</span></span><br><span class="line">    <span class="comment">// SimpleAudioEngine::sharedEngine()-&gt;resumeBackgroundMusic();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码为建立Cocos2D-X项目时自动生成的，只需要修改成与上面一致，主要是此处的修改一致<code>CCScene *pScene = GameScene::scene()</code>。</p>
+<h3>结束</h3>
+<p>到这里，第一次在Cocos2D-X中写代码就完成了，到目前为止，感觉在游戏中的概念并不难接受，但是，这只是开头，学一种技能最重要的是能够坚持下去，否则再简单的东西也是学不到手的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Cocos2D/">Cocos2D</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/web/">web</a>, <a href="/tags/game/">game</a>, <a href="/tags/cocos2d-x/">cocos2d-x</a>, <a href="/tags/cocos2d/">cocos2d</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+<script>
+ (function() {
+     var d = document, s = d.createElement('script');
+     s.src = 'https://cntoby.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<script id="dsq-count-scr" src="//cntoby.disqus.com/count.js" async></script>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.tobycn.org">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Cocos2D/">Cocos2D</a><small>4</small></li>
+  
+    <li><a href="/categories/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/categories/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/categories/Reading/">Reading</a><small>1</small></li>
+  
+    <li><a href="/categories/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/categories/server/archlinux/">archlinux</a><small>1</small></li>
+  
+    <li><a href="/categories/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/categories/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/emacs/">emacs</a><small>1</small></li>
+  
+    <li><a href="/categories/functionally/">functionally</a><small>1</small></li>
+  
+    <li><a href="/categories/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/categories/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/categories/mysql/network/">network</a><small>1</small></li>
+  
+    <li><a href="/categories/server/">server</a><small>1</small></li>
+  
+    <li><a href="/categories/技术生涯/">技术生涯</a><small>1</small></li>
+  
+    <li><a href="/categories/日常生活/">日常生活</a><small>4</small></li>
+  
+    <li><a href="/categories/架构/">架构</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Story/">Story</a><small>0</small></li>
+  
+    <li><a href="/tags/TexturePacker/">TexturePacker</a><small>3</small></li>
+  
+    <li><a href="/tags/boot/">boot</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c</a><small>1</small></li>
+  
+    <li><a href="/tags/cheater/">cheater</a><small>1</small></li>
+  
+    <li><a href="/tags/cocos2d/">cocos2d</a><small>4</small></li>
+  
+    <li><a href="/tags/cocos2d-x/">cocos2d-x</a><small>4</small></li>
+  
+    <li><a href="/tags/coffee/">coffee</a><small>1</small></li>
+  
+    <li><a href="/tags/elisp/">elisp</a><small>2</small></li>
+  
+    <li><a href="/tags/emacs/">emacs</a><small>2</small></li>
+  
+    <li><a href="/tags/faker/">faker</a><small>1</small></li>
+  
+    <li><a href="/tags/functionally/">functionally</a><small>6</small></li>
+  
+    <li><a href="/tags/game/">game</a><small>5</small></li>
+  
+    <li><a href="/tags/gen8/">gen8</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/gitolite/">gitolite</a><small>1</small></li>
+  
+    <li><a href="/tags/haskell/">haskell</a><small>4</small></li>
+  
+    <li><a href="/tags/hhkb/">hhkb</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/lisp/">lisp</a><small>3</small></li>
+  
+    <li><a href="/tags/memory/">memory</a><small>0</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql-packet/">mysql packet</a><small>1</small></li>
+  
+    <li><a href="/tags/network/">network</a><small>1</small></li>
+  
+    <li><a href="/tags/programming/">programming</a><small>1</small></li>
+  
+    <li><a href="/tags/range/">range</a><small>1</small></li>
+  
+    <li><a href="/tags/sprite-sheet/">sprite sheet</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/swindlers/">swindlers</a><small>1</small></li>
+  
+    <li><a href="/tags/tuple/">tuple</a><small>1</small></li>
+  
+    <li><a href="/tags/web/">web</a><small>2</small></li>
+  
+    <li><a href="/tags/zwoptex/">zwoptex</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2018 老白
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
