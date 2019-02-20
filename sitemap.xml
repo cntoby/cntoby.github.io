@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.tobycn.org/2015/03/13/About-Reading-and-buy-books/</loc>
+    
+    <lastmod>2019-02-20T07:59:01.542Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.tobycn.org/2019/02/18/controll-the-mindset-of-reading/</loc>
     
-    <lastmod>2019-02-18T09:15:33.055Z</lastmod>
+    <lastmod>2019-02-20T03:43:22.481Z</lastmod>
     
   </url>
   
@@ -37,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2013/12/13/what-life-we-want/</loc>
+    <loc>https://www.tobycn.org/2013/09/14/something-at-last-2-month/</loc>
     
     <lastmod>2018-03-08T02:46:48.052Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2013/09/14/something-at-last-2-month/</loc>
+    <loc>https://www.tobycn.org/2013/12/13/what-life-we-want/</loc>
     
     <lastmod>2018-03-08T02:46:48.052Z</lastmod>
     
@@ -128,6 +135,13 @@
   </url>
   
   <url>
+    <loc>https://www.tobycn.org/2015/03/26/Start-to-learn-Haskell-01/</loc>
+    
+    <lastmod>2018-03-08T02:46:48.048Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.tobycn.org/2015/03/27/Start-to-learn-Haskell-02/</loc>
     
     <lastmod>2018-03-08T02:46:48.048Z</lastmod>
@@ -136,13 +150,6 @@
   
   <url>
     <loc>https://www.tobycn.org/2015/03/28/Start-to-learn-Haskell-03/</loc>
-    
-    <lastmod>2018-03-08T02:46:48.048Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2015/03/26/Start-to-learn-Haskell-01/</loc>
     
     <lastmod>2018-03-08T02:46:48.048Z</lastmod>
     
@@ -180,13 +187,6 @@
     <loc>https://www.tobycn.org/2015/11/06/Elisp-Basics-more/</loc>
     
     <lastmod>2018-03-08T02:46:48.046Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2015/03/13/About-Reading-and-buy-books/</loc>
-    
-    <lastmod>2018-03-08T02:46:48.045Z</lastmod>
     
   </url>
   
