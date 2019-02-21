@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.tobycn.org/2015/1104/Elisp-Basics.html</loc>
-    
-    <lastmod>2019-02-21T08:26:37.496Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</loc>
     
-    <lastmod>2019-02-21T08:24:23.600Z</lastmod>
+    <lastmod>2019-02-21T08:40:52.069Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</loc>
     
-    <lastmod>2019-02-21T08:22:52.527Z</lastmod>
+    <lastmod>2019-02-21T08:40:00.725Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.tobycn.org/2015/1104/Elisp-Basics.html</loc>
+    
+    <lastmod>2019-02-21T08:39:35.986Z</lastmod>
     
   </url>
   
