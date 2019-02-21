@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.tobycn.org/2015/1104/Elisp-Basics.html</loc>
+    
+    <lastmod>2019-02-21T08:26:37.496Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</loc>
+    
+    <lastmod>2019-02-21T08:24:23.600Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</loc>
+    
+    <lastmod>2019-02-21T08:22:52.527Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.tobycn.org/2015/0313/About-Reading-and-buy-books.html</loc>
     
     <lastmod>2019-02-20T08:10:35.866Z</lastmod>
@@ -72,14 +93,14 @@
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html</loc>
+    <loc>https://www.tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html</loc>
     
     <lastmod>2018-03-08T02:46:48.051Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html</loc>
+    <loc>https://www.tobycn.org/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html</loc>
     
     <lastmod>2018-03-08T02:46:48.051Z</lastmod>
     
@@ -108,13 +129,6 @@
   
   <url>
     <loc>https://www.tobycn.org/2014/0331/about-sprite-sheet-and-tools.html</loc>
-    
-    <lastmod>2018-03-08T02:46:48.049Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</loc>
     
     <lastmod>2018-03-08T02:46:48.049Z</lastmod>
     
@@ -180,20 +194,6 @@
     <loc>https://www.tobycn.org/2015/1106/Elisp-Basics-more.html</loc>
     
     <lastmod>2018-03-08T02:46:48.046Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2015/1104/Elisp-Basics.html</loc>
-    
-    <lastmod>2018-03-08T02:46:48.046Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</loc>
-    
-    <lastmod>2018-03-08T02:46:48.045Z</lastmod>
     
   </url>
   
