@@ -1,25 +1,1232 @@
-<!DOCTYPE html><html lang="en"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>老白说 | 讲述老白身边的故事</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">老白说</h1><a id="logo" href="/.">老白说</a><p class="description">讲述老白身边的故事</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title"><a href="/2014/0327/cocos2d-x-learning-2.html">Cocos2D-X learning 2</a></h1><div class="post-meta">2014-03-27</div><div class="post-content"><h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h3>
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="老白说">
+<meta property="og:url" content="https://www.tobycn.org/page/3/index.html">
+<meta property="og:site_name" content="老白说">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老白说">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="老白说" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://www.tobycn.org/page/3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>老白说 – 讲述老白身边的故事</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">老白说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">讲述老白身边的故事</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/cntoby" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2014/0327/cocos2d-x-learning-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2014/0327/cocos2d-x-learning-2.html" class="post-title-link" itemprop="url">Cocos2D-X learning 2</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-03-27 22:49:58" itemprop="dateCreated datePublished" datetime="2014-03-27T22:49:58+08:00">2014-03-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cocos2D/" itemprop="url" rel="index"><span itemprop="name">Cocos2D</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2014/0327/cocos2d-x-learning-2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2014/0327/cocos2d-x-learning-2.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h3>
 <p>今天学习了在Cocos2D-X开发中创建场景，以及在场景中加入图片资源，并通过写一个简单的例子对涉及到的CCLayer和CCSprite进行练习和熟悉。</p>
 <h3 id="过程"><a class="markdownIt-Anchor" href="#过程"></a> 过程</h3>
 <p>首先，场景类需要继承于CCLayer，并且必须实现类函数<code>CCScene *scene()</code>和虚函数<code>bool init()</code>,前者用于建立场景并在场景中加入层以备演示CCSprite，而后者则是用于对本场景进行初始化，代码如下：</p>
 <figure class="highlight c++"><figcaption><span>GameScene.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HelloCocos__GameScene__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HelloCocos__GameScene__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameScene</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameScene);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__HelloCocos__GameScene__) */</span></span></span><br></pre></td></tr></table></figure>
-<p>以上代码， <code>CREATE_FUNC(GameScene)</code>是一个宏，此宏的功能是为GameScene类创建一个<code>GameScene *GameScene::create()</code>类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的<code>init()</code>方法，因此，使用宏对代码进行简化是一个非常好的方法。</p></div><p class="readmore"><a href="/2014/0327/cocos2d-x-learning-2.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2014/0327/cocos2d-x-learning-1.html">Cocos2D-X learning 1</a></h1><div class="post-meta">2014-03-27</div><div class="post-content"><p>最近学了一些关于Cocos2D-X的知道，在这里整理一下。</p>
+<p>以上代码， <code>CREATE_FUNC(GameScene)</code>是一个宏，此宏的功能是为GameScene类创建一个<code>GameScene *GameScene::create()</code>类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的<code>init()</code>方法，因此，使用宏对代码进行简化是一个非常好的方法。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2014/0327/cocos2d-x-learning-2.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2014/0327/cocos2d-x-learning-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2014/0327/cocos2d-x-learning-1.html" class="post-title-link" itemprop="url">Cocos2D-X learning 1</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-03-27 07:41:48" itemprop="dateCreated datePublished" datetime="2014-03-27T07:41:48+08:00">2014-03-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cocos2D/" itemprop="url" rel="index"><span itemprop="name">Cocos2D</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2014/0327/cocos2d-x-learning-1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2014/0327/cocos2d-x-learning-1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近学了一些关于Cocos2D-X的知道，在这里整理一下。</p>
 <p>一直以来我做的都是后端的工作，现在突然有兴趣做一些前端的关于移动程序开发以及游戏开发方面的程序，对很多概念都是非常陌生的，不知道我后端开发方面的经验放在前端有没有一些用处。</p>
-<h3 id="cocos2d的简单介绍"><a class="markdownIt-Anchor" href="#cocos2d的简单介绍"></a> Cocos2D的简单介绍</h3></div><p class="readmore"><a href="/2014/0327/cocos2d-x-learning-1.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2014/0228/encounter-swindlers.html">遭遇骗子</a></h1><div class="post-meta">2014-02-28</div><div class="post-content"><h2 id="骗子出现"><a class="markdownIt-Anchor" href="#骗子出现"></a> 骗子出现</h2>
+<h3 id="cocos2d的简单介绍"><a class="markdownIt-Anchor" href="#cocos2d的简单介绍"></a> Cocos2D的简单介绍</h3>
+<p>Cocos2D是一个应用非常广泛的2D游戏开发引擎，可以帮助对页面的元素进行方便的管理以及移动变形等操作，Cocos2D是基于Objective-C语言的，所以在iOS上的开发非常方便，但是跨平台方面就较差了，所以，就有了Cocos2D-X这一个基于C++的复刻版。</p>
+<h3 id="cocos2d的一些概念这里只说我学到的"><a class="markdownIt-Anchor" href="#cocos2d的一些概念这里只说我学到的"></a> Cocos2D的一些概念（这里只说我学到的）</h3>
+<ol>
+<li>导演类CCDirector：这个类可以算是管理类，可以通过这个类获取到游戏运行界面的一些元素的属性，比如winSize等，在游戏中可以用来管理场景等。本类的使用方式为单例，通过类方法CCDirector::sharedDirecter获取对象。</li>
+<li>OpenGL类CCEGLView：对于OpenGL我不是很了解，但是我猜是可以提供类似于DirectX之类的功能，应该是管理图像动画等操作的，CCDirector需要绑定一个CCEGLView对象才可以运行，也是以单例的方式使用，通过类方法CCEGLView::sharedOpenGLView获取对象。</li>
+<li>场景类CCScene: 场景类继承于CCNode，在其中可以放置CCLayer类。</li>
+<li>层CCLayer：此类同样继承于CCNode，在其中可以放置CCSprite类，我的理解CCLayer就相当于电影中的幕次吧。在游戏中定义的不同游戏场景都需要继承CCLayer，必须实现的方法有virtual CCScene * scene()/static bool init()/CREATE_FUNC(CustomSceneName)，其中CREATE_FUNC是宏，可以帮助建立create方法。</li>
+<li>精灵类CCSprite：这应该是场景中更小的元素，在游戏中放置的背景、图片等都需要使用CCSprite，与CCScene一样都是继承自CCNode，由此可以判断，CCSprite类也是一个小场景，在其中可以加入其它的子元素，共同完成更复杂的动作。</li>
+</ol>
+<p>目前基本只学到了这些，明天继续。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2014/0228/encounter-swindlers.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2014/0228/encounter-swindlers.html" class="post-title-link" itemprop="url">遭遇骗子</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-02-28 21:27:57" itemprop="dateCreated datePublished" datetime="2014-02-28T21:27:57+08:00">2014-02-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/日常生活/" itemprop="url" rel="index"><span itemprop="name">日常生活</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2014/0228/encounter-swindlers.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2014/0228/encounter-swindlers.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="骗子出现"><a class="markdownIt-Anchor" href="#骗子出现"></a> 骗子出现</h2>
 <p>下午正在看书时，QQ提示有人加好友，由于我的QQ设置了加好友需要回答问题，所以，一般回答问题不是我认识的人，并且引不起我的兴趣的话我是不会加好友的。但是那骗子的QQ资料跟我一个朋友完全一样，而且我跟那朋友也好久没有联系了，虽然他在验证问题里回答的都是“认识的”，但是我还是以为是他本人换QQ了或是启用新号之类的原因，于是没有犹豫就加了好友。</p>
 <h2 id="为行骗做铺垫"><a class="markdownIt-Anchor" href="#为行骗做铺垫"></a> 为行骗做铺垫</h2>
 <p>由于我一般不会在QQ上主动跟别人说话，所以尽管加了好友但是我并没有跟他说话。</p>
 <p>等到他主动跟我说话时我首先问了一个我比较关心的问题，就是为什么突然又加我好友，其实这个时候我还没开始怀疑，因为我根本不记得那朋友以前用的QQ号，这骗子的回答是不小心把我删了，现在又加回来，我当时虽然觉得回答合理，可还是感觉有点不对劲，事后我反应过来，如果你把一个QQ好友删掉，恐怕你根本就不会记得你删掉好友的QQ号，又怎么可能那么容易加回来哪。</p>
 <p>然后，对方马上让我发视频，说是要看看他那边还能不能显示，于是我发送了视频请求，然后对方视频刚一显示出来一个画面就不动了，然后对方马上跟我说新西兰这边网络太差，视频太卡了，然后就关掉了视频。当时看视频显示的画面确实是我朋友，当时只是觉得这画面好眼熟，其它的也没多想。</p>
 <p>在识穿骗子的真面目后，我去朋友Q空间相册里找到了视频里显示的照片，看到照片后我又想到一个疑点，新西兰在南半球，这个时候应该是夏秋季节，可照片里是穿厚衣服的，这很明显不对头呀。</p>
-<p>骗子之所以来这一手，其目的就是让你认为在电脑那头的就是你朋友，当你认为这是熟人之后自然就便于骗子下手了。</p></div><p class="readmore"><a href="/2014/0228/encounter-swindlers.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2014/0102/my-programming-development-history.html">我的编程进化史</a></h1><div class="post-meta">2014-01-02</div><div class="post-content"><p>其实这篇博的题目原本是“我的C语言观”，这题目真扯淡，我是无论如何也不会想出要主动写这样的题目的，但是，因为表妹的狗P老师要求他们写这样的题目作为考试，虽然我不会帮她写作业，但是突然也想试试，对于一个这样大的题目，我都能写出什么来？所以，就试着写一下吧。</p>
+<p>骗子之所以来这一手，其目的就是让你认为在电脑那头的就是你朋友，当你认为这是熟人之后自然就便于骗子下手了。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2014/0228/encounter-swindlers.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2014/0102/my-programming-development-history.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2014/0102/my-programming-development-history.html" class="post-title-link" itemprop="url">我的编程进化史</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2014-01-02 20:35:01" itemprop="dateCreated datePublished" datetime="2014-01-02T20:35:01+08:00">2014-01-02</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术生涯/" itemprop="url" rel="index"><span itemprop="name">技术生涯</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2014/0102/my-programming-development-history.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2014/0102/my-programming-development-history.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>其实这篇博的题目原本是“我的C语言观”，这题目真扯淡，我是无论如何也不会想出要主动写这样的题目的，但是，因为表妹的狗P老师要求他们写这样的题目作为考试，虽然我不会帮她写作业，但是突然也想试试，对于一个这样大的题目，我都能写出什么来？所以，就试着写一下吧。</p>
 <h2 id="闭门造车"><a class="markdownIt-Anchor" href="#闭门造车"></a> 闭门造车</h2>
 <p>现在想起来，开始接触C语言已经是很久很久之前的事情了，嗯，大概是95年吧，那时候突然对计算机兴起了很大的兴趣，但是与别人不同的是，我是对计算机本身以及里面的程序感兴趣，而对于电脑游戏我有种出于本能的反感，所以在基本上学习电脑学习编程的前十年，我没接触过电脑游戏，而且偶尔的几次陪同学一起去玩游戏，也完全没感觉到好玩。</p>
 <p>再说回学习编程语言的过程吧，最早接触编程语言我记得是在同学的学习机上，那上面提供了一种Basic语言，好像是QBasic吧，对这门语言的记忆只剩下需要在每行的前面标记行号，这是一件很不人道的事情，直到后来接触到C语言。</p>
 <p>刚开始接触到C语言时，对于函数的定义之类的有些费解，不过好像用了不久的时间就适应了，并且很乐于使用函数，然后慢慢了解到变量范围，学会使用不同的作用范围的变量。对了，还有，go关键字，刚开始时还觉得这用起来很方便，但是时间久了发现，这并没有想象的那么容易使用，而且在程序中跳来跳去让逻辑变得很乱。</p>
 <p>由于C语言是我真正学习的第一门编程语言，在初期，我并不知道需要把不同的函数按照功能分放在不同的文件里，这导致了刚开始写的一些小程序只有一个文件，当时觉得头文件没有必要使用，更不用说extern关键字了，我甚至以为我发现了C语言设计的一些问题。</p>
 <p>当时因为用的操作系统是MS-DOS，使用的开发工具叫做Turbo C，虽然感觉用起来不方便，但是这总算是全屏幕编辑器，可以自由的在文件内移动光标，总比行编辑器要好。当时是不知道有Linux这种操作系统，更不知道在Linux下有编辑器之神Vi，也不知道有神的编辑器Emacs。</p>
-<p>随着不断的学习，写的代码似乎也越来越长，这时就觉得在一个文件里写代码太麻烦了，打开文件慢，寻找相应的代码也很麻烦，这时我试着把代码按功能分置在不同的文件中。此时，我终于可以在代码中包含我自己的头文件，这突然让我感觉到一种莫名的成就感，当时甚至在考虑，我是不是有必要把自己写的代码提供给别人使用了，这样会不会让我更有成就感。</p></div><p class="readmore"><a href="/2014/0102/my-programming-development-history.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2013/1213/what-life-we-want.html">我们想要什么样的生活</a></h1><div class="post-meta">2013-12-13</div><div class="post-content"><p>没有调查过调查过其它人的生活和思想状态，但是就我自己而言，我发现我对现状越来不满，当然这不是对我的家庭，我想这应该是对社会现状的极大不公平的心理抗争吧。没有在国外长期生活过，不知道生活在其它国家的普通人有没有发出生意的权利，但是从网络中得到的信息，我想，这总好过生活在灰暗空气中我们吧。</p>
+<p>随着不断的学习，写的代码似乎也越来越长，这时就觉得在一个文件里写代码太麻烦了，打开文件慢，寻找相应的代码也很麻烦，这时我试着把代码按功能分置在不同的文件中。此时，我终于可以在代码中包含我自己的头文件，这突然让我感觉到一种莫名的成就感，当时甚至在考虑，我是不是有必要把自己写的代码提供给别人使用了，这样会不会让我更有成就感。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2014/0102/my-programming-development-history.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2013/1213/what-life-we-want.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2013/1213/what-life-we-want.html" class="post-title-link" itemprop="url">我们想要什么样的生活</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2013-12-13 20:24:49" itemprop="dateCreated datePublished" datetime="2013-12-13T20:24:49+08:00">2013-12-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/日常生活/" itemprop="url" rel="index"><span itemprop="name">日常生活</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2013/1213/what-life-we-want.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2013/1213/what-life-we-want.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>没有调查过调查过其它人的生活和思想状态，但是就我自己而言，我发现我对现状越来不满，当然这不是对我的家庭，我想这应该是对社会现状的极大不公平的心理抗争吧。没有在国外长期生活过，不知道生活在其它国家的普通人有没有发出生意的权利，但是从网络中得到的信息，我想，这总好过生活在灰暗空气中我们吧。</p>
 <h2 id="民以食为天"><a class="markdownIt-Anchor" href="#民以食为天"></a> 民以食为天</h2>
 <p>天朝，北方，最受欢迎的早餐我猜大抵得算是油条、油饼、包子、豆浆、豆腐脑吧？天朝P民平时吃的菜的做法也基本上就是煎炒烹炸炖吧？仔细看看，发现我们吃的东西根本离不开油，那么做油的生意肯定很赚钱吧？然后，有人就想在这上面赚更多的钱了，然后地沟油出现了。</p>
 <p>地沟油的问题经过一段时间的打压似乎销声匿迹了，而且似乎舆论也并不太关注了，可是大家都知道，一个暴利行业出现后，并不是那么容易消失的，你要知道，资本家为了百分之二百的利润是不惜走上绞刑台的。 还有需要担心的转基因食品，因为你不知道这种东西会给身体或者整个人类造成什么样的危害，很多的科学家或伪科学家们在热火朝天的争论这是否安全，能否出现在普通人的餐桌上，而于此同时他们还在桌下数着其为某势力代言得到的钞票，他们争论的焦点多半是由哪方从人民手中赚取利润。<br>
@@ -28,7 +1235,183 @@
 <p>好好想想，我们有多久没有看到满天的星辰？ 夏天，吃过晚饭，把竹制茶几抬到院子里，再把两个竹椅抬出来，父亲泡着茶，孩子在旁边或撒欢或缠着父亲给讲个故事，父亲拿起扇子使劲摇了两下，然后另一手拿着紫砂小壶吱的吸一小口，“好，昨天咱们讲了织女牛郎星的故事，今天咱还讲跟星星有关的故事，你先把北斗星给老爸指出来。”，“正北边那个最亮的是北极星，那旁边七个比较亮长得像勺子的就是北斗星了”，父亲又拿起茶壶吸了一口，发出吱的一声，“好，那今天咱们就讲个霍去病倒看北斗的故事，霍去病是西汉年间的一位大将…”<br>
 时常想起小时候，老爸讲星星的故事给我听，边讲故事边指各个星的位置给我看，由此，我至今记住了很多星星。<br>
 我想把这些再讲给我儿子听，可是抬头看看，天空漆黑如墨，运气好的时候能看到在雾气蒙蒙中隐现的月亮，往远处看，也只能看到雾气昭昭中昏黄的路灯。<br>
-也不要再奢望在院子里乘凉了，现在在屋里都需要装空气过滤机，更何况，再也没有可能自己独用一个小院子了。</p></div><p class="readmore"><a href="/2013/1213/what-life-we-want.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2013/0914/something-at-last-2-month.html">写写最近的一些情况吧</a></h1><div class="post-meta">2013-09-14</div><div class="post-content"><h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+也不要再奢望在院子里乘凉了，现在在屋里都需要装空气过滤机，更何况，再也没有可能自己独用一个小院子了。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2013/1213/what-life-we-want.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2013/0914/something-at-last-2-month.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2013/0914/something-at-last-2-month.html" class="post-title-link" itemprop="url">写写最近的一些情况吧</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2013-09-14 19:16:34" itemprop="dateCreated datePublished" datetime="2013-09-14T19:16:34+08:00">2013-09-14</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/日常生活/" itemprop="url" rel="index"><span itemprop="name">日常生活</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2013/0914/something-at-last-2-month.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2013/0914/something-at-last-2-month.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>在OSC混了这么久，一直想写点东西来着，但是直到现在博客都是空的，主要原因我想有以下这么几点：</p>
 <ul>
 <li>所掌握的知识点较散，不成体系，没办法写出一篇漂亮的文章，于是就不想动手。</li>
@@ -38,7 +1421,183 @@
 </ul>
 <p>最近突然特别想写点东西主要是最近身边发生了一些事。</p>
 <h2 id="事情一"><a class="markdownIt-Anchor" href="#事情一"></a> 事情一</h2>
-<p>我的老板（其实就是之前我和另外一哥们跟着他开公司做游戏的哥们，这话说的有点绕的感觉），前几天夜里突然吐了很多血，据这哥们说，当时他正准备睡觉，然后就是一阵阵剧烈的咳嗽，同时吐出一些东西，他发现吐的是血已经是天亮准备去上班的时候了，在他老婆的押送下去了医院做检查，查了一天也没查出原因所在，医生的原话是，先开点药回去吃着，注意休息，等下次再吐血时马上来医院再做全面检查。</p></div><p class="readmore"><a href="/2013/0914/something-at-last-2-month.html">Read More</a></p></div><div class="post"><h1 class="post-title"><a href="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html">在游戏后端开发中我是怎样解决高并发高负载问题的</a></h1><div class="post-meta">2013-05-20</div><div class="post-content"><h2 id="引子"><a class="markdownIt-Anchor" href="#引子"></a> 引子</h2>
+<p>我的老板（其实就是之前我和另外一哥们跟着他开公司做游戏的哥们，这话说的有点绕的感觉），前几天夜里突然吐了很多血，据这哥们说，当时他正准备睡觉，然后就是一阵阵剧烈的咳嗽，同时吐出一些东西，他发现吐的是血已经是天亮准备去上班的时候了，在他老婆的押送下去了医院做检查，查了一天也没查出原因所在，医生的原话是，先开点药回去吃着，注意休息，等下次再吐血时马上来医院再做全面检查。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2013/0914/something-at-last-2-month.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.tobycn.org/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html" class="post-title-link" itemprop="url">在游戏后端开发中我是怎样解决高并发高负载问题的</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2013-05-20 19:11:17" itemprop="dateCreated datePublished" datetime="2013-05-20T19:11:17+08:00">2013-05-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="引子"><a class="markdownIt-Anchor" href="#引子"></a> 引子</h2>
 <p>大概在两个多月前，我们之前的小公司被现在公司收购，从此，我就开始了水深火热的生活。再也不能享受走路五分钟就可以到公司的待遇了，想吃点早餐还要算着时间，不过好在现在这公司在10点前到公司都可以不算迟到。<br>
 除了生活上的问题，还有就是工作上也遇到了新的挑战。之前，公司在游戏的推广力度上不大，游戏服务也一直运行的非常不错，没出过大问题，更同遇到过负载问题，但是到了这边后就大不一样了。几乎来新公司之后就马上对游戏开始了大力的推广，于是就开始了地狱般的一个月。</p>
 <h2 id="nosql"><a class="markdownIt-Anchor" href="#nosql"></a> NoSQL</h2>
@@ -47,4 +1606,494 @@
 <h2 id="404-or-500"><a class="markdownIt-Anchor" href="#404-or-500"></a> 404 or 500</h2>
 <p>随着用户的增加，新的问题开始暴发出来。表现出来的现象是，一到在线高峰，用户就可以访问不到服务器，提示404错误，检查日志，发现出现404错误是由500错误引发的，由于没有配置500错误页面，500错误时找不到500错误页面，于是Nginx返回了404 Not Found。查看500错误，发现是无法连接fastcgi服务，然后就卡在这里了，当时没想起来可以记慢执行日志。<br>
 在腾讯开放后台查看统计数据时无意中发现，在每次出现大量404错误时数据库的连接数都暴高，猜测这可能是由于同时连接到数据库的客户端太多，查遍了所有有关连接数据库的位置，加入延迟连接数据库的代码，只在必要的时候&gt;连接数据库。这种做法虽然稍有改观，但是在在线高峰时还是会出现404错误。<br>
-在纠结于无法解决这个问题时，又检查了GM后台，以及感觉不起眼的队列同步服务，发现队列服务竟然没限制同时连接数，虽然里面加入了限制连接数的代码，但是没启用。果断限制连接数，然后再看，高峰时段平稳度过。</p></div><p class="readmore"><a href="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html">Read More</a></p></div><nav class="page-navigator"><a class="extend prev" rel="prev" href="/page/2/">Previous</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span></nav></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="https://www.tobycn.org"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Cocos2D/">Cocos2D</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Game/">Game</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Reading/">Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/coffee/">coffee</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/emacs/">emacs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/haskell/">haskell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/server/">server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术生涯/">技术生涯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常生活/">日常生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/gen8/" style="font-size: 15px;">gen8</a> <a href="/tags/boot/" style="font-size: 15px;">boot</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/lisp/" style="font-size: 15px;">lisp</a> <a href="/tags/elisp/" style="font-size: 15px;">elisp</a> <a href="/tags/emacs/" style="font-size: 15px;">emacs</a> <a href="/tags/functionally/" style="font-size: 15px;">functionally</a> <a href="/tags/日常/" style="font-size: 15px;">日常</a> <a href="/tags/hhkb/" style="font-size: 15px;">hhkb</a> <a href="/tags/haskell/" style="font-size: 15px;">haskell</a> <a href="/tags/range/" style="font-size: 15px;">range</a> <a href="/tags/tuple/" style="font-size: 15px;">tuple</a> <a href="/tags/sprite-sheet/" style="font-size: 15px;">sprite sheet</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/game/" style="font-size: 15px;">game</a> <a href="/tags/TexturePacker/" style="font-size: 15px;">TexturePacker</a> <a href="/tags/zwoptex/" style="font-size: 15px;">zwoptex</a> <a href="/tags/cocos2d-x/" style="font-size: 15px;">cocos2d-x</a> <a href="/tags/cocos2d/" style="font-size: 15px;">cocos2d</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/network/" style="font-size: 15px;">network</a> <a href="/tags/mysql-packet/" style="font-size: 15px;">mysql packet</a> <a href="/tags/reading/" style="font-size: 15px;">reading</a> <a href="/tags/swindlers/" style="font-size: 15px;">swindlers</a> <a href="/tags/cheater/" style="font-size: 15px;">cheater</a> <a href="/tags/faker/" style="font-size: 15px;">faker</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/gitolite/" style="font-size: 15px;">gitolite</a> <a href="/tags/ssh/" style="font-size: 15px;">ssh</a> <a href="/tags/coffee/" style="font-size: 15px;">coffee</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/programming/" style="font-size: 15px;">programming</a> <a href="/tags/总结/" style="font-size: 15px;">总结</a> <a href="/tags/archlinux/" style="font-size: 15px;">archlinux</a> <a href="/tags/server/" style="font-size: 15px;">server</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/0218/controll-the-mindset-of-reading.html">读书不可贪多</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/0201/the-2018.html">我的二零一八</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/0606/I-m-back.html">I'm back</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/1118/Fall-into-coffee-trap.html">掉进咖啡的大坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html">Booting Archlinux from USB Stick in Gen8 Server</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/1106/Elisp-Basics-more.html">Elisp Basics (more)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/1104/Elisp-Basics.html">Elisp Basics</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/0328/Start-to-learn-Haskell-03.html">Start to learn Haskell 03</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/0327/Start-to-learn-Haskell-02.html">Start to learn Haskell 02</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/0326/Start-to-learn-Haskell-01.html">Start to learn Haskell 01</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://www.tigerwang.us/" title="Tiger Wang" target="_blank">Tiger Wang</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">老白说.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+在纠结于无法解决这个问题时，又检查了GM后台，以及感觉不起眼的队列同步服务，发现队列服务竟然没限制同时连接数，虽然里面加入了限制连接数的代码，但是没启用。果断限制连接数，然后再看，高峰时段平稳度过。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">老白</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/cntoby" title="GitHub &rarr; https://github.com/cntoby" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/cntoby" title="Weibo &rarr; https://weibo.com/cntoby" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/cntoby" title="Twitter &rarr; https://twitter.com/cntoby" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2013 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">老白</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'hPI6qJNF47iB6VExH5KUHO8I-MdYXbMMI',
+    appKey: '8pdij7EH6XqgPYRwGFnaGUcu',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
