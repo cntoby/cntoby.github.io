@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.tobycn.org/2020/0421/a-normally-story.html</loc>
-    
-    <lastmod>2020-04-21T04:47:50.288Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</loc>
     
     <lastmod>2019-02-21T08:40:52.069Z</lastmod>
@@ -100,6 +93,13 @@
   </url>
   
   <url>
+    <loc>https://www.tobycn.org/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html</loc>
+    
+    <lastmod>2018-03-08T02:46:48.051Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html</loc>
     
     <lastmod>2018-03-08T02:46:48.051Z</lastmod>
@@ -107,9 +107,9 @@
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2013/0520/how-do-i-dispose-the-high-load-in-game-server.html</loc>
+    <loc>https://www.tobycn.org/2014/0329/cocos2d-x-learning-4.html</loc>
     
-    <lastmod>2018-03-08T02:46:48.051Z</lastmod>
+    <lastmod>2018-03-08T02:46:48.050Z</lastmod>
     
   </url>
   
@@ -122,13 +122,6 @@
   
   <url>
     <loc>https://www.tobycn.org/2014/0228/encounter-swindlers.html</loc>
-    
-    <lastmod>2018-03-08T02:46:48.050Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.tobycn.org/2014/0329/cocos2d-x-learning-4.html</loc>
     
     <lastmod>2018-03-08T02:46:48.050Z</lastmod>
     
@@ -156,14 +149,14 @@
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2015/0326/Start-to-learn-Haskell-01.html</loc>
+    <loc>https://www.tobycn.org/2015/0327/Start-to-learn-Haskell-02.html</loc>
     
     <lastmod>2018-03-08T02:46:48.048Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2015/0327/Start-to-learn-Haskell-02.html</loc>
+    <loc>https://www.tobycn.org/2015/0326/Start-to-learn-Haskell-01.html</loc>
     
     <lastmod>2018-03-08T02:46:48.048Z</lastmod>
     
@@ -191,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2014/0813/Busy-Times.html</loc>
+    <loc>https://www.tobycn.org/2015/1106/Elisp-Basics-more.html</loc>
     
     <lastmod>2018-03-08T02:46:48.046Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.tobycn.org/2015/1106/Elisp-Basics-more.html</loc>
+    <loc>https://www.tobycn.org/2014/0813/Busy-Times.html</loc>
     
     <lastmod>2018-03-08T02:46:48.046Z</lastmod>
     

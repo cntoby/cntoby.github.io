@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"www.tobycn.org","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="惯例闲话 昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。  列表函数  n">
+  <meta name="description" content="惯例闲话昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。 列表函数 null">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Start to learn Haskell 01">
 <meta property="og:url" content="https://www.tobycn.org/2015/0326/Start-to-learn-Haskell-01.html">
 <meta property="og:site_name" content="老白说">
-<meta property="og:description" content="惯例闲话 昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。  列表函数  n">
+<meta property="og:description" content="惯例闲话昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。 列表函数 null">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-03-26T04:26:33.000Z">
 <meta property="article:modified_time" content="2018-03-08T02:46:48.048Z">
@@ -258,10 +258,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="惯例闲话"><a class="markdownIt-Anchor" href="#惯例闲话"></a> 惯例闲话</h1>
-<p>昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。</p>
-<h1 id="列表函数"><a class="markdownIt-Anchor" href="#列表函数"></a> 列表函数</h1>
-<ul>
+        <h1 id="惯例闲话"><a href="#惯例闲话" class="headerlink" title="惯例闲话"></a>惯例闲话</h1><p>昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。</p>
+<h1 id="列表函数"><a href="#列表函数" class="headerlink" title="列表函数"></a>列表函数</h1><ul>
 <li><code>null [1,2,3]</code> 检查列表是否为空，返回<code>True</code>或<code>False</code></li>
 <li><code>take 2 [1,2,3]</code> 获取前n个元素组成的列表，当n为0时返回空列表，当n大于列表长度时返回整个列表</li>
 <li><code>drop 2 [1,2,3]</code> 删除前n个元素，并返回剩余元素组成的列表，当n等于0时返回整个列表，当n大于列表长度时返回空</li>
@@ -271,25 +269,18 @@
 <li><code>product [3,6,9]</code> 对列表中的元素求积</li>
 <li><code>elem 3 [5,4,3,2,1]</code> 检查给定数据是否为列表中的元素，返回<code>True</code>或<code>False</code></li>
 </ul>
-<h1 id="区间"><a class="markdownIt-Anchor" href="#区间"></a> 区间</h1>
-<h2 id="简单区间"><a class="markdownIt-Anchor" href="#简单区间"></a> 简单区间</h2>
-<p>所谓区间，实际上是利用列表元素的规律以简单的方式生成较大列表的一种方法。例如，按之间所学习的，如果要定义一个从1到10所有整数的列表，就需要这样<code>[1,2,3,4,5,6,7,8,9,10]</code>，但是如果使用区间则可以简化成<code>[1..10]</code>，当然了，如果要生成字母A-Z的列表，同样可以使用类似的方法<code>['A'..'Z']</code>。</p>
+<h1 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h1><h2 id="简单区间"><a href="#简单区间" class="headerlink" title="简单区间"></a>简单区间</h2><p>所谓区间，实际上是利用列表元素的规律以简单的方式生成较大列表的一种方法。例如，按之间所学习的，如果要定义一个从1到10所有整数的列表，就需要这样<code>[1,2,3,4,5,6,7,8,9,10]</code>，但是如果使用区间则可以简化成<code>[1..10]</code>，当然了，如果要生成字母A-Z的列表，同样可以使用类似的方法<code>[&#39;A&#39;..&#39;Z&#39;]</code>。</p>
 <a id="more"></a>
-<h2 id="自定义步长的区间"><a class="markdownIt-Anchor" href="#自定义步长的区间"></a> 自定义步长的区间</h2>
-<p>我们当然不可能只使用这种简单的+1+1+1的列表，可能我们还需要+2+2或+3+3这样的列表，那么，这样需要更改步长的区间的需求如何利用Haskell的区间生成哪，其实也很简单，确定列表最前面的两个连续元素，然后在<code>..</code>的后面加上最大值或最小值对列表进行限制，如<code>[2,5..10]</code>，这样就定义了一个<code>[2,5,8]</code>这样的列表，由2和5决定了本列表的步长，由10限制了列表的最大值。</p>
-<h2 id="递减区间"><a class="markdownIt-Anchor" href="#递减区间"></a> 递减区间</h2>
-<p>上面的所有示例都是递增的区间，递减的区间实现方法跟上面的示例非常相似，比如，<code>[10,9..1]</code>，需要特别注意的一点是，递减的区别不能用类似<code>[10..1]</code>这样的方式定义，因为在不没有步长因素的情况下，Haskell会认为这是递增区别，从10开始递增元素并寻找不大于1的元素，这当然是找不到的，所以用<code>[10..1]</code>定义的列表是个空列表。</p>
-<h2 id="无限列表"><a class="markdownIt-Anchor" href="#无限列表"></a> 无限列表</h2>
-<p>关于区间，我学到的最后的部分是关于无限列表的内容，所谓无限列表即是这个列表中的元素是无穷尽的，比如<code>[1,2..]</code>，这就是一个无限列表，它的元素就是从1开始，一直递增，没有终点。当然，无需对这个列表是否会占用太多计算机资源担心，Haskell是惰性语言，表达式就在那里，你不使用的时候它就是一个表达式，而当要使用这个列表时，系统才对其进行计算，比如<code>take 10 [1,5..]</code>，由于此表达式只是从无限列表中取10个元素出来，所以，系统只会计算到第10个元素即终止。</p>
+<h2 id="自定义步长的区间"><a href="#自定义步长的区间" class="headerlink" title="自定义步长的区间"></a>自定义步长的区间</h2><p>我们当然不可能只使用这种简单的+1+1+1的列表，可能我们还需要+2+2或+3+3这样的列表，那么，这样需要更改步长的区间的需求如何利用Haskell的区间生成哪，其实也很简单，确定列表最前面的两个连续元素，然后在<code>..</code>的后面加上最大值或最小值对列表进行限制，如<code>[2,5..10]</code>，这样就定义了一个<code>[2,5,8]</code>这样的列表，由2和5决定了本列表的步长，由10限制了列表的最大值。</p>
+<h2 id="递减区间"><a href="#递减区间" class="headerlink" title="递减区间"></a>递减区间</h2><p>上面的所有示例都是递增的区间，递减的区间实现方法跟上面的示例非常相似，比如，<code>[10,9..1]</code>，需要特别注意的一点是，递减的区别不能用类似<code>[10..1]</code>这样的方式定义，因为在不没有步长因素的情况下，Haskell会认为这是递增区别，从10开始递增元素并寻找不大于1的元素，这当然是找不到的，所以用<code>[10..1]</code>定义的列表是个空列表。</p>
+<h2 id="无限列表"><a href="#无限列表" class="headerlink" title="无限列表"></a>无限列表</h2><p>关于区间，我学到的最后的部分是关于无限列表的内容，所谓无限列表即是这个列表中的元素是无穷尽的，比如<code>[1,2..]</code>，这就是一个无限列表，它的元素就是从1开始，一直递增，没有终点。当然，无需对这个列表是否会占用太多计算机资源担心，Haskell是惰性语言，表达式就在那里，你不使用的时候它就是一个表达式，而当要使用这个列表时，系统才对其进行计算，比如<code>take 10 [1,5..]</code>，由于此表达式只是从无限列表中取10个元素出来，所以，系统只会计算到第10个元素即终止。</p>
 <p>几个常见操作无限列表的方法</p>
 <ul>
 <li><code>cycle [1,2,3]</code> 无限循环列表</li>
 <li><code>repeat 5</code> 生成只有参数组成的无限列表</li>
 <li><code>replicate 5 10</code> 本语句生成的不是无限列表，而是由5个10组成的列表，与上一条有点相似，只不过上一条是无限列表，大多数时候可用本语句。</li>
 </ul>
-<h1 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h1>
-<p>不管是直接定义简单的列表或是用区间生成列表，现在看来都过于简单，也许还需要更复杂的列表生成规则，于是现在就用到了列表推导式，列表推导式可以由一个简单的列表进行过滤或计算生成一个更适用的列表。<br>
-先来个简单的</p>
+<h1 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h1><p>不管是直接定义简单的列表或是用区间生成列表，现在看来都过于简单，也许还需要更复杂的列表生成规则，于是现在就用到了列表推导式，列表推导式可以由一个简单的列表进行过滤或计算生成一个更适用的列表。<br>先来个简单的</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x * <span class="number">2</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>]]</span><br></pre></td></tr></table></figure>
 <p>其中，<code>|</code>前面是要输出元素，后面是导入的列表，此表达式会将列表<code>[1..10]</code>中的每一个元素赋值给x传递到输出部分进行计算。还可以再给本推导式增加一个谓语，以对输出的元素进行过滤，如：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x * <span class="number">2</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], odd x]</span><br></pre></td></tr></table></figure>
@@ -297,17 +288,13 @@
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x * <span class="number">2</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], odd x, x &gt;= <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
 <p>此示例又在前面的基础上限制了x必须大于等于5，除此之外，还可以在谓语中还可以使用自定义的函数，唯一的要求就是函数需要返回<code>True</code>或<code>False</code>，如：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">byThree</span> x = <span class="keyword">if</span> x `mod` <span class="number">3</span> == <span class="number">0</span></span><br><span class="line">            <span class="keyword">then</span> <span class="type">True</span></span><br><span class="line">            <span class="keyword">else</span> <span class="type">False</span></span><br><span class="line">[x * <span class="number">2</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], byThree x]</span><br></pre></td></tr></table></figure>
-<p>本示例使用了自定义的过滤函数<code>byThree</code>，只使用能被3整除了元素。<br>
-除了在增加谓语对元素进行过滤外，还可以在输出中对数据进行整理，如</p>
+<p>本示例使用了自定义的过滤函数<code>byThree</code>，只使用能被3整除了元素。<br>除了在增加谓语对元素进行过滤外，还可以在输出中对数据进行整理，如</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="keyword">if</span> x*<span class="number">2</span> &lt; <span class="number">15</span> <span class="keyword">then</span> <span class="string">"Big"</span> <span class="keyword">else</span> <span class="string">"Bang"</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], byThree x]</span><br></pre></td></tr></table></figure>
 <p>另外，推导式还可以支持多个输入，如：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ x + y | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], y &lt;- [<span class="number">11.</span><span class="number">.20</span>]]</span><br></pre></td></tr></table></figure>
 <p>此表达式将输出一个对两个列表中的每个元素分别相加的列表，至于输出结果，因为比较长，写出来太难看，所以就免了。</p>
 <p>此外，输入的列表还可以是列表的列表，在这里就不详细说了。</p>
-<h1 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h1>
-<p>本来感觉昨天只看了不到半个小时的书，可写的内容应该没有多少的，结果万万没想到，竟然也让我罗嗦的那么半天，不过似乎还挺有意思的。<br>
-今天下午4点去了一趟医院，看时间也不算早，再加上最近一段时间一直加班，今天就偷懒一下，早点回家休息休息，希望加班的兄弟们不要羡慕。<br>
-因为今天回来的比较早，<a href="http://www.hector2.us/" target="_blank" rel="noopener">王爷</a>看到我好开心的样子，哈哈，这一个人在家里学习工作是有多寂寞啊，据王爷说最近一段时间，虽然合租在一套房子里，每天跟我的交流就是听到我打呼噜的节奏，不要误会，我俩不是住在同一个房间里，只不过是房间中间就隔了一堵墙。</p>
+<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>本来感觉昨天只看了不到半个小时的书，可写的内容应该没有多少的，结果万万没想到，竟然也让我罗嗦的那么半天，不过似乎还挺有意思的。<br>今天下午4点去了一趟医院，看时间也不算早，再加上最近一段时间一直加班，今天就偷懒一下，早点回家休息休息，希望加班的兄弟们不要羡慕。<br>因为今天回来的比较早，<a href="http://www.hector2.us/" target="_blank" rel="noopener">王爷</a>看到我好开心的样子，哈哈，这一个人在家里学习工作是有多寂寞啊，据王爷说最近一段时间，虽然合租在一套房子里，每天跟我的交流就是听到我打呼噜的节奏，不要误会，我俩不是住在同一个房间里，只不过是房间中间就隔了一堵墙。</p>
 
     </div>
 
@@ -414,7 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#惯例闲话"><span class="nav-number">1.</span> <span class="nav-text"> 惯例闲话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表函数"><span class="nav-number">2.</span> <span class="nav-text"> 列表函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间"><span class="nav-number">3.</span> <span class="nav-text"> 区间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单区间"><span class="nav-number">3.1.</span> <span class="nav-text"> 简单区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义步长的区间"><span class="nav-number">3.2.</span> <span class="nav-text"> 自定义步长的区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递减区间"><span class="nav-number">3.3.</span> <span class="nav-text"> 递减区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无限列表"><span class="nav-number">3.4.</span> <span class="nav-text"> 无限列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表推导式"><span class="nav-number">4.</span> <span class="nav-text"> 列表推导式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结尾"><span class="nav-number">5.</span> <span class="nav-text"> 结尾</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#惯例闲话"><span class="nav-number">1.</span> <span class="nav-text">惯例闲话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表函数"><span class="nav-number">2.</span> <span class="nav-text">列表函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间"><span class="nav-number">3.</span> <span class="nav-text">区间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单区间"><span class="nav-number">3.1.</span> <span class="nav-text">简单区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义步长的区间"><span class="nav-number">3.2.</span> <span class="nav-text">自定义步长的区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递减区间"><span class="nav-number">3.3.</span> <span class="nav-text">递减区间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无限列表"><span class="nav-number">3.4.</span> <span class="nav-text">无限列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列表推导式"><span class="nav-number">4.</span> <span class="nav-text">列表推导式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结尾"><span class="nav-number">5.</span> <span class="nav-text">结尾</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -428,7 +415,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
