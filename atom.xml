@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.tobycn.org/"/>
-  <updated>2019-02-20T03:43:22.481Z</updated>
+  <updated>2020-04-21T04:47:50.288Z</updated>
   <id>https://www.tobycn.org/</id>
   
   <author>
@@ -14,7 +14,22 @@
     
   </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>a normally story</title>
+    <link href="https://www.tobycn.org/2020/0421/a-normally-story.html"/>
+    <id>https://www.tobycn.org/2020/0421/a-normally-story.html</id>
+    <published>2020-04-21T04:47:50.000Z</published>
+    <updated>2020-04-21T04:47:50.288Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>读书不可贪多</title>
@@ -37,6 +52,7 @@
 &lt;p&gt;而对于装逼需求嘛，其实这一点就不是完全的兴趣促使了，就如我希望了解更多的绘画知识，其实原因可以分为两部分，一方面，我知道我的最大的短板其实是在绘画方面，我没有这方面的天赋，但是同时我确实也想通过学习来补足这一块儿，另一方面，我也希望增加谈资，在看到一幅画时可以轻松的说出这幅画的年代、作者等背景知识。这种需求并不强烈，但是也促使我购买了不少相关的书，导致我分配了很多精力在这方面。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="Reading" scheme="https://www.tobycn.org/categories/Reading/"/>
     
@@ -67,6 +83,7 @@
     
     </summary>
     
+    
       <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
     
@@ -94,6 +111,7 @@
 &lt;p&gt;感悟抒发告一段落，每次想到家老婆孩子时，想写点儿什么都是缺乏条理的，后面还是写点儿其它的吧。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
@@ -124,6 +142,7 @@
     
     </summary>
     
+    
       <category term="coffee" scheme="https://www.tobycn.org/categories/coffee/"/>
     
     
@@ -152,6 +171,7 @@
 &lt;p&gt;然后服务器上的两根网线都连到路由器上，一根是iLo另一根就是系统要用的了，到此为止，所有准备工作都准备好了，可以正式开始折腾了，哦对了，我还去HP官网申请了一个iLo专业版的试用证书，要不然是不能使用iLo的Remote Console功能的，因为家里用的是iMac，没有多余的显示器给服务器用，所以，这个Remote Console绝对是好东西，还可以把ISO虚拟成光盘给服务器使用，绝对是利器。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="server" scheme="https://www.tobycn.org/categories/server/"/>
     
@@ -193,6 +213,7 @@
     
     </summary>
     
+    
       <category term="emacs" scheme="https://www.tobycn.org/categories/emacs/"/>
     
     
@@ -226,6 +247,7 @@
 &lt;p&gt;因为之前对Common Lisp有过一定程度上的了解，所以对于Elisp其实接受起来还是挺快的，在简单看了&lt;a href=&quot;http://ergoemacs.org/emacs/elisp.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;几篇关于Elisp的文章&lt;/a&gt;后，对于Elisp的大概印象也就有一些，在这里仅对Elisp做一个简单的介绍，备忘吧。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="emacs" scheme="https://www.tobycn.org/categories/emacs/"/>
     
@@ -262,6 +284,7 @@
     
     </summary>
     
+    
       <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
     
     
@@ -289,6 +312,7 @@
 &lt;p&gt;那么，如果我们保存的一组数据都是相同的数据类型，比如一组二维坐标点&lt;code&gt;[[1,2], [2,3], 3,4]]&lt;/code&gt;，这样看起来似乎不会有问题，列表中的每一个列表都是一个坐标，一切都是那么完美，可是一个意外出现了，某位连续加班一个星期的程序猿手一抖，这个就把这个列表写成了&lt;code&gt;[[1,2],[2,3,3],[3,4]]&lt;/code&gt;，程序正常的完成了编译，于是就把程序放上了线，结果，程序无法按照这些坐标画出期望的线。如果使用元组进行定义会是怎样哪？同个个程序猿又犯了同样的错误，写出来这样一个元组的列表&lt;code&gt;[(1,2),(2,3,3),(3,4)]&lt;/code&gt;，编译，出了错误提示，编译不通过，然后就直接按照错误提示找到出错的地方。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
     
@@ -331,6 +355,7 @@
     
     </summary>
     
+    
       <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
     
     
@@ -363,6 +388,7 @@
     
     </summary>
     
+    
       <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
     
     
@@ -390,6 +416,7 @@
     
     </summary>
     
+    
       <category term="Reading" scheme="https://www.tobycn.org/categories/Reading/"/>
     
     
@@ -415,6 +442,7 @@
     </summary>
     
     
+    
       <category term="hhkb" scheme="https://www.tobycn.org/tags/hhkb/"/>
     
   </entry>
@@ -435,6 +463,7 @@
 &lt;p&gt;当然了，之所以说繁忙，主要还是因为除了工作我还做了不少其它的事，总之，这段时间我把时间安排的非常紧凑，尽管很忙，但是这也让我过得很充实，下面尽量简单的记一个流水帐。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
@@ -459,6 +488,7 @@
       
     
     </summary>
+    
     
       <category term="Git" scheme="https://www.tobycn.org/categories/Git/"/>
     
@@ -491,6 +521,7 @@
     </summary>
     
     
+    
       <category term="TexturePacker" scheme="https://www.tobycn.org/tags/TexturePacker/"/>
     
   </entry>
@@ -515,6 +546,7 @@
 &lt;p&gt;而在游戏开发中，合理的使用Sprite Sheet同样有着积极的作用，比如将相关性较高的图片合并到一张大图片中，不仅可以使图片的渲染过程得到优化，同时还能使图片资源更便于管理（这也是我最近也学到的，😃）。&lt;/p&gt;
     
     </summary>
+    
     
       <category term="Game" scheme="https://www.tobycn.org/categories/Game/"/>
     
@@ -555,6 +587,7 @@ PS: 代码基于上一篇BLOG，只对关键部分进行说明。&lt;/p&gt;
     
     </summary>
     
+    
       <category term="Cocos2D" scheme="https://www.tobycn.org/categories/Cocos2D/"/>
     
     
@@ -592,6 +625,7 @@ PS: 代码基于上一篇BLOG，只对关键部分进行说明。&lt;/p&gt;
     
     </summary>
     
+    
       <category term="Cocos2D" scheme="https://www.tobycn.org/categories/Cocos2D/"/>
     
     
@@ -600,37 +634,6 @@ PS: 代码基于上一篇BLOG，只对关键部分进行说明。&lt;/p&gt;
       <category term="cocos2d-x" scheme="https://www.tobycn.org/tags/cocos2d-x/"/>
     
       <category term="cocos2d" scheme="https://www.tobycn.org/tags/cocos2d/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于MySQL网络协议中的数据包序号</title>
-    <link href="https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html"/>
-    <id>https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</id>
-    <published>2014-03-28T06:00:08.000Z</published>
-    <updated>2019-02-21T08:40:00.725Z</updated>
-    
-    <content type="html"><![CDATA[<p>对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。</p><p>在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。</p><p>前三个字节最大只能表达16M的长度，这是三个字节表达无符号整型的极限，所以，每次客户端可以接受到的最大数据包为16M+4个字节。</p><p>至于第四个字节，这是表达当前包的序数的，一个字节能表达的最大正整数是255。我们知道，在MySQL协议中，发送COM_QUERY命令后，服务器返回的数据格式为，响应头为一个包，然后，每一个字段的描述也会是一个包，字段说明后面会跟一个EOF包表示字段描述结束，之后则跟随的是表中的数据，每一个数据包表达一行数据，一般情况，我们每次从数据库里检索的条数，去掉描述协议的部分，在序数中我们还有不少空间可以用在数据记录上，但是，如果总的包数超过255，那会是怎么的情况哪？</p><p>在我们使用数据库的经验中，我们可以经常有机会看到很多条记录同时显示出来的例子，记录数明明超过了255，可是依然正常显示，这是为什么哪？</p><p>经过对MySQL交互嗅探，我发现在数据包次序达到255后，之后紧随的包的次序就变成了0，在Wireshark的协议分析中会认为这是错乱的协议，我想，这应该是MySQL特意使用的方式。</p><p>前后端的交互中，到发现次序达到255后，对序数加1，由于只使用了一个字节，所以数据溢出变成了0，这样的情况在MySQL协议中被认为是合法的，只要前后端认可这种方式，那这种通讯就不会出错。</p><p>所以我认为，在MySQL通讯中，包序号只是用来确认包的次序没有发生错误的，至于序号是几并不重要，只要认定255号后为0号是合法的，那就可以达到正常交互并保证数据序号不会出错的目的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。&lt;/p&gt;
-&lt;p&gt;在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。&lt;/p&gt;
-&lt;p&gt;前三个字节最大只能表达1
-      
-    
-    </summary>
-    
-      <category term="mysql" scheme="https://www.tobycn.org/categories/mysql/"/>
-    
-    
-      <category term="mysql" scheme="https://www.tobycn.org/tags/mysql/"/>
-    
-      <category term="network" scheme="https://www.tobycn.org/tags/network/"/>
-    
-      <category term="mysql packet" scheme="https://www.tobycn.org/tags/mysql-packet/"/>
     
   </entry>
   
