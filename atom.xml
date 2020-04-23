@@ -5,9 +5,9 @@
   <subtitle>讲述老白身边的故事</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://www.tobycn.org/"/>
+  <link href="https://tobycn.org/"/>
   <updated>2019-02-20T03:43:22.481Z</updated>
-  <id>https://www.tobycn.org/</id>
+  <id>https://tobycn.org/</id>
   
   <author>
     <name>老白</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>读书不可贪多</title>
-    <link href="https://www.tobycn.org/2019/0218/controll-the-mindset-of-reading.html"/>
-    <id>https://www.tobycn.org/2019/0218/controll-the-mindset-of-reading.html</id>
+    <link href="https://tobycn.org/2019/0218/controll-the-mindset-of-reading.html"/>
+    <id>https://tobycn.org/2019/0218/controll-the-mindset-of-reading.html</id>
     <published>2019-02-18T07:01:31.000Z</published>
     <updated>2019-02-20T03:43:22.481Z</updated>
     
@@ -39,17 +39,17 @@
     </summary>
     
     
-      <category term="Reading" scheme="https://www.tobycn.org/categories/Reading/"/>
+      <category term="Reading" scheme="https://tobycn.org/categories/Reading/"/>
     
     
-      <category term="reading" scheme="https://www.tobycn.org/tags/reading/"/>
+      <category term="reading" scheme="https://tobycn.org/tags/reading/"/>
     
   </entry>
   
   <entry>
     <title>我的二零一八</title>
-    <link href="https://www.tobycn.org/2019/0201/the-2018.html"/>
-    <id>https://www.tobycn.org/2019/0201/the-2018.html</id>
+    <link href="https://tobycn.org/2019/0201/the-2018.html"/>
+    <id>https://tobycn.org/2019/0201/the-2018.html</id>
     <published>2019-02-01T10:28:31.000Z</published>
     <updated>2019-02-02T07:56:23.919Z</updated>
     
@@ -68,19 +68,19 @@
     </summary>
     
     
-      <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+      <category term="日常生活" scheme="https://tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
     
-      <category term="日常" scheme="https://www.tobycn.org/tags/%E6%97%A5%E5%B8%B8/"/>
+      <category term="日常" scheme="https://tobycn.org/tags/%E6%97%A5%E5%B8%B8/"/>
     
-      <category term="总结" scheme="https://www.tobycn.org/tags/%E6%80%BB%E7%BB%93/"/>
+      <category term="总结" scheme="https://tobycn.org/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>I&#39;m back</title>
-    <link href="https://www.tobycn.org/2018/0606/I-m-back.html"/>
-    <id>https://www.tobycn.org/2018/0606/I-m-back.html</id>
+    <link href="https://tobycn.org/2018/0606/I-m-back.html"/>
+    <id>https://tobycn.org/2018/0606/I-m-back.html</id>
     <published>2018-06-06T06:17:57.000Z</published>
     <updated>2018-06-07T02:53:41.266Z</updated>
     
@@ -97,17 +97,17 @@
     </summary>
     
     
-      <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+      <category term="日常生活" scheme="https://tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
     
-      <category term="日常" scheme="https://www.tobycn.org/tags/%E6%97%A5%E5%B8%B8/"/>
+      <category term="日常" scheme="https://tobycn.org/tags/%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
   <entry>
     <title>掉进咖啡的大坑</title>
-    <link href="https://www.tobycn.org/2016/1118/Fall-into-coffee-trap.html"/>
-    <id>https://www.tobycn.org/2016/1118/Fall-into-coffee-trap.html</id>
+    <link href="https://tobycn.org/2016/1118/Fall-into-coffee-trap.html"/>
+    <id>https://tobycn.org/2016/1118/Fall-into-coffee-trap.html</id>
     <published>2016-11-18T07:42:15.000Z</published>
     <updated>2018-03-08T02:46:48.047Z</updated>
     
@@ -124,17 +124,17 @@
     </summary>
     
     
-      <category term="coffee" scheme="https://www.tobycn.org/categories/coffee/"/>
+      <category term="coffee" scheme="https://tobycn.org/categories/coffee/"/>
     
     
-      <category term="coffee" scheme="https://www.tobycn.org/tags/coffee/"/>
+      <category term="coffee" scheme="https://tobycn.org/tags/coffee/"/>
     
   </entry>
   
   <entry>
     <title>Booting Archlinux from USB Stick in Gen8 Server</title>
-    <link href="https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html"/>
-    <id>https://www.tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</id>
+    <link href="https://tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html"/>
+    <id>https://tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html</id>
     <published>2015-11-25T03:15:16.000Z</published>
     <updated>2019-02-21T08:40:52.069Z</updated>
     
@@ -152,25 +152,25 @@
     </summary>
     
     
-      <category term="server" scheme="https://www.tobycn.org/categories/server/"/>
+      <category term="server" scheme="https://tobycn.org/categories/server/"/>
     
     
-      <category term="gen8" scheme="https://www.tobycn.org/tags/gen8/"/>
+      <category term="gen8" scheme="https://tobycn.org/tags/gen8/"/>
     
-      <category term="boot" scheme="https://www.tobycn.org/tags/boot/"/>
+      <category term="boot" scheme="https://tobycn.org/tags/boot/"/>
     
-      <category term="linux" scheme="https://www.tobycn.org/tags/linux/"/>
+      <category term="linux" scheme="https://tobycn.org/tags/linux/"/>
     
-      <category term="archlinux" scheme="https://www.tobycn.org/tags/archlinux/"/>
+      <category term="archlinux" scheme="https://tobycn.org/tags/archlinux/"/>
     
-      <category term="server" scheme="https://www.tobycn.org/tags/server/"/>
+      <category term="server" scheme="https://tobycn.org/tags/server/"/>
     
   </entry>
   
   <entry>
     <title>Elisp Basics (more)</title>
-    <link href="https://www.tobycn.org/2015/1106/Elisp-Basics-more.html"/>
-    <id>https://www.tobycn.org/2015/1106/Elisp-Basics-more.html</id>
+    <link href="https://tobycn.org/2015/1106/Elisp-Basics-more.html"/>
+    <id>https://tobycn.org/2015/1106/Elisp-Basics-more.html</id>
     <published>2015-11-06T06:34:09.000Z</published>
     <updated>2018-03-08T02:46:48.046Z</updated>
     
@@ -191,23 +191,23 @@
     </summary>
     
     
-      <category term="emacs" scheme="https://www.tobycn.org/categories/emacs/"/>
+      <category term="emacs" scheme="https://tobycn.org/categories/emacs/"/>
     
     
-      <category term="lisp" scheme="https://www.tobycn.org/tags/lisp/"/>
+      <category term="lisp" scheme="https://tobycn.org/tags/lisp/"/>
     
-      <category term="elisp" scheme="https://www.tobycn.org/tags/elisp/"/>
+      <category term="elisp" scheme="https://tobycn.org/tags/elisp/"/>
     
-      <category term="emacs" scheme="https://www.tobycn.org/tags/emacs/"/>
+      <category term="emacs" scheme="https://tobycn.org/tags/emacs/"/>
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
   </entry>
   
   <entry>
     <title>Elisp Basics</title>
-    <link href="https://www.tobycn.org/2015/1104/Elisp-Basics.html"/>
-    <id>https://www.tobycn.org/2015/1104/Elisp-Basics.html</id>
+    <link href="https://tobycn.org/2015/1104/Elisp-Basics.html"/>
+    <id>https://tobycn.org/2015/1104/Elisp-Basics.html</id>
     <published>2015-11-04T15:14:07.000Z</published>
     <updated>2019-02-21T08:39:35.986Z</updated>
     
@@ -224,23 +224,23 @@
     </summary>
     
     
-      <category term="emacs" scheme="https://www.tobycn.org/categories/emacs/"/>
+      <category term="emacs" scheme="https://tobycn.org/categories/emacs/"/>
     
     
-      <category term="lisp" scheme="https://www.tobycn.org/tags/lisp/"/>
+      <category term="lisp" scheme="https://tobycn.org/tags/lisp/"/>
     
-      <category term="elisp" scheme="https://www.tobycn.org/tags/elisp/"/>
+      <category term="elisp" scheme="https://tobycn.org/tags/elisp/"/>
     
-      <category term="emacs" scheme="https://www.tobycn.org/tags/emacs/"/>
+      <category term="emacs" scheme="https://tobycn.org/tags/emacs/"/>
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
   </entry>
   
   <entry>
     <title>Start to learn Haskell 03</title>
-    <link href="https://www.tobycn.org/2015/0328/Start-to-learn-Haskell-03.html"/>
-    <id>https://www.tobycn.org/2015/0328/Start-to-learn-Haskell-03.html</id>
+    <link href="https://tobycn.org/2015/0328/Start-to-learn-Haskell-03.html"/>
+    <id>https://tobycn.org/2015/0328/Start-to-learn-Haskell-03.html</id>
     <published>2015-03-28T06:13:31.000Z</published>
     <updated>2018-03-08T02:46:48.048Z</updated>
     
@@ -254,19 +254,19 @@
     </summary>
     
     
-      <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/categories/haskell/"/>
     
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
-      <category term="haskell" scheme="https://www.tobycn.org/tags/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/tags/haskell/"/>
     
   </entry>
   
   <entry>
     <title>Start to learn Haskell 02</title>
-    <link href="https://www.tobycn.org/2015/0327/Start-to-learn-Haskell-02.html"/>
-    <id>https://www.tobycn.org/2015/0327/Start-to-learn-Haskell-02.html</id>
+    <link href="https://tobycn.org/2015/0327/Start-to-learn-Haskell-02.html"/>
+    <id>https://tobycn.org/2015/0327/Start-to-learn-Haskell-02.html</id>
     <published>2015-03-27T09:34:53.000Z</published>
     <updated>2018-03-08T02:46:48.048Z</updated>
     
@@ -281,21 +281,21 @@
     </summary>
     
     
-      <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/categories/haskell/"/>
     
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
-      <category term="haskell" scheme="https://www.tobycn.org/tags/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/tags/haskell/"/>
     
-      <category term="tuple" scheme="https://www.tobycn.org/tags/tuple/"/>
+      <category term="tuple" scheme="https://tobycn.org/tags/tuple/"/>
     
   </entry>
   
   <entry>
     <title>Start to learn Haskell 01</title>
-    <link href="https://www.tobycn.org/2015/0326/Start-to-learn-Haskell-01.html"/>
-    <id>https://www.tobycn.org/2015/0326/Start-to-learn-Haskell-01.html</id>
+    <link href="https://tobycn.org/2015/0326/Start-to-learn-Haskell-01.html"/>
+    <id>https://tobycn.org/2015/0326/Start-to-learn-Haskell-01.html</id>
     <published>2015-03-26T04:26:33.000Z</published>
     <updated>2018-03-08T02:46:48.048Z</updated>
     
@@ -319,23 +319,23 @@
     </summary>
     
     
-      <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/categories/haskell/"/>
     
     
-      <category term="lisp" scheme="https://www.tobycn.org/tags/lisp/"/>
+      <category term="lisp" scheme="https://tobycn.org/tags/lisp/"/>
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
-      <category term="haskell" scheme="https://www.tobycn.org/tags/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/tags/haskell/"/>
     
-      <category term="range" scheme="https://www.tobycn.org/tags/range/"/>
+      <category term="range" scheme="https://tobycn.org/tags/range/"/>
     
   </entry>
   
   <entry>
     <title>Start to learn Haskell 00</title>
-    <link href="https://www.tobycn.org/2015/0324/Start-to-learn-Haskell-00.html"/>
-    <id>https://www.tobycn.org/2015/0324/Start-to-learn-Haskell-00.html</id>
+    <link href="https://tobycn.org/2015/0324/Start-to-learn-Haskell-00.html"/>
+    <id>https://tobycn.org/2015/0324/Start-to-learn-Haskell-00.html</id>
     <published>2015-03-24T15:45:52.000Z</published>
     <updated>2015-03-25T13:30:00.000Z</updated>
     
@@ -350,19 +350,19 @@
     </summary>
     
     
-      <category term="haskell" scheme="https://www.tobycn.org/categories/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/categories/haskell/"/>
     
     
-      <category term="functionally" scheme="https://www.tobycn.org/tags/functionally/"/>
+      <category term="functionally" scheme="https://tobycn.org/tags/functionally/"/>
     
-      <category term="haskell" scheme="https://www.tobycn.org/tags/haskell/"/>
+      <category term="haskell" scheme="https://tobycn.org/tags/haskell/"/>
     
   </entry>
   
   <entry>
     <title>关于阅读和买书</title>
-    <link href="https://www.tobycn.org/2015/0313/About-Reading-and-buy-books.html"/>
-    <id>https://www.tobycn.org/2015/0313/About-Reading-and-buy-books.html</id>
+    <link href="https://tobycn.org/2015/0313/About-Reading-and-buy-books.html"/>
+    <id>https://tobycn.org/2015/0313/About-Reading-and-buy-books.html</id>
     <published>2015-03-13T11:26:50.000Z</published>
     <updated>2019-02-20T08:10:35.866Z</updated>
     
@@ -377,15 +377,15 @@
     </summary>
     
     
-      <category term="Reading" scheme="https://www.tobycn.org/categories/Reading/"/>
+      <category term="Reading" scheme="https://tobycn.org/categories/Reading/"/>
     
     
   </entry>
   
   <entry>
     <title>最终还是没忍住HHKB的诱惑</title>
-    <link href="https://www.tobycn.org/2015/0228/My-HHKB-was-coming.html"/>
-    <id>https://www.tobycn.org/2015/0228/My-HHKB-was-coming.html</id>
+    <link href="https://tobycn.org/2015/0228/My-HHKB-was-coming.html"/>
+    <id>https://tobycn.org/2015/0228/My-HHKB-was-coming.html</id>
     <published>2015-02-28T15:25:26.000Z</published>
     <updated>2018-03-08T02:46:48.047Z</updated>
     
@@ -403,14 +403,14 @@
     
     
     
-      <category term="hhkb" scheme="https://www.tobycn.org/tags/hhkb/"/>
+      <category term="hhkb" scheme="https://tobycn.org/tags/hhkb/"/>
     
   </entry>
   
   <entry>
     <title>繁忙时代</title>
-    <link href="https://www.tobycn.org/2014/0813/Busy-Times.html"/>
-    <id>https://www.tobycn.org/2014/0813/Busy-Times.html</id>
+    <link href="https://tobycn.org/2014/0813/Busy-Times.html"/>
+    <id>https://tobycn.org/2014/0813/Busy-Times.html</id>
     <published>2014-08-13T14:53:11.000Z</published>
     <updated>2018-03-08T02:46:48.046Z</updated>
     
@@ -424,15 +424,15 @@
     </summary>
     
     
-      <category term="日常生活" scheme="https://www.tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+      <category term="日常生活" scheme="https://tobycn.org/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
     
     
   </entry>
   
   <entry>
     <title>Install a git server use gitolite over the ssh</title>
-    <link href="https://www.tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html"/>
-    <id>https://www.tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html</id>
+    <link href="https://tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html"/>
+    <id>https://tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html</id>
     <published>2014-04-15T04:06:56.000Z</published>
     <updated>2018-03-08T02:46:48.051Z</updated>
     
@@ -448,21 +448,21 @@
     </summary>
     
     
-      <category term="Git" scheme="https://www.tobycn.org/categories/Git/"/>
+      <category term="Git" scheme="https://tobycn.org/categories/Git/"/>
     
     
-      <category term="git" scheme="https://www.tobycn.org/tags/git/"/>
+      <category term="git" scheme="https://tobycn.org/tags/git/"/>
     
-      <category term="gitolite" scheme="https://www.tobycn.org/tags/gitolite/"/>
+      <category term="gitolite" scheme="https://tobycn.org/tags/gitolite/"/>
     
-      <category term="ssh" scheme="https://www.tobycn.org/tags/ssh/"/>
+      <category term="ssh" scheme="https://tobycn.org/tags/ssh/"/>
     
   </entry>
   
   <entry>
     <title>Get a TexturePacker free license</title>
-    <link href="https://www.tobycn.org/2014/0402/get-a-texturepacker-free-license.html"/>
-    <id>https://www.tobycn.org/2014/0402/get-a-texturepacker-free-license.html</id>
+    <link href="https://tobycn.org/2014/0402/get-a-texturepacker-free-license.html"/>
+    <id>https://tobycn.org/2014/0402/get-a-texturepacker-free-license.html</id>
     <published>2014-04-02T12:10:28.000Z</published>
     <updated>2018-03-08T02:46:48.051Z</updated>
     
@@ -479,14 +479,14 @@
     
     
     
-      <category term="TexturePacker" scheme="https://www.tobycn.org/tags/TexturePacker/"/>
+      <category term="TexturePacker" scheme="https://tobycn.org/tags/TexturePacker/"/>
     
   </entry>
   
   <entry>
     <title>About Sprite Sheet And Tools</title>
-    <link href="https://www.tobycn.org/2014/0331/about-sprite-sheet-and-tools.html"/>
-    <id>https://www.tobycn.org/2014/0331/about-sprite-sheet-and-tools.html</id>
+    <link href="https://tobycn.org/2014/0331/about-sprite-sheet-and-tools.html"/>
+    <id>https://tobycn.org/2014/0331/about-sprite-sheet-and-tools.html</id>
     <published>2014-03-31T13:06:17.000Z</published>
     <updated>2018-03-08T02:46:48.049Z</updated>
     
@@ -503,25 +503,25 @@
     </summary>
     
     
-      <category term="Game" scheme="https://www.tobycn.org/categories/Game/"/>
+      <category term="Game" scheme="https://tobycn.org/categories/Game/"/>
     
     
-      <category term="sprite sheet" scheme="https://www.tobycn.org/tags/sprite-sheet/"/>
+      <category term="sprite sheet" scheme="https://tobycn.org/tags/sprite-sheet/"/>
     
-      <category term="web" scheme="https://www.tobycn.org/tags/web/"/>
+      <category term="web" scheme="https://tobycn.org/tags/web/"/>
     
-      <category term="game" scheme="https://www.tobycn.org/tags/game/"/>
+      <category term="game" scheme="https://tobycn.org/tags/game/"/>
     
-      <category term="TexturePacker" scheme="https://www.tobycn.org/tags/TexturePacker/"/>
+      <category term="TexturePacker" scheme="https://tobycn.org/tags/TexturePacker/"/>
     
-      <category term="zwoptex" scheme="https://www.tobycn.org/tags/zwoptex/"/>
+      <category term="zwoptex" scheme="https://tobycn.org/tags/zwoptex/"/>
     
   </entry>
   
   <entry>
     <title>Cocos2D-X learning 4</title>
-    <link href="https://www.tobycn.org/2014/0329/cocos2d-x-learning-4.html"/>
-    <id>https://www.tobycn.org/2014/0329/cocos2d-x-learning-4.html</id>
+    <link href="https://tobycn.org/2014/0329/cocos2d-x-learning-4.html"/>
+    <id>https://tobycn.org/2014/0329/cocos2d-x-learning-4.html</id>
     <published>2014-03-29T15:22:08.000Z</published>
     <updated>2018-03-08T02:46:48.050Z</updated>
     
@@ -538,25 +538,25 @@
     </summary>
     
     
-      <category term="Cocos2D" scheme="https://www.tobycn.org/categories/Cocos2D/"/>
+      <category term="Cocos2D" scheme="https://tobycn.org/categories/Cocos2D/"/>
     
     
-      <category term="game" scheme="https://www.tobycn.org/tags/game/"/>
+      <category term="game" scheme="https://tobycn.org/tags/game/"/>
     
-      <category term="TexturePacker" scheme="https://www.tobycn.org/tags/TexturePacker/"/>
+      <category term="TexturePacker" scheme="https://tobycn.org/tags/TexturePacker/"/>
     
-      <category term="zwoptex" scheme="https://www.tobycn.org/tags/zwoptex/"/>
+      <category term="zwoptex" scheme="https://tobycn.org/tags/zwoptex/"/>
     
-      <category term="cocos2d-x" scheme="https://www.tobycn.org/tags/cocos2d-x/"/>
+      <category term="cocos2d-x" scheme="https://tobycn.org/tags/cocos2d-x/"/>
     
-      <category term="cocos2d" scheme="https://www.tobycn.org/tags/cocos2d/"/>
+      <category term="cocos2d" scheme="https://tobycn.org/tags/cocos2d/"/>
     
   </entry>
   
   <entry>
     <title>Cocos2D-X learning 3 (CCScene and CCMenu)</title>
-    <link href="https://www.tobycn.org/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html"/>
-    <id>https://www.tobycn.org/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html</id>
+    <link href="https://tobycn.org/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html"/>
+    <id>https://tobycn.org/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html</id>
     <published>2014-03-28T15:41:37.000Z</published>
     <updated>2018-03-08T02:46:48.050Z</updated>
     
@@ -573,21 +573,21 @@
     </summary>
     
     
-      <category term="Cocos2D" scheme="https://www.tobycn.org/categories/Cocos2D/"/>
+      <category term="Cocos2D" scheme="https://tobycn.org/categories/Cocos2D/"/>
     
     
-      <category term="game" scheme="https://www.tobycn.org/tags/game/"/>
+      <category term="game" scheme="https://tobycn.org/tags/game/"/>
     
-      <category term="cocos2d-x" scheme="https://www.tobycn.org/tags/cocos2d-x/"/>
+      <category term="cocos2d-x" scheme="https://tobycn.org/tags/cocos2d-x/"/>
     
-      <category term="cocos2d" scheme="https://www.tobycn.org/tags/cocos2d/"/>
+      <category term="cocos2d" scheme="https://tobycn.org/tags/cocos2d/"/>
     
   </entry>
   
   <entry>
     <title>关于MySQL网络协议中的数据包序号</title>
-    <link href="https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html"/>
-    <id>https://www.tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</id>
+    <link href="https://tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html"/>
+    <id>https://tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html</id>
     <published>2014-03-28T06:00:08.000Z</published>
     <updated>2019-02-21T08:40:00.725Z</updated>
     
@@ -605,14 +605,14 @@
     </summary>
     
     
-      <category term="mysql" scheme="https://www.tobycn.org/categories/mysql/"/>
+      <category term="mysql" scheme="https://tobycn.org/categories/mysql/"/>
     
     
-      <category term="mysql" scheme="https://www.tobycn.org/tags/mysql/"/>
+      <category term="mysql" scheme="https://tobycn.org/tags/mysql/"/>
     
-      <category term="network" scheme="https://www.tobycn.org/tags/network/"/>
+      <category term="network" scheme="https://tobycn.org/tags/network/"/>
     
-      <category term="mysql packet" scheme="https://www.tobycn.org/tags/mysql-packet/"/>
+      <category term="mysql packet" scheme="https://tobycn.org/tags/mysql-packet/"/>
     
   </entry>
   
