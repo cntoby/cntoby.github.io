@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -171,6 +171,113 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" class="post-title-link" itemprop="url">Booting Archlinux from USB Stick in Gen8 Server</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-25 11:15:16" itemprop="dateCreated datePublished" datetime="2015-11-25T11:15:16+08:00">2015-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-02-21 16:40:52" itemprop="dateModified" datetime="2019-02-21T16:40:52+08:00">2019-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/server/" itemprop="url" rel="index"><span itemprop="name">server</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" class="post-meta-item leancloud_visitors" data-flag-title="Booting Archlinux from USB Stick in Gen8 Server" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="冲动的入手Gen8"><a href="#冲动的入手Gen8" class="headerlink" title="冲动的入手Gen8"></a>冲动的入手Gen8</h1><p>看上Gen8已经很久了，一直因为价格问题和纠结于买来后是否有用的问题而迟迟没有下手，这次总算是借着双11的机会，再加上京东白条免息免手续费分期，算了一下，很划算呀，每月还不了多少钱，感觉很合适。因为太过激动，就忘了硬盘的事，于是又弄了两块2T的红盘，因为考虑最终要做Raid10，所以就不准备直接把系统安排在四个主要的硬盘位上，光驱位是个好地方，这也是Gen8的玩家们常用来放第五块硬盘的位置，于是又搞了一块120<del>T</del>G<a href="[王爷](http://tigerwang.us)火眼金睛">^tgerror</a>的SSD硬盘，好在这块硬盘并不贵，因为后来启动服务器时，发现启动系统最浪费时间的地方根本就不在硬盘上。</p>
+<p>本来以为硬盘到位后就可以开始玩起哪，谁知道，手上存的几根数据线根本就没办法用，要么不够长，要么接口不对，然后又满网上找合适的线，前两条买回来还不对，靠，那两条线还都写了Gen8专用啥啥的，坑啊，也怪我没认真去看那几根线的接口，只是看到Gen8专用就以为没问题哪。</p>
+<p>在数据线到手后又折腾了一对电力猫，以便为服务器提供稳定的网络，不过话说回来，电力猫确实是好东西，通过电力线路传输网络信号，在现在这个信道几乎全部会被占用的大环境里，能方便的使用有线网络，那绝对是改变生活质量的举措啊。</p>
+<p>后来一想，反正这些东西都备齐了也不差几根好点的网线了，于是又搞了几条超六类网线，不知是心理作用还是实际效果，反正感觉上来说好像确实上网感受好了不少哪。</p>
+<h1 id="折腾Gen8"><a href="#折腾Gen8" class="headerlink" title="折腾Gen8"></a>折腾Gen8</h1><p>因为不想以后再麻烦的拆装硬盘什么的，又买了两个2.5转3.5的硬盘盒，用来安装我之前的两个移动硬盘到服务器，再加上新买的两块红盘，硬盘仓的四个位置全部占满，然后再加上SSD硬盘安装系统，一共五块硬盘都安装在服务器上。</p>
+<p>然后服务器上的两根网线都连到路由器上，一根是iLo另一根就是系统要用的了，到此为止，所有准备工作都准备好了，可以正式开始折腾了，哦对了，我还去HP官网申请了一个iLo专业版的试用证书，要不然是不能使用iLo的Remote Console功能的，因为家里用的是iMac，没有多余的显示器给服务器用，所以，这个Remote Console绝对是好东西，还可以把ISO虚拟成光盘给服务器使用，绝对是利器。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -594,119 +701,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0326/Start-to-learn-Haskell-01.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/0326/Start-to-learn-Haskell-01.html" class="post-title-link" itemprop="url">Start to learn Haskell 01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-26 12:26:33" itemprop="dateCreated datePublished" datetime="2015-03-26T12:26:33+08:00">2015-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/0326/Start-to-learn-Haskell-01.html" class="post-meta-item leancloud_visitors" data-flag-title="Start to learn Haskell 01" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/0326/Start-to-learn-Haskell-01.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/0326/Start-to-learn-Haskell-01.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="惯例闲话"><a href="#惯例闲话" class="headerlink" title="惯例闲话"></a>惯例闲话</h1><p>昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。</p>
-<h1 id="列表函数"><a href="#列表函数" class="headerlink" title="列表函数"></a>列表函数</h1><ul>
-<li><code>null [1,2,3]</code> 检查列表是否为空，返回<code>True</code>或<code>False</code></li>
-<li><code>take 2 [1,2,3]</code> 获取前n个元素组成的列表，当n为0时返回空列表，当n大于列表长度时返回整个列表</li>
-<li><code>drop 2 [1,2,3]</code> 删除前n个元素，并返回剩余元素组成的列表，当n等于0时返回整个列表，当n大于列表长度时返回空</li>
-<li><code>maximum [1,4,7,3,6]</code> 返回列表中最大的元素</li>
-<li><code>minimum [1,4,7,3,6]</code> 返回列表中最小的元素</li>
-<li><code>sum [3,6,9]</code> 对列表中的元素进行求和</li>
-<li><code>product [3,6,9]</code> 对列表中的元素求积</li>
-<li><code>elem 3 [5,4,3,2,1]</code> 检查给定数据是否为列表中的元素，返回<code>True</code>或<code>False</code></li>
-</ul>
-<h1 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h1><h2 id="简单区间"><a href="#简单区间" class="headerlink" title="简单区间"></a>简单区间</h2><p>所谓区间，实际上是利用列表元素的规律以简单的方式生成较大列表的一种方法。例如，按之间所学习的，如果要定义一个从1到10所有整数的列表，就需要这样<code>[1,2,3,4,5,6,7,8,9,10]</code>，但是如果使用区间则可以简化成<code>[1..10]</code>，当然了，如果要生成字母A-Z的列表，同样可以使用类似的方法<code>[&#39;A&#39;..&#39;Z&#39;]</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/0326/Start-to-learn-Haskell-01.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -776,12 +770,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -812,7 +806,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

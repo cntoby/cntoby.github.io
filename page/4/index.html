@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -171,6 +171,123 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" class="post-title-link" itemprop="url">Install a git server use gitolite over the ssh</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-04-15 12:06:56" itemprop="dateCreated datePublished" datetime="2014-04-15T12:06:56+08:00">2014-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" class="post-meta-item leancloud_visitors" data-flag-title="Install a git server use gitolite over the ssh" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h3><p>最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。</p>
+<h3 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h3><p>建立服务器的软件我这里选用Gitolite，之所以选用Gitolite，一是因为之前曾经使用过Gitolite，再一个是因为Gitolite可配置性更高，而且更为小巧。而且，由于这个服务器只在内部使用，没有必要使用Gitlab这种体积庞大的提供过多的WEB方面功能的程序。</p>
+<p>没有特别声明的都为在服务器上执行</p>
+<ol>
+<li>Git<br>使用系统命令安装git客户端，比如<code>yum install git</code>，版本最好不要太低，1.7以上。</li>
+<li>建立Git帐户<br><code>useradd -d /opt/git -m git</code>，用户目录的位置不做要求，但是由于是专用帐号，最好是放在有备份保证的目录，便于管理。</li>
+<li>生成管理公钥 （管理端）<br><code>ssh-keygen -t rsa -C &quot;Git Admin&quot; -f gitadmin</code><br>这个步骤需要注意的是生成密钥对最好不要加密码，否则有可能出现奇怪的问题。完成这一步后将gitadmin.pub文件传至git的HOME目录中备用。</li>
+<li>同步Gitolite代码<br><code>git clone https://github.com/sitaramc/gitolite</code>，此命令需要在Git用户的HOME目录中执行。</li>
+<li>安装Gitolite<br>在用户目录中执行<code>gitolite/install -ln</code>，参数的意思是在$HOME/bin目录中建立指向源代码目录的文件链接，这样做的好处是可以方便的升级gitolite，另外，install命令另一个参数是-to可以指定命令安装到的目录，默认情况下不需要指定。<br>需要注意的是，默认安装的时候需要将$HOME/bin加入$PATH，如果指定安装目标需要将$HOME/to_dir加入$PATH。<br>执行完install之后需要执行<code>gitolite setup -pk gitadmin.pub</code>。<br>完成后，需要再检查一下~/.ssh目录和其中的authorized_keys文件的权限，需要将权限控制为仅本人可读写。</li>
+<li>同步管理库（管理端）<br>由于管理端或客户端与Git服务器之间的通讯是基于ssh的，所以，为了便于使用，需要对与Git服务器的连接进行单独配置，打开<code>~/.ssh/config</code>，在其中加入单独定义管理时所使用的密钥文件。</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">  <span class="built_in"> User </span>git</span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
+<p>  经过以上配置即可以执行<code>git clone gitadmin:gitadmin</code>获取管理库，之后所有对服务器的管理只能通过此管理库进行，严禁直接在服务器上对服务器进行修改。<br>7. 修改Gitolite配置及用户管理<br>  详细使用配置及管理方法请参考源代码目录下的<code>README.txt</code><br>8. 从Subversion向Git做版本迁移<br>  两种方法</p>
+<ul>
+<li>git svn clone svn://url.to.svn/repos –no-metadata –authors-file=users.txt<br>直接从svn版本库中clone数据到本地，其中</li>
+</ul>
+<p>   –no-metadata 指定命令不在git版本库中加入svn版本元数据。<br>   –authors-file 指定与svn用户相对应的git用户。</p>
+<ul>
+<li>git svn init svn://url.to.svn/repos –no-metadata</li>
+<li>git svn fetch –authors-file=users.txt<br>这两个命令为一组，第一个命令初始化一个基于svn源的git库，此时可以在该库的.git目录下修改branches和tags信息，完成之后使用第二个命令开始同步代码，此时代码将按照配置把不同分支或标签下的代码提交到git库的指定位置。<br>如要迁移的Subversion版本库使用遵循惯例的目录设置，则可以在第一种方法和第二种方法的第一条命令中加入-s选项，本选择可以简化同步的操作。</li>
+</ul>
+<p>Windows版客户端TortoiseGit下载地址：<a href="http://download.tortoisegit.org/tgit/1.8.8.0/" target="_blank" rel="noopener">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>Pro Git: <a href="http://git-scm.com/book/zh/" target="_blank" rel="noopener">http://git-scm.com/book/zh/</a></p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>Git的使用入门很容易 ，只需要简单的分支、标签管理和版本提交，基本上就可以满足日常的需求，当然，还有更多的特性需要在使用的过程中逐渐的接触和应用。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -577,108 +694,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-title-link" itemprop="url">关于MySQL网络协议中的数据包序号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-03-28 14:00:08" itemprop="dateCreated datePublished" datetime="2014-03-28T14:00:08+08:00">2014-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-02-21 16:40:00" itemprop="dateModified" datetime="2019-02-21T16:40:00+08:00">2019-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-meta-item leancloud_visitors" data-flag-title="关于MySQL网络协议中的数据包序号" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。</p>
-<p>在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。</p>
-<p>前三个字节最大只能表达16M的长度，这是三个字节表达无符号整型的极限，所以，每次客户端可以接受到的最大数据包为16M+4个字节。</p>
-<p>至于第四个字节，这是表达当前包的序数的，一个字节能表达的最大正整数是255。我们知道，在MySQL协议中，发送COM_QUERY命令后，服务器返回的数据格式为，响应头为一个包，然后，每一个字段的描述也会是一个包，字段说明后面会跟一个EOF包表示字段描述结束，之后则跟随的是表中的数据，每一个数据包表达一行数据，一般情况，我们每次从数据库里检索的条数，去掉描述协议的部分，在序数中我们还有不少空间可以用在数据记录上，但是，如果总的包数超过255，那会是怎么的情况哪？</p>
-<p>在我们使用数据库的经验中，我们可以经常有机会看到很多条记录同时显示出来的例子，记录数明明超过了255，可是依然正常显示，这是为什么哪？</p>
-<p>经过对MySQL交互嗅探，我发现在数据包次序达到255后，之后紧随的包的次序就变成了0，在Wireshark的协议分析中会认为这是错乱的协议，我想，这应该是MySQL特意使用的方式。</p>
-<p>前后端的交互中，到发现次序达到255后，对序数加1，由于只使用了一个字节，所以数据溢出变成了0，这样的情况在MySQL协议中被认为是合法的，只要前后端认可这种方式，那这种通讯就不会出错。</p>
-<p>所以我认为，在MySQL通讯中，包序号只是用来确认包的次序没有发生错误的，至于序号是几并不重要，只要认定255号后为0号是合法的，那就可以达到正常交互并保证数据序号不会出错的目的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -748,12 +763,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -784,7 +799,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

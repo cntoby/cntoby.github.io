@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -171,6 +171,108 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-title-link" itemprop="url">关于MySQL网络协议中的数据包序号</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-28 14:00:08" itemprop="dateCreated datePublished" datetime="2014-03-28T14:00:08+08:00">2014-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-02-21 16:40:00" itemprop="dateModified" datetime="2019-02-21T16:40:00+08:00">2019-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-meta-item leancloud_visitors" data-flag-title="关于MySQL网络协议中的数据包序号" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。</p>
+<p>在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。</p>
+<p>前三个字节最大只能表达16M的长度，这是三个字节表达无符号整型的极限，所以，每次客户端可以接受到的最大数据包为16M+4个字节。</p>
+<p>至于第四个字节，这是表达当前包的序数的，一个字节能表达的最大正整数是255。我们知道，在MySQL协议中，发送COM_QUERY命令后，服务器返回的数据格式为，响应头为一个包，然后，每一个字段的描述也会是一个包，字段说明后面会跟一个EOF包表示字段描述结束，之后则跟随的是表中的数据，每一个数据包表达一行数据，一般情况，我们每次从数据库里检索的条数，去掉描述协议的部分，在序数中我们还有不少空间可以用在数据记录上，但是，如果总的包数超过255，那会是怎么的情况哪？</p>
+<p>在我们使用数据库的经验中，我们可以经常有机会看到很多条记录同时显示出来的例子，记录数明明超过了255，可是依然正常显示，这是为什么哪？</p>
+<p>经过对MySQL交互嗅探，我发现在数据包次序达到255后，之后紧随的包的次序就变成了0，在Wireshark的协议分析中会认为这是错乱的协议，我想，这应该是MySQL特意使用的方式。</p>
+<p>前后端的交互中，到发现次序达到255后，对序数加1，由于只使用了一个字节，所以数据溢出变成了0，这样的情况在MySQL协议中被认为是合法的，只要前后端认可这种方式，那这种通讯就不会出错。</p>
+<p>所以我认为，在MySQL通讯中，包序号只是用来确认包的次序没有发生错误的，至于序号是几并不重要，只要认定255号后为0号是合法的，那就可以达到正常交互并保证数据序号不会出错的目的。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -596,111 +698,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2013/1213/what-life-we-want.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2013/1213/what-life-we-want.html" class="post-title-link" itemprop="url">我们想要什么样的生活</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2013-12-13 20:24:49" itemprop="dateCreated datePublished" datetime="2013-12-13T20:24:49+08:00">2013-12-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">日常生活</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2013/1213/what-life-we-want.html" class="post-meta-item leancloud_visitors" data-flag-title="我们想要什么样的生活" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2013/1213/what-life-we-want.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2013/1213/what-life-we-want.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>没有调查过调查过其它人的生活和思想状态，但是就我自己而言，我发现我对现状越来不满，当然这不是对我的家庭，我想这应该是对社会现状的极大不公平的心理抗争吧。没有在国外长期生活过，不知道生活在其它国家的普通人有没有发出生意的权利，但是从网络中得到的信息，我想，这总好过生活在灰暗空气中我们吧。</p>
-<h2 id="民以食为天"><a href="#民以食为天" class="headerlink" title="民以食为天"></a>民以食为天</h2><p>天朝，北方，最受欢迎的早餐我猜大抵得算是油条、油饼、包子、豆浆、豆腐脑吧？天朝P民平时吃的菜的做法也基本上就是煎炒烹炸炖吧？仔细看看，发现我们吃的东西根本离不开油，那么做油的生意肯定很赚钱吧？然后，有人就想在这上面赚更多的钱了，然后地沟油出现了。</p>
-<p>地沟油的问题经过一段时间的打压似乎销声匿迹了，而且似乎舆论也并不太关注了，可是大家都知道，一个暴利行业出现后，并不是那么容易消失的，你要知道，资本家为了百分之二百的利润是不惜走上绞刑台的。 还有需要担心的转基因食品，因为你不知道这种东西会给身体或者整个人类造成什么样的危害，很多的科学家或伪科学家们在热火朝天的争论这是否安全，能否出现在普通人的餐桌上，而于此同时他们还在桌下数着其为某势力代言得到的钞票，他们争论的焦点多半是由哪方从人民手中赚取利润。<br>当然，官员们也在关心这些哪边占领至高点对它的专政更有好处，对于其统治下的人们的健康问题它们不用担心，在天朝，他们在理所当然的享受着安全的特供食品，而这全是脚下的血肉灌注的。</p>
-<h2 id="繁星似锦"><a href="#繁星似锦" class="headerlink" title="繁星似锦"></a>繁星似锦</h2><p>好好想想，我们有多久没有看到满天的星辰？ 夏天，吃过晚饭，把竹制茶几抬到院子里，再把两个竹椅抬出来，父亲泡着茶，孩子在旁边或撒欢或缠着父亲给讲个故事，父亲拿起扇子使劲摇了两下，然后另一手拿着紫砂小壶吱的吸一小口，“好，昨天咱们讲了织女牛郎星的故事，今天咱还讲跟星星有关的故事，你先把北斗星给老爸指出来。”，“正北边那个最亮的是北极星，那旁边七个比较亮长得像勺子的就是北斗星了”，父亲又拿起茶壶吸了一口，发出吱的一声，“好，那今天咱们就讲个霍去病倒看北斗的故事，霍去病是西汉年间的一位大将……”<br>时常想起小时候，老爸讲星星的故事给我听，边讲故事边指各个星的位置给我看，由此，我至今记住了很多星星。<br>我想把这些再讲给我儿子听，可是抬头看看，天空漆黑如墨，运气好的时候能看到在雾气蒙蒙中隐现的月亮，往远处看，也只能看到雾气昭昭中昏黄的路灯。<br>也不要再奢望在院子里乘凉了，现在在屋里都需要装空气过滤机，更何况，再也没有可能自己独用一个小院子了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2013/1213/what-life-we-want.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -770,12 +767,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -806,7 +803,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
