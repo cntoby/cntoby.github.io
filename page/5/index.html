@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -171,6 +171,112 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html" class="post-title-link" itemprop="url">Cocos2D-X learning 3 (CCScene and CCMenu)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-28 23:41:37" itemprop="dateCreated datePublished" datetime="2014-03-28T23:41:37+08:00">2014-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cocos2D/" itemprop="url" rel="index"><span itemprop="name">Cocos2D</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html" class="post-meta-item leancloud_visitors" data-flag-title="Cocos2D-X learning 3 (CCScene and CCMenu)" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h3><p>本来部门计划今天下午全部门去搞团建的，主要活动是开卡丁车、桌游等项目，可惜天不从人愿，早晨有点下雨，好不容易盼到中午晴天，结果Leader又一个通知，说今天事情太多，活动改期到下周了，我勒个去的，废话不多说，进去正题。</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>今天练习的内容主要是在Cocos2D开发中，对菜单的运用以及场景切换，中间还涉及到对于CCSprite对象的一些操作和schedule的简单应用。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>首先用<code>create_project.py</code>建立一个基础项目，然后分别建立两个CCLayer的子类。</p>
+<figure class="highlight c++"><figcaption><span>StudyCocos2D.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudyCocos2D</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onStartClick</span><span class="params">(CCObject *obj)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(StudyCocos2D);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__StudyCocos2D__) */</span></span></span><br></pre></td></tr></table></figure>
+<p>这是一个最简单的头文件，相比上一篇只多了一个私有方法<code>void onStartClick(CCObject *obj)</code>，其作用后面再说明。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -590,114 +696,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0102/my-programming-development-history.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/0102/my-programming-development-history.html" class="post-title-link" itemprop="url">我的编程进化史</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-01-02 20:35:01" itemprop="dateCreated datePublished" datetime="2014-01-02T20:35:01+08:00">2014-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%94%9F%E6%B6%AF/" itemprop="url" rel="index"><span itemprop="name">技术生涯</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2014/0102/my-programming-development-history.html" class="post-meta-item leancloud_visitors" data-flag-title="我的编程进化史" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/0102/my-programming-development-history.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/0102/my-programming-development-history.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>其实这篇博的题目原本是“我的C语言观”，这题目真扯淡，我是无论如何也不会想出要主动写这样的题目的，但是，因为表妹的狗P老师要求他们写这样的题目作为考试，虽然我不会帮她写作业，但是突然也想试试，对于一个这样大的题目，我都能写出什么来？所以，就试着写一下吧。</p>
-<h2 id="闭门造车"><a href="#闭门造车" class="headerlink" title="闭门造车"></a>闭门造车</h2><p>现在想起来，开始接触C语言已经是很久很久之前的事情了，嗯，大概是95年吧，那时候突然对计算机兴起了很大的兴趣，但是与别人不同的是，我是对计算机本身以及里面的程序感兴趣，而对于电脑游戏我有种出于本能的反感，所以在基本上学习电脑学习编程的前十年，我没接触过电脑游戏，而且偶尔的几次陪同学一起去玩游戏，也完全没感觉到好玩。</p>
-<p>再说回学习编程语言的过程吧，最早接触编程语言我记得是在同学的学习机上，那上面提供了一种Basic语言，好像是QBasic吧，对这门语言的记忆只剩下需要在每行的前面标记行号，这是一件很不人道的事情，直到后来接触到C语言。</p>
-<p>刚开始接触到C语言时，对于函数的定义之类的有些费解，不过好像用了不久的时间就适应了，并且很乐于使用函数，然后慢慢了解到变量范围，学会使用不同的作用范围的变量。对了，还有，go关键字，刚开始时还觉得这用起来很方便，但是时间久了发现，这并没有想象的那么容易使用，而且在程序中跳来跳去让逻辑变得很乱。</p>
-<p>由于C语言是我真正学习的第一门编程语言，在初期，我并不知道需要把不同的函数按照功能分放在不同的文件里，这导致了刚开始写的一些小程序只有一个文件，当时觉得头文件没有必要使用，更不用说extern关键字了，我甚至以为我发现了C语言设计的一些问题。</p>
-<p>当时因为用的操作系统是MS-DOS，使用的开发工具叫做Turbo C，虽然感觉用起来不方便，但是这总算是全屏幕编辑器，可以自由的在文件内移动光标，总比行编辑器要好。当时是不知道有Linux这种操作系统，更不知道在Linux下有编辑器之神Vi，也不知道有神的编辑器Emacs。</p>
-<p>随着不断的学习，写的代码似乎也越来越长，这时就觉得在一个文件里写代码太麻烦了，打开文件慢，寻找相应的代码也很麻烦，这时我试着把代码按功能分置在不同的文件中。此时，我终于可以在代码中包含我自己的头文件，这突然让我感觉到一种莫名的成就感，当时甚至在考虑，我是不是有必要把自己写的代码提供给别人使用了，这样会不会让我更有成就感。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2014/0102/my-programming-development-history.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -767,7 +765,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
