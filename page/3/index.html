@@ -175,6 +175,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0328/Start-to-learn-Haskell-03.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/0328/Start-to-learn-Haskell-03.html" class="post-title-link" itemprop="url">Start to learn Haskell 03</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-28 14:13:31" itemprop="dateCreated datePublished" datetime="2015-03-28T14:13:31+08:00">2015-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/0328/Start-to-learn-Haskell-03.html" class="post-meta-item leancloud_visitors" data-flag-title="Start to learn Haskell 03" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2015/0328/Start-to-learn-Haskell-03.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/0328/Start-to-learn-Haskell-03.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="郁闷"><a href="#郁闷" class="headerlink" title="郁闷"></a>郁闷</h1><p>今天周六，公司附近基本上没有卖早餐的，不过今天看起来似乎比较幸运，竟然神奇的多了一家卖早鸡蛋灌饼的在地铁附近。为了早晨不挨饿就买了一个，但是不知道为什么，在去公司的路上我就一直感觉不太对，也一直在考虑只要再看到有一家卖早点的，我就把这个灌饼给丢掉。但是今天是周六嘛，我没有幸运的看到第二家卖早点的，只好将就一下了。<br>事情的发展是这样的，10点半吃完，到11点前就感觉不太对，我以为那是因为我还喝了格瓦斯，11点多出去抽烟，感觉更难受了，然后就去了厕所，先是拉肚子，然后出来又开始吐。中午吃饭时也感觉没有胃口，平时一碗面对我来说还略嫌不够，不过今天吃了连三分之一都不到就吃不下了，吃饭回来又接着吐。在拉肚子的时候任何一个屁都不值得相信，为了安全起见，又进了厕所，果然又是拉肚子，然后下午就由两个同事陪同去了医院急诊，拿了药回到家接着吐，然后睡觉，现在总算是好一些了。<br>这期间还有，从下午回来我就发现王爷是在家的，但是一直到我晚上起床都没听到他的动静，就打了电话给他，原来他老人家上吐下泄到今天凌晨4点，我勒个去的。<br>哦，还有，中日友好医院急诊内科的那个年轻女大夫很漂亮。</p>
+<h1 id="Haskell变量类型"><a href="#Haskell变量类型" class="headerlink" title="Haskell变量类型"></a>Haskell变量类型</h1><h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>在Haskell中一切都是有类型的，如字符<code>Char</code>字符列表<code>[Char]</code>元组<code>(Int, Bool)</code>，数值类型有<code>Int</code>和<code>Integer</code>，其中<code>Int</code>受系统位数影响，比如64位系统，这种类型的范围就是-2-2…^63到2^63-1<code>Integer</code>类型则非常大，可以尝试一下<code>product [1..50]</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/0328/Start-to-learn-Haskell-03.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0327/Start-to-learn-Haskell-02.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -596,103 +699,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0228/My-HHKB-was-coming.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/0228/My-HHKB-was-coming.html" class="post-title-link" itemprop="url">最终还是没忍住HHKB的诱惑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-02-28 23:25:26" itemprop="dateCreated datePublished" datetime="2015-02-28T23:25:26+08:00">2015-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-
-          
-            <span id="/2015/0228/My-HHKB-was-coming.html" class="post-meta-item leancloud_visitors" data-flag-title="最终还是没忍住HHKB的诱惑" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/0228/My-HHKB-was-coming.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/0228/My-HHKB-was-coming.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>刚打开BLOG看了一下，发现上次发文已经是N个月之前的事了，实在是不应该啊，这次趁着新键盘到手的契机，顺便写写最近的一些情况以庆祝。</p>
-<h2 id="上一份工作"><a href="#上一份工作" class="headerlink" title="上一份工作"></a>上一份工作</h2><p>为什么说是上一份工作哪？原因是，我换工作了，这应该是持续时间最短的一份工作了。</p>
-<p>现在想来，上一份工作似乎没做多少事，从3月份到11月份，八个月的时间，真正由我来做的其实就只有两件事，而其中一件还只是进行了设计以及初步的定义相关的编码。</p>
-<p>首先是队列系统，主要是用来解决高并发状态时的压力问题，这个项目通过在世界杯项目中的使用，基本上证实了思路的正确，并且在使用中也确实是起到了非常明显的作用，实现了设计目标。</p>
-<p>然后是一个数据层系统，设计中这个数据层会解决数据的持久化及缓存的管理及合并，并且向下游用户提供良好的使用接口，实现MySQL协议以降低现有系统数据的迁移难度，就我看来，这个设计是合适的，但是由于公司内部的一些变动，没办法让我把精力放在这个系统的开发上，然后，就没再坚持下去。</p>
-<h2 id="新工作"><a href="#新工作" class="headerlink" title="新工作"></a>新工作</h2><p>现在的这份工作是在朋友创业公司，这朋友还是王爷介绍认识的（能认识王爷以及几个新朋友是我这次回北京最大的收获），现在是接着做游戏后端相关的工作。</p>
-<p>目前来看，现在的工作对我来说又是一个巨大的收获。在项目开始时我就有幸参与进来了，因为时间足够，在后端的设计初期花了大量的时间进行系统的设计，这些设计目前来说还是比较合理的，至少使后期的开发工作极其的便利，关于项目的设计部分以后再专门讨论。</p>
-<p>现在这个游戏项目已经到了后期，目前处于跟发行商谈判以及根据发行商要求进行修改的阶段，再有两个月左右的时间应该就可以跟大家见面。</p>
-<h2 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h2><p>虽然早就对机械键盘有所了解，但是真正接触的时间并不长，先是用了一把CHERRY的茶轴，然后在对HHKB进行了大量的了解之后，实在没忍住就入了一把，虽然价格上贵了些，拿到手上就对其爱不释手了，这篇博客就是用这个键盘写的第一篇文章，用到现在我只有一个感觉，那就是舒服。</p>
-<p>现在看来我真是不会细节描写，除了说舒服我就找不出更合适的词来形容这个键盘了。</p>
-<p>在买这个键盘之前我还担心不适应其独特的键盘布局，但是现在看来这个担心是完全没有必要了。原因应该有那么三个吧，一、我把2、3跳线打开了，其它都是默认的，2号是把键盘设置成Mac模式，3号是把BACKSPACE切换成习惯的方式，其它的跟用普通键盘没啥区别。二、我用习惯了Mac，用CTRL配合光标移动对我来说也很熟悉，再加上vi/emacs对我来说更是最常用的编辑器。三、没了。</p>
-<p>最后，对于程序员来说，我觉得HHKB确实是值得拥有的一把利器。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -762,7 +768,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
