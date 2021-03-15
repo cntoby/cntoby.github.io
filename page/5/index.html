@@ -175,6 +175,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0331/about-sprite-sheet-and-tools.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0331/about-sprite-sheet-and-tools.html" class="post-title-link" itemprop="url">About Sprite Sheet And Tools</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-03-31 21:06:17" itemprop="dateCreated datePublished" datetime="2014-03-31T21:06:17+08:00">2014-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Game/" itemprop="url" rel="index"><span itemprop="name">Game</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0331/about-sprite-sheet-and-tools.html" class="post-meta-item leancloud_visitors" data-flag-title="About Sprite Sheet And Tools" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0331/about-sprite-sheet-and-tools.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0331/about-sprite-sheet-and-tools.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h3><p>感冒好像有些更严重了，头很不舒服。</p>
+<p>下午听王爷说他们发奖金了，虽然不多，但是也是要恭喜一下的，毕竟不管发多少，总比不发强吧，而且现在他的项目进展的也算是顺利。一想到这项目还是会有些郁闷，毕竟是我们哥几个一点点弄出来的，现在却成了别人的孩子，而且还是不太待见的孩子，郁闷。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>今天随便说说<a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)" target="_blank" rel="noopener">Sprite Sheet</a>吧，简单来说，这是一个小图片集合。我印象中，这种技术最早用于WEB开发中，当在网页中使用很多小图片时，在访问时，浏览器需要对每个图片发起请求，而每次请求都只传送了一个很小的图片文件，这无形中就浪费了大量的HTTP请求和网络连接，即使在<a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="noopener">HTTP 1.1</a>的环境中，默认的头Connection保持keep-alive时可以我重用连接，便是多次请求传送的Header也会浪费很多的流量。</p>
+<p>因此，就有聪明人发明了这种方式，把多个小图片合成一个大图片，这样不仅减少了请求数、节约了资源，还使数据传输更加有效率，于是人们亲切的称之为Sprite Sheet。</p>
+<p>而在游戏开发中，合理的使用Sprite Sheet同样有着积极的作用，比如将相关性较高的图片合并到一张大图片中，不仅可以使图片的渲染过程得到优化，同时还能使图片资源更便于管理（这也是我最近也学到的，:)）。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/0331/about-sprite-sheet-and-tools.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0329/cocos2d-x-learning-4.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -590,115 +696,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0327/cocos2d-x-learning-1.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/0327/cocos2d-x-learning-1.html" class="post-title-link" itemprop="url">Cocos2D-X learning 1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-03-27 07:41:48" itemprop="dateCreated datePublished" datetime="2014-03-27T07:41:48+08:00">2014-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Cocos2D/" itemprop="url" rel="index"><span itemprop="name">Cocos2D</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2014/0327/cocos2d-x-learning-1.html" class="post-meta-item leancloud_visitors" data-flag-title="Cocos2D-X learning 1" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/0327/cocos2d-x-learning-1.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/0327/cocos2d-x-learning-1.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近学了一些关于Cocos2D-X的知道，在这里整理一下。</p>
-<p>一直以来我做的都是后端的工作，现在突然有兴趣做一些前端的关于移动程序开发以及游戏开发方面的程序，对很多概念都是非常陌生的，不知道我后端开发方面的经验放在前端有没有一些用处。</p>
-<h3 id="Cocos2D的简单介绍"><a href="#Cocos2D的简单介绍" class="headerlink" title="Cocos2D的简单介绍"></a>Cocos2D的简单介绍</h3><p>Cocos2D是一个应用非常广泛的2D游戏开发引擎，可以帮助对页面的元素进行方便的管理以及移动变形等操作，Cocos2D是基于Objective-C语言的，所以在iOS上的开发非常方便，但是跨平台方面就较差了，所以，就有了Cocos2D-X这一个基于C++的复刻版。</p>
-<h3 id="Cocos2D的一些概念（这里只说我学到的）"><a href="#Cocos2D的一些概念（这里只说我学到的）" class="headerlink" title="Cocos2D的一些概念（这里只说我学到的）"></a>Cocos2D的一些概念（这里只说我学到的）</h3><ol>
-<li>导演类CCDirector：这个类可以算是管理类，可以通过这个类获取到游戏运行界面的一些元素的属性，比如winSize等，在游戏中可以用来管理场景等。本类的使用方式为单例，通过类方法CCDirector::sharedDirecter获取对象。</li>
-<li>OpenGL类CCEGLView：对于OpenGL我不是很了解，但是我猜是可以提供类似于DirectX之类的功能，应该是管理图像动画等操作的，CCDirector需要绑定一个CCEGLView对象才可以运行，也是以单例的方式使用，通过类方法CCEGLView::sharedOpenGLView获取对象。</li>
-<li>场景类CCScene: 场景类继承于CCNode，在其中可以放置CCLayer类。</li>
-<li>层CCLayer：此类同样继承于CCNode，在其中可以放置CCSprite类，我的理解CCLayer就相当于电影中的幕次吧。在游戏中定义的不同游戏场景都需要继承CCLayer，必须实现的方法有virtual CCScene * scene()/static bool init()/CREATE_FUNC(CustomSceneName)，其中CREATE_FUNC是宏，可以帮助建立create方法。</li>
-<li>精灵类CCSprite：这应该是场景中更小的元素，在游戏中放置的背景、图片等都需要使用CCSprite，与CCScene一样都是继承自CCNode，由此可以判断，CCSprite类也是一个小场景，在其中可以加入其它的子元素，共同完成更复杂的动作。</li>
-</ol>
-<p>目前基本只学到了这些，明天继续。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -764,7 +765,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

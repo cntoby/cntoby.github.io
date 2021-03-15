@@ -175,6 +175,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/1104/Elisp-Basics.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/1104/Elisp-Basics.html" class="post-title-link" itemprop="url">Elisp Basics</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-04 23:14:07" itemprop="dateCreated datePublished" datetime="2015-11-04T23:14:07+08:00">2015-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-02-21 16:39:35" itemprop="dateModified" datetime="2019-02-21T16:39:35+08:00">2019-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/emacs/" itemprop="url" rel="index"><span itemprop="name">emacs</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/1104/Elisp-Basics.html" class="post-meta-item leancloud_visitors" data-flag-title="Elisp Basics" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2015/1104/Elisp-Basics.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/1104/Elisp-Basics.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h1><p>有很长时间没写Blog了，主要原因是，不够自律，没有坚持写下去，次要原因是，最近确实是忙了些，几乎每周都有一多半的时间是在下班的，由于这样的疲累，也导致了一旦不上班的时候就忙着休息了。</p>
+<p>有时想想，其实忙并不是放松的理由，最主要的原因还是因为懒，这个是一定要改的，再不改我们就老了。</p>
+<p>最近做了几件事，首先当然还是工作，游戏有前端进步非常大，与半年前相比几乎完全变成了另外一个游戏的感觉，加入了新角色，玩法系统也更丰富了，对于我负责的后端，除了加新功能，其它的变化并不大，但是有计划对架构底层的Cache系统进行改进，这将很大的提高系统的性能和稳定性；另外的事就是，关掉了<a href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61" target="_blank" rel="noopener">Linode</a>和<a href="http://www.vultr.com/?ref=6857104" target="_blank" rel="noopener">Vultr</a>主机，当然了，这跟这两家的服务质量无关，主要是我为合理调配资源。首先，开了一台AWS用来做<strong>佛跳墙</strong>的主力服务器，另外开了一台香港的主机用来放BLOG和小项目，而且同时在<a href="https://bandwagonhost.com/aff.php?aff=5395" target="_blank" rel="noopener">搬瓦工</a>和<a href="https://www.digitalocean.com/?refcode=b5ea84a7594f" target="_blank" rel="noopener">DigitalOcean</a>还各有一台VPS做备用的<strong>科学上网</strong>服，所以，这个时候还留着<a href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61" target="_blank" rel="noopener">Linode</a>和<a href="http://www.vultr.com/?ref=6857104" target="_blank" rel="noopener">Vultr</a>就是极大的浪费了吧。不过话说回来，这两家的东京服务器对于国内来说还是相当不错的，也就只比香港机房差一点吧。</p>
+<h1 id="Emacs-amp-Elisp"><a href="#Emacs-amp-Elisp" class="headerlink" title="Emacs &amp; Elisp"></a>Emacs &amp; Elisp</h1><p>从使用Emacs开始到现在也有个几年了吧，不过大多数时间都是在别人配置的基础上进行修改，而且在Emacs上时多半都是一些中小型的开发和写作，这样的应用场景下，自然对于Emacs的配置要求就没有那么高了。趁着这段时间没什么学习新知识的想法，刚好可以再次拿起Emacs以及必须要掌握的Elisp好好学习一番了。</p>
+<p>因为之前对Common Lisp有过一定程度上的了解，所以对于Elisp其实接受起来还是挺快的，在简单看了<a href="http://ergoemacs.org/emacs/elisp.html" target="_blank" rel="noopener">几篇关于Elisp的文章</a>后，对于Elisp的大概印象也就有一些，在这里仅对Elisp做一个简单的介绍，备忘吧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/1104/Elisp-Basics.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0328/Start-to-learn-Haskell-03.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -595,114 +701,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0313/About-Reading-and-buy-books.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/0313/About-Reading-and-buy-books.html" class="post-title-link" itemprop="url">关于阅读和买书</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-13 19:26:50" itemprop="dateCreated datePublished" datetime="2015-03-13T19:26:50+08:00">2015-03-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-02-20 16:10:35" itemprop="dateModified" datetime="2019-02-20T16:10:35+08:00">2019-02-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Reading/" itemprop="url" rel="index"><span itemprop="name">Reading</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/0313/About-Reading-and-buy-books.html" class="post-meta-item leancloud_visitors" data-flag-title="关于阅读和买书" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/0313/About-Reading-and-buy-books.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/0313/About-Reading-and-buy-books.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="闲话几句"><a href="#闲话几句" class="headerlink" title="闲话几句"></a>闲话几句</h2><p>最近在<a href="http://jianshu.io" target="_blank" rel="noopener">简书</a>上读了几篇关于写作和文章，其中有谈到关于如何提高写作能力的训练方法，其中有提到最重要的还是多写，于是在上面又看到了那篇译作《每天一篇千字文》。</p>
-<p>这要说起来，写出千字的文章难度并不算大，但是每天写出一篇来这就很有挑战性了。我觉得，要是只是每天写出一篇千字文也许是可以凑出来，不就是千字吗，光写每天的流水帐也差不多可以整得差不多了，但是这样的文章写出来有意义吗？之所以写文章，要么就是表达思想、价值观，要么输出知识，如果只是每天千篇一律的生活流水帐，那还真不如不写。所以，每天一篇千字文的最大难度应该是每天能输出有价值的东西，这才是难度所在。</p>
-<p>事物总是有两面的，回过头再想想，如果我真的能坚持这么写下去，总有一天，现有的知识会输出光，这时候为了坚持下去，会不会促使我去学习吸收新的知识哪？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/0313/About-Reading-and-buy-books.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -768,7 +770,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
