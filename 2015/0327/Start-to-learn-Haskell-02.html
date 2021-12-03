@@ -28,7 +28,7 @@
 <meta property="og:description" content="闲话昨天去了一趟医院，然后就回家休息了，顺便帮着解决一些工作的事，以为小伙伴们应该也会像往前一样十点多十一点那样就撤了，直到今天早晨才知道，他们昨天竟然一直工作到凌晨一点多，太辛苦了，可怜的孩子们，今天我也要一起加班，不知道几点能撤，不过我手上的事倒是做完了，可以写写博客什么的，估计今天晚上会回得比较晚，不知道有没有时间看书。 元组(tuple)昨天就学了关于元组的一节，元组跟列表有些相似，使用圆">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-03-27T09:34:53.000Z">
-<meta property="article:modified_time" content="2018-03-08T02:46:48.048Z">
+<meta property="article:modified_time" content="2021-11-12T08:48:20.368Z">
 <meta property="article:author" content="老白">
 <meta property="article:tag" content="functionally">
 <meta property="article:tag" content="haskell">
@@ -213,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:48:20" itemprop="dateModified" datetime="2021-11-12T16:48:20+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +221,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -260,7 +260,7 @@
         <h1 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h1><p>昨天去了一趟医院，然后就回家休息了，顺便帮着解决一些工作的事，以为小伙伴们应该也会像往前一样十点多十一点那样就撤了，直到今天早晨才知道，他们昨天竟然一直工作到凌晨一点多，太辛苦了，可怜的孩子们，今天我也要一起加班，不知道几点能撤，不过我手上的事倒是做完了，可以写写博客什么的，估计今天晚上会回得比较晚，不知道有没有时间看书。</p>
 <h1 id="元组-tuple"><a href="#元组-tuple" class="headerlink" title="元组(tuple)"></a>元组(tuple)</h1><p>昨天就学了关于元组的一节，元组跟列表有些相似，使用圆括号声明，如<code>(1, &quot;Toby&quot;, &quot;M&quot;)</code>，通过这个语句已经可以看出其与列表的一些区别，列表中只能保存一种数据类型，而元组可以保存多种不同类型，所以，元组应该更适用于保存一组有意义的档案，每一个元组都可以当做数据表中的一条记录来使用。</p>
 <p>那么，如果我们保存的一组数据都是相同的数据类型，比如一组二维坐标点<code>[[1,2], [2,3], 3,4]]</code>，这样看起来似乎不会有问题，列表中的每一个列表都是一个坐标，一切都是那么完美，可是一个意外出现了，某位连续加班一个星期的程序猿手一抖，这个就把这个列表写成了<code>[[1,2],[2,3,3],[3,4]]</code>，程序正常的完成了编译，于是就把程序放上了线，结果，程序无法按照这些坐标画出期望的线。如果使用元组进行定义会是怎样哪？同个个程序猿又犯了同样的错误，写出来这样一个元组的列表<code>[(1,2),(2,3,3),(3,4)]</code>，编译，出了错误提示，编译不通过，然后就直接按照错误提示找到出错的地方。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>之所以出现这样的情况是跟Haskell对元组的定义及处理方式分不开的，在Haskell的元组的定义中，元素数量不同的元组，以及相同位置元素的数据类型不同，系统都会认为这些元组是不同的数据类型，于是放在要求所有元素数据类型必须一样的列表中就出了错。</p>
 <p>元组内可以由不同数量不同数据类型的元素组成，其中有两个元素组成的元组叫做二元组，由三个元素组成的元组叫做三元组，以此类推，而二元组有一个特别的名字叫序对。</p>
 <p>序对有两个专用的函数</p>
@@ -269,14 +269,14 @@
 <li><code>snd (1, &quot;ONE&quot;)</code> 返回序对的第二个元素</li>
 </ul>
 <p>另外，还有一个函数可以将两个列表交叉生成一个元组的列表</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">zip</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>] [<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>, <span class="string">"five"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">zip</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>] [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;four&quot;</span>, <span class="string">&quot;five&quot;</span>]</span><br></pre></td></tr></table></figure>
 <p>本例会返回一个元组的列表<code>[(1,&quot;one&quot;),(2,&quot;two&quot;),(3,&quot;three&quot;),(4,&quot;four&quot;),(5,&quot;five&quot;)]</code>，由于Haskell的惰性，本例还可以写成如下方式</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">zip</span> [<span class="number">1</span>,<span class="number">2.</span>.] [<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>, <span class="string">"five"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">zip</span> [<span class="number">1</span>,<span class="number">2.</span>.] [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;four&quot;</span>, <span class="string">&quot;five&quot;</span>]</span><br></pre></td></tr></table></figure>
 <p>输出与上例相同。<br>之所以出现这样的情况是因为，<code>zip</code>执行过程以较短的列表为准，而无限列表与定长的列表相比，当然是定长的列表较短。</p>
 <h1 id="找一组三角形吧"><a href="#找一组三角形吧" class="headerlink" title="找一组三角形吧"></a>找一组三角形吧</h1><p>要求边长从1到10的直角三角形，首先要明确勾股定理，直角三角形的三条边的边长应该满足a^2 + b^2 = c^2，其中a为底边，c为斜边，b为另一条直角边，a和b都应该小于斜边c，再确定a不短于b，当然有b长于a时的情况，只不过这种情况只是a长于b换了一下摆放方向而已，所以我们可以得出下面的语句。</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(a,b,c) | c &lt;- [<span class="number">1.</span><span class="number">.10</span>], a &lt;- [<span class="number">1.</span>.c], b &lt;- [<span class="number">1.</span>.a], a^<span class="number">2</span>+b^<span class="number">2</span>==c^<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 <p>输出为<code>[(4,3,5),(8,6,10)]</code>，当然还可以加一些谓语过滤出更接近需求的组合。</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>刚才有同事推荐了一个游戏，<a href="http://timelineapp.pointstone.org/coreball/game.html?openid=o3OtAuK--ELj5XEt3w22NGpb6Jv8&from=timeline&isappinstalled=0" target="_blank" rel="noopener">Core Ball</a>，我费半天劲玩到了第10关，然后就再也玩不下去了，看的眼都花了，然后我就推荐给了<a href="http://www.hector2.us" target="_blank" rel="noopener">王爷</a>，然后王爷成功的玩到了第20关，然后说想吐了，要去躺一会儿，哈哈哈哈。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>刚才有同事推荐了一个游戏，<a target="_blank" rel="noopener" href="http://timelineapp.pointstone.org/coreball/game.html?openid=o3OtAuK--ELj5XEt3w22NGpb6Jv8&from=timeline&isappinstalled=0">Core Ball</a>，我费半天劲玩到了第10关，然后就再也玩不下去了，看的眼都花了，然后我就推荐给了<a target="_blank" rel="noopener" href="http://www.hector2.us/">王爷</a>，然后王爷成功的玩到了第20关，然后说想吐了，要去躺一会儿，哈哈哈哈。</p>
 
     </div>
 
@@ -396,16 +396,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

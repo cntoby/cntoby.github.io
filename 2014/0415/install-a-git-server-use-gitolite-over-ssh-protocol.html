@@ -28,7 +28,7 @@
 <meta property="og:description" content="闲话最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。 进入正题建立服务器的软件我这里选用Gitolite，之所以选用Gitolite，一是因为之前曾经使用过Gitolite，再一个是因为Gitolite可配置性更高，而且更为小巧。而">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2014-04-15T04:06:56.000Z">
-<meta property="article:modified_time" content="2018-03-08T02:46:48.051Z">
+<meta property="article:modified_time" content="2021-11-12T08:51:41.567Z">
 <meta property="article:author" content="老白">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="gitolite">
@@ -213,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:51:41" itemprop="dateModified" datetime="2021-11-12T16:51:41+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +268,7 @@
 <li>安装Gitolite<br>在用户目录中执行<code>gitolite/install -ln</code>，参数的意思是在$HOME/bin目录中建立指向源代码目录的文件链接，这样做的好处是可以方便的升级gitolite，另外，install命令另一个参数是-to可以指定命令安装到的目录，默认情况下不需要指定。<br>需要注意的是，默认安装的时候需要将$HOME/bin加入$PATH，如果指定安装目标需要将$HOME/to_dir加入$PATH。<br>执行完install之后需要执行<code>gitolite setup -pk gitadmin.pub</code>。<br>完成后，需要再检查一下~/.ssh目录和其中的authorized_keys文件的权限，需要将权限控制为仅本人可读写。</li>
 <li>同步管理库（管理端）<br>由于管理端或客户端与Git服务器之间的通讯是基于ssh的，所以，为了便于使用，需要对与Git服务器的连接进行单独配置，打开<code>~/.ssh/config</code>，在其中加入单独定义管理时所使用的密钥文件。</li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">  <span class="built_in"> User </span>git</span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">   <span class="keyword">User</span> <span class="title">git</span></span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
 <p>  经过以上配置即可以执行<code>git clone gitadmin:gitadmin</code>获取管理库，之后所有对服务器的管理只能通过此管理库进行，严禁直接在服务器上对服务器进行修改。<br>7. 修改Gitolite配置及用户管理<br>  详细使用配置及管理方法请参考源代码目录下的<code>README.txt</code><br>8. 从Subversion向Git做版本迁移<br>  两种方法</p>
 <ul>
 <li>git svn clone svn://url.to.svn/repos –no-metadata –authors-file=users.txt<br>直接从svn版本库中clone数据到本地，其中</li>
@@ -278,7 +278,7 @@
 <li>git svn init svn://url.to.svn/repos –no-metadata</li>
 <li>git svn fetch –authors-file=users.txt<br>这两个命令为一组，第一个命令初始化一个基于svn源的git库，此时可以在该库的.git目录下修改branches和tags信息，完成之后使用第二个命令开始同步代码，此时代码将按照配置把不同分支或标签下的代码提交到git库的指定位置。<br>如要迁移的Subversion版本库使用遵循惯例的目录设置，则可以在第一种方法和第二种方法的第一条命令中加入-s选项，本选择可以简化同步的操作。</li>
 </ul>
-<p>Windows版客户端TortoiseGit下载地址：<a href="http://download.tortoisegit.org/tgit/1.8.8.0/" target="_blank" rel="noopener">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>Pro Git: <a href="http://git-scm.com/book/zh/" target="_blank" rel="noopener">http://git-scm.com/book/zh/</a></p>
+<p>Windows版客户端TortoiseGit下载地址：<a target="_blank" rel="noopener" href="http://download.tortoisegit.org/tgit/1.8.8.0/">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>Pro Git: <a target="_blank" rel="noopener" href="http://git-scm.com/book/zh/">http://git-scm.com/book/zh/</a></p>
 <h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>Git的使用入门很容易 ，只需要简单的分支、标签管理和版本提交，基本上就可以满足日常的需求，当然，还有更多的特性需要在使用的过程中逐渐的接触和应用。</p>
 
     </div>
@@ -399,16 +399,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

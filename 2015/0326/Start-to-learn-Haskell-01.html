@@ -28,7 +28,7 @@
 <meta property="og:description" content="惯例闲话昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。 列表函数 null">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-03-26T04:26:33.000Z">
-<meta property="article:modified_time" content="2018-03-08T02:46:48.048Z">
+<meta property="article:modified_time" content="2021-11-12T08:49:05.112Z">
 <meta property="article:author" content="老白">
 <meta property="article:tag" content="lisp">
 <meta property="article:tag" content="functionally">
@@ -214,7 +214,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:49:05" itemprop="dateModified" datetime="2021-11-12T16:49:05+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -270,7 +270,7 @@
 <li><code>elem 3 [5,4,3,2,1]</code> 检查给定数据是否为列表中的元素，返回<code>True</code>或<code>False</code></li>
 </ul>
 <h1 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h1><h2 id="简单区间"><a href="#简单区间" class="headerlink" title="简单区间"></a>简单区间</h2><p>所谓区间，实际上是利用列表元素的规律以简单的方式生成较大列表的一种方法。例如，按之间所学习的，如果要定义一个从1到10所有整数的列表，就需要这样<code>[1,2,3,4,5,6,7,8,9,10]</code>，但是如果使用区间则可以简化成<code>[1..10]</code>，当然了，如果要生成字母A-Z的列表，同样可以使用类似的方法<code>[&#39;A&#39;..&#39;Z&#39;]</code>。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="自定义步长的区间"><a href="#自定义步长的区间" class="headerlink" title="自定义步长的区间"></a>自定义步长的区间</h2><p>我们当然不可能只使用这种简单的+1+1+1的列表，可能我们还需要+2+2或+3+3这样的列表，那么，这样需要更改步长的区间的需求如何利用Haskell的区间生成哪，其实也很简单，确定列表最前面的两个连续元素，然后在<code>..</code>的后面加上最大值或最小值对列表进行限制，如<code>[2,5..10]</code>，这样就定义了一个<code>[2,5,8]</code>这样的列表，由2和5决定了本列表的步长，由10限制了列表的最大值。</p>
 <h2 id="递减区间"><a href="#递减区间" class="headerlink" title="递减区间"></a>递减区间</h2><p>上面的所有示例都是递增的区间，递减的区间实现方法跟上面的示例非常相似，比如，<code>[10,9..1]</code>，需要特别注意的一点是，递减的区别不能用类似<code>[10..1]</code>这样的方式定义，因为在不没有步长因素的情况下，Haskell会认为这是递增区别，从10开始递增元素并寻找不大于1的元素，这当然是找不到的，所以用<code>[10..1]</code>定义的列表是个空列表。</p>
 <h2 id="无限列表"><a href="#无限列表" class="headerlink" title="无限列表"></a>无限列表</h2><p>关于区间，我学到的最后的部分是关于无限列表的内容，所谓无限列表即是这个列表中的元素是无穷尽的，比如<code>[1,2..]</code>，这就是一个无限列表，它的元素就是从1开始，一直递增，没有终点。当然，无需对这个列表是否会占用太多计算机资源担心，Haskell是惰性语言，表达式就在那里，你不使用的时候它就是一个表达式，而当要使用这个列表时，系统才对其进行计算，比如<code>take 10 [1,5..]</code>，由于此表达式只是从无限列表中取10个元素出来，所以，系统只会计算到第10个元素即终止。</p>
@@ -289,12 +289,12 @@
 <p>此示例又在前面的基础上限制了x必须大于等于5，除此之外，还可以在谓语中还可以使用自定义的函数，唯一的要求就是函数需要返回<code>True</code>或<code>False</code>，如：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">byThree</span> x = <span class="keyword">if</span> x `mod` <span class="number">3</span> == <span class="number">0</span></span><br><span class="line">            <span class="keyword">then</span> <span class="type">True</span></span><br><span class="line">            <span class="keyword">else</span> <span class="type">False</span></span><br><span class="line">[x * <span class="number">2</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], byThree x]</span><br></pre></td></tr></table></figure>
 <p>本示例使用了自定义的过滤函数<code>byThree</code>，只使用能被3整除了元素。<br>除了在增加谓语对元素进行过滤外，还可以在输出中对数据进行整理，如</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="keyword">if</span> x*<span class="number">2</span> &lt; <span class="number">15</span> <span class="keyword">then</span> <span class="string">"Big"</span> <span class="keyword">else</span> <span class="string">"Bang"</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], byThree x]</span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="keyword">if</span> x*<span class="number">2</span> &lt; <span class="number">15</span> <span class="keyword">then</span> <span class="string">&quot;Big&quot;</span> <span class="keyword">else</span> <span class="string">&quot;Bang&quot;</span> | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], byThree x]</span><br></pre></td></tr></table></figure>
 <p>另外，推导式还可以支持多个输入，如：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ x + y | x &lt;- [<span class="number">1.</span><span class="number">.10</span>], y &lt;- [<span class="number">11.</span><span class="number">.20</span>]]</span><br></pre></td></tr></table></figure>
 <p>此表达式将输出一个对两个列表中的每个元素分别相加的列表，至于输出结果，因为比较长，写出来太难看，所以就免了。</p>
 <p>此外，输入的列表还可以是列表的列表，在这里就不详细说了。</p>
-<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>本来感觉昨天只看了不到半个小时的书，可写的内容应该没有多少的，结果万万没想到，竟然也让我罗嗦的那么半天，不过似乎还挺有意思的。<br>今天下午4点去了一趟医院，看时间也不算早，再加上最近一段时间一直加班，今天就偷懒一下，早点回家休息休息，希望加班的兄弟们不要羡慕。<br>因为今天回来的比较早，<a href="http://www.hector2.us/" target="_blank" rel="noopener">王爷</a>看到我好开心的样子，哈哈，这一个人在家里学习工作是有多寂寞啊，据王爷说最近一段时间，虽然合租在一套房子里，每天跟我的交流就是听到我打呼噜的节奏，不要误会，我俩不是住在同一个房间里，只不过是房间中间就隔了一堵墙。</p>
+<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>本来感觉昨天只看了不到半个小时的书，可写的内容应该没有多少的，结果万万没想到，竟然也让我罗嗦的那么半天，不过似乎还挺有意思的。<br>今天下午4点去了一趟医院，看时间也不算早，再加上最近一段时间一直加班，今天就偷懒一下，早点回家休息休息，希望加班的兄弟们不要羡慕。<br>因为今天回来的比较早，<a target="_blank" rel="noopener" href="http://www.hector2.us/">王爷</a>看到我好开心的样子，哈哈，这一个人在家里学习工作是有多寂寞啊，据王爷说最近一段时间，虽然合租在一套房子里，每天跟我的交流就是听到我打呼噜的节奏，不要误会，我俩不是住在同一个房间里，只不过是房间中间就隔了一堵墙。</p>
 
     </div>
 
@@ -415,16 +415,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

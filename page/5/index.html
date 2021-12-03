@@ -175,6 +175,220 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" class="post-title-link" itemprop="url">Install a git server use gitolite over the ssh</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-04-15 12:06:56" itemprop="dateCreated datePublished" datetime="2014-04-15T12:06:56+08:00">2014-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 16:51:41" itemprop="dateModified" datetime="2021-11-12T16:51:41+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" class="post-meta-item leancloud_visitors" data-flag-title="Install a git server use gitolite over the ssh" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0415/install-a-git-server-use-gitolite-over-ssh-protocol.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h3><p>最近这段时间处在封闭开发状态，基本上没什么时间写日志了，不过现在也忙的差不多了，更重要的是，今天需要安装一台Git服务器做为开发之用，而且需要把安装过程整理出一份文档 ，所以，咱就直接写出来，也做为一篇日志发布了吧。</p>
+<h3 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h3><p>建立服务器的软件我这里选用Gitolite，之所以选用Gitolite，一是因为之前曾经使用过Gitolite，再一个是因为Gitolite可配置性更高，而且更为小巧。而且，由于这个服务器只在内部使用，没有必要使用Gitlab这种体积庞大的提供过多的WEB方面功能的程序。</p>
+<p>没有特别声明的都为在服务器上执行</p>
+<ol>
+<li>Git<br>使用系统命令安装git客户端，比如<code>yum install git</code>，版本最好不要太低，1.7以上。</li>
+<li>建立Git帐户<br><code>useradd -d /opt/git -m git</code>，用户目录的位置不做要求，但是由于是专用帐号，最好是放在有备份保证的目录，便于管理。</li>
+<li>生成管理公钥 （管理端）<br><code>ssh-keygen -t rsa -C &quot;Git Admin&quot; -f gitadmin</code><br>这个步骤需要注意的是生成密钥对最好不要加密码，否则有可能出现奇怪的问题。完成这一步后将gitadmin.pub文件传至git的HOME目录中备用。</li>
+<li>同步Gitolite代码<br><code>git clone https://github.com/sitaramc/gitolite</code>，此命令需要在Git用户的HOME目录中执行。</li>
+<li>安装Gitolite<br>在用户目录中执行<code>gitolite/install -ln</code>，参数的意思是在$HOME/bin目录中建立指向源代码目录的文件链接，这样做的好处是可以方便的升级gitolite，另外，install命令另一个参数是-to可以指定命令安装到的目录，默认情况下不需要指定。<br>需要注意的是，默认安装的时候需要将$HOME/bin加入$PATH，如果指定安装目标需要将$HOME/to_dir加入$PATH。<br>执行完install之后需要执行<code>gitolite setup -pk gitadmin.pub</code>。<br>完成后，需要再检查一下~/.ssh目录和其中的authorized_keys文件的权限，需要将权限控制为仅本人可读写。</li>
+<li>同步管理库（管理端）<br>由于管理端或客户端与Git服务器之间的通讯是基于ssh的，所以，为了便于使用，需要对与Git服务器的连接进行单独配置，打开<code>~/.ssh/config</code>，在其中加入单独定义管理时所使用的密钥文件。</li>
+</ol>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">host gitadmin</span><br><span class="line">   HostName xxx.xxx.xxx.xxx</span><br><span class="line">   <span class="keyword">User</span> <span class="title">git</span></span><br><span class="line">   IdentityFile \~/.ssh/gitadmin</span><br></pre></td></tr></table></figure>
+<p>  经过以上配置即可以执行<code>git clone gitadmin:gitadmin</code>获取管理库，之后所有对服务器的管理只能通过此管理库进行，严禁直接在服务器上对服务器进行修改。<br>7. 修改Gitolite配置及用户管理<br>  详细使用配置及管理方法请参考源代码目录下的<code>README.txt</code><br>8. 从Subversion向Git做版本迁移<br>  两种方法</p>
+<ul>
+<li>git svn clone svn://url.to.svn/repos –no-metadata –authors-file=users.txt<br>直接从svn版本库中clone数据到本地，其中</li>
+</ul>
+<p>   –no-metadata 指定命令不在git版本库中加入svn版本元数据。<br>   –authors-file 指定与svn用户相对应的git用户。</p>
+<ul>
+<li>git svn init svn://url.to.svn/repos –no-metadata</li>
+<li>git svn fetch –authors-file=users.txt<br>这两个命令为一组，第一个命令初始化一个基于svn源的git库，此时可以在该库的.git目录下修改branches和tags信息，完成之后使用第二个命令开始同步代码，此时代码将按照配置把不同分支或标签下的代码提交到git库的指定位置。<br>如要迁移的Subversion版本库使用遵循惯例的目录设置，则可以在第一种方法和第二种方法的第一条命令中加入-s选项，本选择可以简化同步的操作。</li>
+</ul>
+<p>Windows版客户端TortoiseGit下载地址：<a target="_blank" rel="noopener" href="http://download.tortoisegit.org/tgit/1.8.8.0/">http://download.tortoisegit.org/tgit/1.8.8.0/</a><br>Pro Git: <a target="_blank" rel="noopener" href="http://git-scm.com/book/zh/">http://git-scm.com/book/zh/</a></p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>Git的使用入门很容易 ，只需要简单的分支、标签管理和版本提交，基本上就可以满足日常的需求，当然，还有更多的特性需要在使用的过程中逐渐的接触和应用。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0402/get-a-texturepacker-free-license.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2014/0402/get-a-texturepacker-free-license.html" class="post-title-link" itemprop="url">Get a TexturePacker free license</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2014-04-02 20:10:28" itemprop="dateCreated datePublished" datetime="2014-04-02T20:10:28+08:00">2014-04-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 16:52:05" itemprop="dateModified" datetime="2021-11-12T16:52:05+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Software/" itemprop="url" rel="index"><span itemprop="name">Software</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2014/0402/get-a-texturepacker-free-license.html" class="post-meta-item leancloud_visitors" data-flag-title="Get a TexturePacker free license" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2014/0402/get-a-texturepacker-free-license.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2014/0402/get-a-texturepacker-free-license.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="闲话几句"><a href="#闲话几句" class="headerlink" title="闲话几句"></a>闲话几句</h3><p>昨天跟老婆吵了几句，当时确实是非常气愤，不过现在想想真的很划不来，气大伤身不说，昨天也因为这吵架导致了始终静不下心来学习，所以说，这吵架不仅伤身、伤心情，还浪费了时间。<br>其实本来也没有什么大不了的事情，没有必要非得争个是非黑白，如果确实觉得对方做的不合适，完全可以在对方心情恢复正常之后再换个角度讲给她听，这样在达到目的的同时也避免了伤和气。基本上应该有这个原则，在对方情绪激动的时候最好是避免正面的意见冲突，这不光是在两口子之间的相处之道，在和任何人相处时都是适用的。</p>
+<h3 id="说点正题"><a href="#说点正题" class="headerlink" title="说点正题"></a>说点正题</h3><p><a target="_blank" rel="noopener" href="http://www.codeandweb.com/texturepacker" title="Texture Packer">Texture Packer</a>是一个非常方便的Sprite Sheet生成工具，我在<a href="/2014/03/31/about-sprite-sheet-and-tools/" title="About Sprite Sheet and Tools">About Sprite Sheet</a>一文中讲到过，那天我在写博文时就发现下面提示还有两天的试用期，于是去到官网上准备，然后就看到下面有个可以申请免费License的链接，看里面的说明，我的博客是符合条件的，于是就试着申请了一下，没想到今天就收到了作者发来的邮件。<br><img src="/images/get-a-texture-packer-free-license/mail1.png" alt="Email"><br>同时，下面还附送了一个<a target="_blank" rel="noopener" href="http://www.codeandweb.com/physicseditor" title="Physics Editor">Physics Editor</a>的授权文件，这个软件我也安装上了，看起来也是非常的强大，尽管我还没有试用，不过我想这对我学习游戏开发的过程一定会很有帮助，在此对作者表示剧烈的感谢。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>我想作者愿意为做技术的或跟此相关的人提供免费的授权，一方面是希望能帮助宣传这他的软件以使他能够获得更多的回报，另一方面也是希望他的用户更多，即便是没有得到金钱上的回报，但是由此带来的巨大成就感也是所有软件开发者内心所渴望的。<br>就像<a target="_blank" rel="noopener" href="http://www.hector2.us/" title="TIGER/HECTOR学艺碎碎念">王爷</a>他老人家现在每天熬夜加班费劲巴力的花大量的时间在搞他的一个EF English辅助APP一样，他也没指望能在这个APP上获得什么经济回报，当然能得到经济回报更好，就算得不到，一旦用户多了，我想他也会忍不住请我动吃大吃一顿来庆祝一番的。【千里传音：我说的对吧，王爷？】。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0331/about-sprite-sheet-and-tools.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,7 +420,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:52:57" itemprop="dateModified" datetime="2021-11-12T16:52:57+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +466,7 @@
       
           <h3 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h3><p>感冒好像有些更严重了，头很不舒服。</p>
 <p>下午听王爷说他们发奖金了，虽然不多，但是也是要恭喜一下的，毕竟不管发多少，总比不发强吧，而且现在他的项目进展的也算是顺利。一想到这项目还是会有些郁闷，毕竟是我们哥几个一点点弄出来的，现在却成了别人的孩子，而且还是不太待见的孩子，郁闷。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>今天随便说说<a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)" target="_blank" rel="noopener">Sprite Sheet</a>吧，简单来说，这是一个小图片集合。我印象中，这种技术最早用于WEB开发中，当在网页中使用很多小图片时，在访问时，浏览器需要对每个图片发起请求，而每次请求都只传送了一个很小的图片文件，这无形中就浪费了大量的HTTP请求和网络连接，即使在<a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="noopener">HTTP 1.1</a>的环境中，默认的头Connection保持keep-alive时可以我重用连接，便是多次请求传送的Header也会浪费很多的流量。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>今天随便说说<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">Sprite Sheet</a>吧，简单来说，这是一个小图片集合。我印象中，这种技术最早用于WEB开发中，当在网页中使用很多小图片时，在访问时，浏览器需要对每个图片发起请求，而每次请求都只传送了一个很小的图片文件，这无形中就浪费了大量的HTTP请求和网络连接，即使在<a target="_blank" rel="noopener" href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP 1.1</a>的环境中，默认的头Connection保持keep-alive时可以我重用连接，便是多次请求传送的Header也会浪费很多的流量。</p>
 <p>因此，就有聪明人发明了这种方式，把多个小图片合成一个大图片，这样不仅减少了请求数、节约了资源，还使数据传输更加有效率，于是人们亲切的称之为Sprite Sheet。</p>
 <p>而在游戏开发中，合理的使用Sprite Sheet同样有着积极的作用，比如将相关性较高的图片合并到一张大图片中，不仅可以使图片的渲染过程得到优化，同时还能使图片资源更便于管理（这也是我最近也学到的，:)）。</p>
           <!--noindex-->
@@ -312,7 +526,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:53:43" itemprop="dateModified" datetime="2021-11-12T16:53:43+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -360,7 +574,7 @@
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>今天随便说说在Cocos2D-X开发中，关于对CCSprite方面的优化，总得来说就是尽可能减少渲染次数，这样可以使游戏运行更有效率，能够空出更多的CPU时间做其它的事情，以增加游戏的流畅与体验。</p>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>Cocos2D为图片资源批量加载提供了<code>CCSpriteFrameCache</code>类，此类可以通过使用Sprite Sheet文件来减少图片加载次数，简单来说，就是把多个图片拼成一个大图片，之后通过坐标在大文件上取到相应的图片，这个技术被广泛使用在网页设计及游戏开发中。在这里我使用了一个叫做Zwoptex的软件自动生成大图片及相应的<code>.plist</code>，软件的具体使用方法就不在这里细说了（另外，朋友介绍说Texture Packer是可以更好的做这件事的工具，改天尝试一下）。</p>
 <p>另外，Cocos2D还提供了一个<code>CCSpriteBatchNode</code>类，这个类主要作用是，当相同图片资源被重复使用时，通过这个类可以减少使相同的图片只渲染一次，具体做法看下面的代码。<br>PS: 代码基于上一篇BLOG，只对关键部分进行说明。</p>
-<figure class="highlight c++"><figcaption><span>GameSceneDH.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameSceneDH</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene *<span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameSceneDH);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>GameSceneDH.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__GameSceneDH__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;cocos2d.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameSceneDH</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene *<span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">CREATE_FUNC</span>(GameSceneDH);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2014/0329/cocos2d-x-learning-4.html#more" rel="contents">
@@ -418,7 +632,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:55:29" itemprop="dateModified" datetime="2021-11-12T16:55:29+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -465,218 +679,11 @@
           <h3 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h3><p>本来部门计划今天下午全部门去搞团建的，主要活动是开卡丁车、桌游等项目，可惜天不从人愿，早晨有点下雨，好不容易盼到中午晴天，结果Leader又一个通知，说今天事情太多，活动改期到下周了，我勒个去的，废话不多说，进去正题。</p>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>今天练习的内容主要是在Cocos2D开发中，对菜单的运用以及场景切换，中间还涉及到对于CCSprite对象的一些操作和schedule的简单应用。</p>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>首先用<code>create_project.py</code>建立一个基础项目，然后分别建立两个CCLayer的子类。</p>
-<figure class="highlight c++"><figcaption><span>StudyCocos2D.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudyCocos2D</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onStartClick</span><span class="params">(CCObject *obj)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(StudyCocos2D);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__StudyCocos2D__) */</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>StudyCocos2D.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  StudyCocos2D.h</span></span><br><span class="line"><span class="comment">//  StudyCocos2D</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Toby Lee on 14-3-28.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __StudyCocos2D__StudyCocos2D__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;cocos2d.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudyCocos2D</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onStartClick</span><span class="params">(CCObject *obj)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">CREATE_FUNC</span>(StudyCocos2D);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__StudyCocos2D__StudyCocos2D__) */</span></span></span><br></pre></td></tr></table></figure>
 <p>这是一个最简单的头文件，相比上一篇只多了一个私有方法<code>void onStartClick(CCObject *obj)</code>，其作用后面再说明。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2014/0328/cocos2d-x-learning-3-(ccscene-and-ccmenu).html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-title-link" itemprop="url">关于MySQL网络协议中的数据包序号</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-03-28 14:00:08" itemprop="dateCreated datePublished" datetime="2014-03-28T14:00:08+08:00">2014-03-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-02-21 16:40:00" itemprop="dateModified" datetime="2019-02-21T16:40:00+08:00">2019-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" class="post-meta-item leancloud_visitors" data-flag-title="关于MySQL网络协议中的数据包序号" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/0328/about-the-seqno-of-packet-in-mysql-network-protocol.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>对MySQL协议稍作了解后，我们就知道在协议中，服务端与客户端相互之间的通讯都是以包的形式进行的。</p>
-<p>在这些包中，有一个固定的特征就是前四个字节用途不变，前三个字节表示数据包的长度，第四个字节表示当前包在本次交互中是序数。</p>
-<p>前三个字节最大只能表达16M的长度，这是三个字节表达无符号整型的极限，所以，每次客户端可以接受到的最大数据包为16M+4个字节。</p>
-<p>至于第四个字节，这是表达当前包的序数的，一个字节能表达的最大正整数是255。我们知道，在MySQL协议中，发送COM_QUERY命令后，服务器返回的数据格式为，响应头为一个包，然后，每一个字段的描述也会是一个包，字段说明后面会跟一个EOF包表示字段描述结束，之后则跟随的是表中的数据，每一个数据包表达一行数据，一般情况，我们每次从数据库里检索的条数，去掉描述协议的部分，在序数中我们还有不少空间可以用在数据记录上，但是，如果总的包数超过255，那会是怎么的情况哪？</p>
-<p>在我们使用数据库的经验中，我们可以经常有机会看到很多条记录同时显示出来的例子，记录数明明超过了255，可是依然正常显示，这是为什么哪？</p>
-<p>经过对MySQL交互嗅探，我发现在数据包次序达到255后，之后紧随的包的次序就变成了0，在Wireshark的协议分析中会认为这是错乱的协议，我想，这应该是MySQL特意使用的方式。</p>
-<p>前后端的交互中，到发现次序达到255后，对序数加1，由于只使用了一个字节，所以数据溢出变成了0，这样的情况在MySQL协议中被认为是合法的，只要前后端认可这种方式，那这种通讯就不会出错。</p>
-<p>所以我认为，在MySQL通讯中，包序号只是用来确认包的次序没有发生错误的，至于序号是几并不重要，只要认定255号后为0号是合法的，那就可以达到正常交互并保证数据序号不会出错的目的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2014/0327/cocos2d-x-learning-2.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/0327/cocos2d-x-learning-2.html" class="post-title-link" itemprop="url">Cocos2D-X learning 2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-03-27 22:49:58" itemprop="dateCreated datePublished" datetime="2014-03-27T22:49:58+08:00">2014-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Cocos2D/" itemprop="url" rel="index"><span itemprop="name">Cocos2D</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2014/0327/cocos2d-x-learning-2.html" class="post-meta-item leancloud_visitors" data-flag-title="Cocos2D-X learning 2" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2014/0327/cocos2d-x-learning-2.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2014/0327/cocos2d-x-learning-2.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>今天学习了在Cocos2D-X开发中创建场景，以及在场景中加入图片资源，并通过写一个简单的例子对涉及到的CCLayer和CCSprite进行练习和熟悉。</p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>首先，场景类需要继承于CCLayer，并且必须实现类函数<code>CCScene *scene()</code>和虚函数<code>bool init()</code>,前者用于建立场景并在场景中加入层以备演示CCSprite，而后者则是用于对本场景进行初始化，代码如下：</p>
-<figure class="highlight c++"><figcaption><span>GameScene.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __HelloCocos__GameScene__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HelloCocos__GameScene__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cocos2d.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cocos2d;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GameScene</span>:</span> <span class="keyword">public</span> CCLayer &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> CCScene * <span class="title">scene</span><span class="params">()</span></span>;</span><br><span class="line">    CREATE_FUNC(GameScene);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* defined(__HelloCocos__GameScene__) */</span></span></span><br></pre></td></tr></table></figure>
-<p>以上代码， <code>CREATE_FUNC(GameScene)</code>是一个宏，此宏的功能是为GameScene类创建一个<code>GameScene *GameScene::create()</code>类函数，由于此函数的功能单一，其主要作用就是用来调用对象中的<code>init()</code>方法，因此，使用宏对代码进行简化是一个非常好的方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2014/0327/cocos2d-x-learning-2.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -765,16 +772,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

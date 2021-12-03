@@ -175,6 +175,222 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" class="post-title-link" itemprop="url">Booting Archlinux from USB Stick in Gen8 Server</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-25 11:15:16" itemprop="dateCreated datePublished" datetime="2015-11-25T11:15:16+08:00">2015-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 17:22:10" itemprop="dateModified" datetime="2021-11-12T17:22:10+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Server/" itemprop="url" rel="index"><span itemprop="name">Server</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" class="post-meta-item leancloud_visitors" data-flag-title="Booting Archlinux from USB Stick in Gen8 Server" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="冲动的入手Gen8"><a href="#冲动的入手Gen8" class="headerlink" title="冲动的入手Gen8"></a>冲动的入手Gen8</h1><p>看上Gen8已经很久了，一直因为价格问题和纠结于买来后是否有用的问题而迟迟没有下手，这次总算是借着双11的机会，再加上京东白条免息免手续费分期，算了一下，很划算呀，每月还不了多少钱，感觉很合适。因为太过激动，就忘了硬盘的事，于是又弄了两块2T的红盘，因为考虑最终要做Raid10，所以就不准备直接把系统安排在四个主要的硬盘位上，光驱位是个好地方，这也是Gen8的玩家们常用来放第五块硬盘的位置，于是又搞了一块120<del>T</del>G<a href="%5B%E7%8E%8B%E7%88%B7%5D(http://tigerwang.us)%E7%81%AB%E7%9C%BC%E9%87%91%E7%9D%9B">^tgerror</a>的SSD硬盘，好在这块硬盘并不贵，因为后来启动服务器时，发现启动系统最浪费时间的地方根本就不在硬盘上。</p>
+<p>本来以为硬盘到位后就可以开始玩起哪，谁知道，手上存的几根数据线根本就没办法用，要么不够长，要么接口不对，然后又满网上找合适的线，前两条买回来还不对，靠，那两条线还都写了Gen8专用啥啥的，坑啊，也怪我没认真去看那几根线的接口，只是看到Gen8专用就以为没问题哪。</p>
+<p>在数据线到手后又折腾了一对电力猫，以便为服务器提供稳定的网络，不过话说回来，电力猫确实是好东西，通过电力线路传输网络信号，在现在这个信道几乎全部会被占用的大环境里，能方便的使用有线网络，那绝对是改变生活质量的举措啊。</p>
+<p>后来一想，反正这些东西都备齐了也不差几根好点的网线了，于是又搞了几条超六类网线，不知是心理作用还是实际效果，反正感觉上来说好像确实上网感受好了不少哪。</p>
+<h1 id="折腾Gen8"><a href="#折腾Gen8" class="headerlink" title="折腾Gen8"></a>折腾Gen8</h1><p>因为不想以后再麻烦的拆装硬盘什么的，又买了两个2.5转3.5的硬盘盒，用来安装我之前的两个移动硬盘到服务器，再加上新买的两块红盘，硬盘仓的四个位置全部占满，然后再加上SSD硬盘安装系统，一共五块硬盘都安装在服务器上。</p>
+<p>然后服务器上的两根网线都连到路由器上，一根是iLo另一根就是系统要用的了，到此为止，所有准备工作都准备好了，可以正式开始折腾了，哦对了，我还去HP官网申请了一个iLo专业版的试用证书，要不然是不能使用iLo的Remote Console功能的，因为家里用的是iMac，没有多余的显示器给服务器用，所以，这个Remote Console绝对是好东西，还可以把ISO虚拟成光盘给服务器使用，绝对是利器。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/1125/Booting-Archlinux-from-USB-Stick-in-Gen8-Server.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/1106/Elisp-Basics-more.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="老白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老白说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/1106/Elisp-Basics-more.html" class="post-title-link" itemprop="url">Elisp Basics (more)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-11-06 14:34:09" itemprop="dateCreated datePublished" datetime="2015-11-06T14:34:09+08:00">2015-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 16:45:54" itemprop="dateModified" datetime="2021-11-12T16:45:54+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/1106/Elisp-Basics-more.html" class="post-meta-item leancloud_visitors" data-flag-title="Elisp Basics (more)" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2015/1106/Elisp-Basics-more.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2015/1106/Elisp-Basics-more.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="还是几句闲话"><a href="#还是几句闲话" class="headerlink" title="还是几句闲话"></a>还是几句闲话</h1><p>刚加了一个大夜班，基本上等于通宵了，从前一天早晨10点一直上班到第二天早晨5点多才下班，在那个时间好像已经感觉不到明显的困意了，不过回到家基本上倒在床上就直接睡着了。睡到中午11点多自然醒了，算一下，这才睡了5个多小时，确实是老了吗？这觉也太少了些吧。</p>
+<p>前天晚上写了一段关于Elisp的内容，昨天在家里呆着却迟迟不想接着写下来，不知道这是拖延症发作还是又是懒性大发抑或是这两者合并并生的效果，总之，我对于这种状态极其的不满意，是时候对自己多些管理，要不然都老了。</p>
+<h1 id="Emacs-Lisp"><a href="#Emacs-Lisp" class="headerlink" title="Emacs Lisp"></a>Emacs Lisp</h1><p><a href="/2015/11/04/Elisp-Basics/">Elisp Basics</a>里简单写了一些关于Elisp的内容，今天再加一些关于循环、判断的部分，就可以算是Emacs Lisp最基础教程结束了，以后再写类似主题也只会是针对单个需求。</p>
+<h2 id="IF-THEN-ELSE"><a href="#IF-THEN-ELSE" class="headerlink" title="IF THEN ELSE"></a>IF THEN ELSE</h2><p>确切的说本语法分为<code>IF THEN</code>和<code>IF THEN ELSE</code>两种情况，不细说，看示例。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">if</span> (<span class="name">&lt;</span> <span class="number">3</span> <span class="number">4</span>) <span class="comment">; IF</span></span><br><span class="line"> (<span class="name">message</span> <span class="string">&quot;3 is smaller than 4&quot;</span>) <span class="comment">; THEN</span></span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">if</span> (<span class="name">&gt;</span> <span class="number">3</span> <span class="number">4</span>) <span class="comment">; IF</span></span><br><span class="line"> (<span class="name">message</span> <span class="string">&quot;3 is bigger than 4&quot;</span>) <span class="comment">; THEN</span></span><br><span class="line"> (<span class="name">message</span> <span class="string">&quot;4 is bigger than 3&quot;</span>) <span class="comment">; ELSE</span></span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+<p>在ELISP中，除了IF函数还有另外两种常用的类似函数，<code>when</code>和<code>unless</code>，其中<code>when</code>与IF的<code>IF THEN</code>用法一样，而<code>unless</code>则相反，看例子</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">when</span> (<span class="name">&gt;</span> <span class="number">3</span> <span class="number">2</span>) <span class="comment">; 当3大于2时</span></span><br><span class="line"> (<span class="name">message</span> <span class="string">&quot;3 is bigger than 2&quot;</span>)</span><br><span class="line"> )</span><br><span class="line">(<span class="name">unless</span> (<span class="name">&lt;</span> <span class="number">3</span> <span class="number">2</span>) <span class="comment">; 当3不小于2时</span></span><br><span class="line"> (<span class="name">message</span> <span class="string">&quot;3 is bigger than 2&quot;</span>)</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/1106/Elisp-Basics-more.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/1104/Elisp-Basics.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,7 +422,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-02-21 16:39:35" itemprop="dateModified" datetime="2019-02-21T16:39:35+08:00">2019-02-21</time>
+                <time title="Modified: 2021-11-12 16:46:37" itemprop="dateModified" datetime="2021-11-12T16:46:37+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,7 +430,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/emacs/" itemprop="url" rel="index"><span itemprop="name">emacs</span></a>
+                  <a href="/categories/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
                 </span>
             </span>
 
@@ -252,9 +468,9 @@
       
           <h1 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h1><p>有很长时间没写Blog了，主要原因是，不够自律，没有坚持写下去，次要原因是，最近确实是忙了些，几乎每周都有一多半的时间是在下班的，由于这样的疲累，也导致了一旦不上班的时候就忙着休息了。</p>
 <p>有时想想，其实忙并不是放松的理由，最主要的原因还是因为懒，这个是一定要改的，再不改我们就老了。</p>
-<p>最近做了几件事，首先当然还是工作，游戏有前端进步非常大，与半年前相比几乎完全变成了另外一个游戏的感觉，加入了新角色，玩法系统也更丰富了，对于我负责的后端，除了加新功能，其它的变化并不大，但是有计划对架构底层的Cache系统进行改进，这将很大的提高系统的性能和稳定性；另外的事就是，关掉了<a href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61" target="_blank" rel="noopener">Linode</a>和<a href="http://www.vultr.com/?ref=6857104" target="_blank" rel="noopener">Vultr</a>主机，当然了，这跟这两家的服务质量无关，主要是我为合理调配资源。首先，开了一台AWS用来做<strong>佛跳墙</strong>的主力服务器，另外开了一台香港的主机用来放BLOG和小项目，而且同时在<a href="https://bandwagonhost.com/aff.php?aff=5395" target="_blank" rel="noopener">搬瓦工</a>和<a href="https://www.digitalocean.com/?refcode=b5ea84a7594f" target="_blank" rel="noopener">DigitalOcean</a>还各有一台VPS做备用的<strong>科学上网</strong>服，所以，这个时候还留着<a href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61" target="_blank" rel="noopener">Linode</a>和<a href="http://www.vultr.com/?ref=6857104" target="_blank" rel="noopener">Vultr</a>就是极大的浪费了吧。不过话说回来，这两家的东京服务器对于国内来说还是相当不错的，也就只比香港机房差一点吧。</p>
+<p>最近做了几件事，首先当然还是工作，游戏有前端进步非常大，与半年前相比几乎完全变成了另外一个游戏的感觉，加入了新角色，玩法系统也更丰富了，对于我负责的后端，除了加新功能，其它的变化并不大，但是有计划对架构底层的Cache系统进行改进，这将很大的提高系统的性能和稳定性；另外的事就是，关掉了<a target="_blank" rel="noopener" href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61">Linode</a>和<a target="_blank" rel="noopener" href="http://www.vultr.com/?ref=6857104">Vultr</a>主机，当然了，这跟这两家的服务质量无关，主要是我为合理调配资源。首先，开了一台AWS用来做<strong>佛跳墙</strong>的主力服务器，另外开了一台香港的主机用来放BLOG和小项目，而且同时在<a target="_blank" rel="noopener" href="https://bandwagonhost.com/aff.php?aff=5395">搬瓦工</a>和<a target="_blank" rel="noopener" href="https://www.digitalocean.com/?refcode=b5ea84a7594f">DigitalOcean</a>还各有一台VPS做备用的<strong>科学上网</strong>服，所以，这个时候还留着<a target="_blank" rel="noopener" href="https://www.linode.com/?r=96d9b6df5e3efbb5f409503c07db0a1d9dc39b61">Linode</a>和<a target="_blank" rel="noopener" href="http://www.vultr.com/?ref=6857104">Vultr</a>就是极大的浪费了吧。不过话说回来，这两家的东京服务器对于国内来说还是相当不错的，也就只比香港机房差一点吧。</p>
 <h1 id="Emacs-amp-Elisp"><a href="#Emacs-amp-Elisp" class="headerlink" title="Emacs &amp; Elisp"></a>Emacs &amp; Elisp</h1><p>从使用Emacs开始到现在也有个几年了吧，不过大多数时间都是在别人配置的基础上进行修改，而且在Emacs上时多半都是一些中小型的开发和写作，这样的应用场景下，自然对于Emacs的配置要求就没有那么高了。趁着这段时间没什么学习新知识的想法，刚好可以再次拿起Emacs以及必须要掌握的Elisp好好学习一番了。</p>
-<p>因为之前对Common Lisp有过一定程度上的了解，所以对于Elisp其实接受起来还是挺快的，在简单看了<a href="http://ergoemacs.org/emacs/elisp.html" target="_blank" rel="noopener">几篇关于Elisp的文章</a>后，对于Elisp的大概印象也就有一些，在这里仅对Elisp做一个简单的介绍，备忘吧。</p>
+<p>因为之前对Common Lisp有过一定程度上的了解，所以对于Elisp其实接受起来还是挺快的，在简单看了<a target="_blank" rel="noopener" href="http://ergoemacs.org/emacs/elisp.html">几篇关于Elisp的文章</a>后，对于Elisp的大概印象也就有一些，在这里仅对Elisp做一个简单的介绍，备忘吧。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/1104/Elisp-Basics.html#more" rel="contents">
@@ -312,7 +528,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:47:19" itemprop="dateModified" datetime="2021-11-12T16:47:19+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -320,7 +536,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -415,7 +631,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:48:20" itemprop="dateModified" datetime="2021-11-12T16:48:20+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,7 +639,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -465,223 +681,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2015/0327/Start-to-learn-Haskell-02.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0326/Start-to-learn-Haskell-01.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/0326/Start-to-learn-Haskell-01.html" class="post-title-link" itemprop="url">Start to learn Haskell 01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-26 12:26:33" itemprop="dateCreated datePublished" datetime="2015-03-26T12:26:33+08:00">2015-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/0326/Start-to-learn-Haskell-01.html" class="post-meta-item leancloud_visitors" data-flag-title="Start to learn Haskell 01" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/0326/Start-to-learn-Haskell-01.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/0326/Start-to-learn-Haskell-01.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="惯例闲话"><a href="#惯例闲话" class="headerlink" title="惯例闲话"></a>惯例闲话</h1><p>昨天加班到比较晚，回家后基本上就11点多了，洗漱完毕基本上也就十二点了，不过还是坚持了一下，看了几页书，今天再接着写写。这次学的主要内容就是部分列表相关的操作，和区间以及列表推导式。由于每次都是睡觉前看上几页书并测试一下代码第二天才写BLOG，所以可能难免有些错误和遗漏，但是我仍然认为这样做是合理的，经过一段时间的理解和遗忘再加上回忆并记录下来，这可能更有利于掌握吧。</p>
-<h1 id="列表函数"><a href="#列表函数" class="headerlink" title="列表函数"></a>列表函数</h1><ul>
-<li><code>null [1,2,3]</code> 检查列表是否为空，返回<code>True</code>或<code>False</code></li>
-<li><code>take 2 [1,2,3]</code> 获取前n个元素组成的列表，当n为0时返回空列表，当n大于列表长度时返回整个列表</li>
-<li><code>drop 2 [1,2,3]</code> 删除前n个元素，并返回剩余元素组成的列表，当n等于0时返回整个列表，当n大于列表长度时返回空</li>
-<li><code>maximum [1,4,7,3,6]</code> 返回列表中最大的元素</li>
-<li><code>minimum [1,4,7,3,6]</code> 返回列表中最小的元素</li>
-<li><code>sum [3,6,9]</code> 对列表中的元素进行求和</li>
-<li><code>product [3,6,9]</code> 对列表中的元素求积</li>
-<li><code>elem 3 [5,4,3,2,1]</code> 检查给定数据是否为列表中的元素，返回<code>True</code>或<code>False</code></li>
-</ul>
-<h1 id="区间"><a href="#区间" class="headerlink" title="区间"></a>区间</h1><h2 id="简单区间"><a href="#简单区间" class="headerlink" title="简单区间"></a>简单区间</h2><p>所谓区间，实际上是利用列表元素的规律以简单的方式生成较大列表的一种方法。例如，按之间所学习的，如果要定义一个从1到10所有整数的列表，就需要这样<code>[1,2,3,4,5,6,7,8,9,10]</code>，但是如果使用区间则可以简化成<code>[1..10]</code>，当然了，如果要生成字母A-Z的列表，同样可以使用类似的方法<code>[&#39;A&#39;..&#39;Z&#39;]</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/0326/Start-to-learn-Haskell-01.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tobycn.org/2015/0324/Start-to-learn-Haskell-00.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="老白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老白说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/0324/Start-to-learn-Haskell-00.html" class="post-title-link" itemprop="url">Start to learn Haskell 00</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-03-24 23:45:52" itemprop="dateCreated datePublished" datetime="2015-03-24T23:45:52+08:00">2015-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2015-03-25 21:30:00" itemprop="dateModified" datetime="2015-03-25T21:30:00+08:00">2015-03-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2015/0324/Start-to-learn-Haskell-00.html" class="post-meta-item leancloud_visitors" data-flag-title="Start to learn Haskell 00" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2015/0324/Start-to-learn-Haskell-00.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2015/0324/Start-to-learn-Haskell-00.html" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="闲话几句"><a href="#闲话几句" class="headerlink" title="闲话几句"></a>闲话几句</h1><p>很丢人，说好的开始写千字文的，但是因为工作原因，最近太忙，每天回到家里都已经很晚了，也就没有胆量开始写一篇文章，一是因为开始写之前需要思考，整理要写的内容，这些都需要花时间，而这会导致的后果就是睡得太晚，影响第二天的工作；二是因为一时间实在想不出要写什么，每天的工作生活千篇一律，工作就是写代码讨论解决方案，然后就是抽一点时间去吃饭，而且吃饭的花样都没什么太大的变化，然后其它的时间都是在上班或回家的路上。所以为了便于坚持，也为了增加点什么，打算现在今天开始学Haskell，然后把学习的过程整理出来，这也算是坚持写作了，然后再在偶尔有灵感的时候写点技术之外的感悟啊之类的，既然不能产出高质量的思想，那就整点也许对一些人有用的干货吧。</p>
-<h1 id="关于Haskell"><a href="#关于Haskell" class="headerlink" title="关于Haskell"></a>关于Haskell</h1><p>话说Haskell是一种函数式语言，在此之前我接触过Common Lisp，而在我的印象中，属于函数式语言的也只有Lisp及其各种方言，如Clojure、Scheme。当然也曾听说过Haskell语言，不过当时对于这属于哪种类型的语言并不明确，在来到新公司之后，由一同事推荐之后才对这门语言产生了兴趣。</p>
-<p>函数式语言对于我的意义，我想更多的应该是在于可以改变一下对于程序的思路，或许换个角度看问题，难题可能也就变成了随手可解的题目了吧。当然，如果能用这语言解决一些实际工作中的问题那就更好了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/0324/Start-to-learn-Haskell-00.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -770,16 +769,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

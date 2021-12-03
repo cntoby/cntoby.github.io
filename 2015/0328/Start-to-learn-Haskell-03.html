@@ -28,7 +28,7 @@
 <meta property="og:description" content="郁闷今天周六，公司附近基本上没有卖早餐的，不过今天看起来似乎比较幸运，竟然神奇的多了一家卖早鸡蛋灌饼的在地铁附近。为了早晨不挨饿就买了一个，但是不知道为什么，在去公司的路上我就一直感觉不太对，也一直在考虑只要再看到有一家卖早点的，我就把这个灌饼给丢掉。但是今天是周六嘛，我没有幸运的看到第二家卖早点的，只好将就一下了。事情的发展是这样的，10点半吃完，到11点前就感觉不太对，我以为那是因为我还喝了格">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2015-03-28T06:13:31.000Z">
-<meta property="article:modified_time" content="2018-03-08T02:46:48.048Z">
+<meta property="article:modified_time" content="2021-11-12T08:47:19.952Z">
 <meta property="article:author" content="老白">
 <meta property="article:tag" content="functionally">
 <meta property="article:tag" content="haskell">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-03-08 10:46:48" itemprop="dateModified" datetime="2018-03-08T10:46:48+08:00">2018-03-08</time>
+                <time title="Modified: 2021-11-12 16:47:19" itemprop="dateModified" datetime="2021-11-12T16:47:19+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -220,7 +220,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -258,14 +258,14 @@
       
         <h1 id="郁闷"><a href="#郁闷" class="headerlink" title="郁闷"></a>郁闷</h1><p>今天周六，公司附近基本上没有卖早餐的，不过今天看起来似乎比较幸运，竟然神奇的多了一家卖早鸡蛋灌饼的在地铁附近。为了早晨不挨饿就买了一个，但是不知道为什么，在去公司的路上我就一直感觉不太对，也一直在考虑只要再看到有一家卖早点的，我就把这个灌饼给丢掉。但是今天是周六嘛，我没有幸运的看到第二家卖早点的，只好将就一下了。<br>事情的发展是这样的，10点半吃完，到11点前就感觉不太对，我以为那是因为我还喝了格瓦斯，11点多出去抽烟，感觉更难受了，然后就去了厕所，先是拉肚子，然后出来又开始吐。中午吃饭时也感觉没有胃口，平时一碗面对我来说还略嫌不够，不过今天吃了连三分之一都不到就吃不下了，吃饭回来又接着吐。在拉肚子的时候任何一个屁都不值得相信，为了安全起见，又进了厕所，果然又是拉肚子，然后下午就由两个同事陪同去了医院急诊，拿了药回到家接着吐，然后睡觉，现在总算是好一些了。<br>这期间还有，从下午回来我就发现王爷是在家的，但是一直到我晚上起床都没听到他的动静，就打了电话给他，原来他老人家上吐下泄到今天凌晨4点，我勒个去的。<br>哦，还有，中日友好医院急诊内科的那个年轻女大夫很漂亮。</p>
 <h1 id="Haskell变量类型"><a href="#Haskell变量类型" class="headerlink" title="Haskell变量类型"></a>Haskell变量类型</h1><h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>在Haskell中一切都是有类型的，如字符<code>Char</code>字符列表<code>[Char]</code>元组<code>(Int, Bool)</code>，数值类型有<code>Int</code>和<code>Integer</code>，其中<code>Int</code>受系统位数影响，比如64位系统，这种类型的范围就是-2-2…^63到2^63-1<code>Integer</code>类型则非常大，可以尝试一下<code>product [1..50]</code>。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h2><p>前面说到，Haskell的函数也是有类型的，在在hci<em>中输入<code>:t getChar</code>，返回是<code>getChar :: IO Char</code>，其含义是</em>getChar*这个函数返回一个<code>Char</code>类型数据（这个地方不太会解释）。<br>由于Haskell可以推断类型，很多情况下似乎可以不用特意声明类型，但是为了使程序更易读并易于编译器检查，我们还是应该在定义函数时，在函数前加上函数类型，如下：</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">byThree</span> :: <span class="type">Int</span> -&gt; <span class="type">Bool</span></span><br><span class="line"><span class="title">byThree</span> x = <span class="keyword">if</span> x `mod` <span class="number">3</span> == <span class="number">0</span></span><br><span class="line">            <span class="keyword">then</span> <span class="type">True</span></span><br><span class="line">            <span class="keyword">else</span> <span class="type">False</span></span><br></pre></td></tr></table></figure>
 <p>例子中，第一行声明<code>byThree</code>这个函数接受一个<code>Int</code>型参数，返回一个<code>Bool</code>型值。</p>
 <h2 id="类型变量"><a href="#类型变量" class="headerlink" title="类型变量"></a>类型变量</h2><p>记得在前两天刚开始学Haskell时，学到一个函数<code>maximum [1,2,3,4,2,5]</code>，这个函数接受一个列表做为参数，返回列表中最大的元素，来看一下这个函数的类型，<code>:t maximum</code>，返回为<code>maximum :: [a] -&gt; a</code>，哦，这是什么意思哪？是说这个函数接受一个<code>a</code>类型列表返回一个<code>a</code>类型数值吗？是的，不过在这里<code>a</code>不特指某一类型，而是可以为<code>Char</code>也可以是<code>Int</code>更可以是别的什么，这是一个变量，在这里就叫<em>类型变量</em>了，而使用<em>类型变量</em>指代参数类型的函数就可以叫做<em>多态函数</em>，这跟C++或Java的泛型有些相似。</p>
 <p>当然，<code>a</code>既然只是一个变量，那我们也可以用其它名字代替，比如<code>b</code>。</p>
 <p>还记得前面学元组时学到的两个函数吧<code>fst</code>和<code>snd</code>，看一下<code>:t fst</code>，返回<code>fst :: (a,b) -&gt; a</code>，其含义就是<code>fst</code>函数接受一个元组为参数，这个元组的第一个元素为<code>a</code>类型，第二个元素为<code>b</code>类型，该函数返回的数据类型与第一个元素相同，因为本函数返回的就是元组的第一个元素。再查看一下<code>:t snd</code>，返回<code>snd :: (a,b) -&gt; b</code>，其含义就显而易见了。</p>
-<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>今天身体不舒服，就写到这里吧，现在已经11点28了，马上休息，希望明天身体装备能完全恢复，今天就暂停一天的学习，明天可以多学一些进行补偿。<br>另外，希望<a href="http://www.hector2.us" target="_blank" rel="noopener">王爷</a>的身体也尽快恢复健康。</p>
+<h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>今天身体不舒服，就写到这里吧，现在已经11点28了，马上休息，希望明天身体装备能完全恢复，今天就暂停一天的学习，明天可以多学一些进行补偿。<br>另外，希望<a target="_blank" rel="noopener" href="http://www.hector2.us/">王爷</a>的身体也尽快恢复健康。</p>
 
     </div>
 
@@ -384,16 +384,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

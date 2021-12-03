@@ -220,7 +220,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/haskell/" itemprop="url" rel="index"><span itemprop="name">haskell</span></a>
+                  <a href="/categories/Haskell/" itemprop="url" rel="index"><span itemprop="name">Haskell</span></a>
                 </span>
             </span>
 
@@ -259,7 +259,7 @@
         <h1 id="闲话几句"><a href="#闲话几句" class="headerlink" title="闲话几句"></a>闲话几句</h1><p>很丢人，说好的开始写千字文的，但是因为工作原因，最近太忙，每天回到家里都已经很晚了，也就没有胆量开始写一篇文章，一是因为开始写之前需要思考，整理要写的内容，这些都需要花时间，而这会导致的后果就是睡得太晚，影响第二天的工作；二是因为一时间实在想不出要写什么，每天的工作生活千篇一律，工作就是写代码讨论解决方案，然后就是抽一点时间去吃饭，而且吃饭的花样都没什么太大的变化，然后其它的时间都是在上班或回家的路上。所以为了便于坚持，也为了增加点什么，打算现在今天开始学Haskell，然后把学习的过程整理出来，这也算是坚持写作了，然后再在偶尔有灵感的时候写点技术之外的感悟啊之类的，既然不能产出高质量的思想，那就整点也许对一些人有用的干货吧。</p>
 <h1 id="关于Haskell"><a href="#关于Haskell" class="headerlink" title="关于Haskell"></a>关于Haskell</h1><p>话说Haskell是一种函数式语言，在此之前我接触过Common Lisp，而在我的印象中，属于函数式语言的也只有Lisp及其各种方言，如Clojure、Scheme。当然也曾听说过Haskell语言，不过当时对于这属于哪种类型的语言并不明确，在来到新公司之后，由一同事推荐之后才对这门语言产生了兴趣。</p>
 <p>函数式语言对于我的意义，我想更多的应该是在于可以改变一下对于程序的思路，或许换个角度看问题，难题可能也就变成了随手可解的题目了吧。当然，如果能用这语言解决一些实际工作中的问题那就更好了。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h1 id="开始学习"><a href="#开始学习" class="headerlink" title="开始学习"></a>开始学习</h1><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>在Haskell中函数应当由简单小巧的语句组成，简单的逻辑可以尽可能的确保函数无误，然后再由这些小的函数组成一个可以完成完整功能的小函数，这应该是所有函数式语言遵循的原则吧，接受参数并返回处理后结果数据，参数不改变。<br>下面定义一个简单的函数</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">maxNum</span> a b = <span class="keyword">if</span> a &gt; b</span><br><span class="line">             <span class="keyword">then</span> a</span><br><span class="line">             <span class="keyword">else</span> b</span><br></pre></td></tr></table></figure>
 <p>如上代码<code>maxNum</code>是函数名，a b是参数，代码简单到不需要进行任何说明，而这也应该是在函数式语言中常见的方法。<br>在调用时只需要像这样<code>maxNum 15 16</code>调用函数，像这种类型的函数在Haskell叫做前缀式函数，顾名思义，就是指函数名在前，参数在后调用。有了<strong>前缀函数</strong>自然也就会有其它类型的函数，目前我知道的有<strong>中缀函数</strong>，即函数在两个参数之间，比如像这样<code>10 + 12</code>，这中间<code>+</code>就是函数，看起来很奇怪吧，但是也还可以接受，在Lisp中<code>(+ 10 12)</code>，其实也是属于类似的用法。<br>另外，可以通过在函数两边使用反引号包围的方法使前缀函数成为中缀函数使用。<br>还有，函数名中可以存在<code>&#39;</code>符号，一般用在区分分别较小的不同函数，如<code>doubleNum</code>和<code>doubleNum&#39;</code>。</p>
@@ -396,16 +396,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
