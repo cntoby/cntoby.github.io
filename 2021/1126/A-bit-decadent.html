@@ -296,7 +296,13 @@
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -538,23 +544,20 @@
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '2b97a8f0b33625b5f466',
-      clientSecret: '777edfa275125b160e572b9973161dab47b2c4c3',
-      repo        : 'cntoby.github.io',
-      owner       : 'cntoby',
-      admin       : ['cntoby'],
-      id          : '1eb6a24693177004e56266d9f6ca78a6',
-        language: '',
-      distractionFreeMode: true
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : 'cWul0aOeNdEUCrzyqblGU0BowOQtNTIbuyYg1jfYgPhmvZJMFboZrgPiDXYujntF',
+      shortname : 'cntoby',
+      url       : "https://tobycn.org/2021/1126/A-bit-decadent.html",
+      identifier: "2021/1126/A-bit-decadent.html",
+      title     : "最近有点颓废了",
     });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
+  }, window.DisqusJS);
 });
 </script>
 
